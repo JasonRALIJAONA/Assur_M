@@ -57,5 +57,25 @@ class Vehicule extends CI_Model {
             throw new Exception("Erreur inattendue: " . $th->getMessage(), 2);
         }
     }
+
+    public function liste_vehicules($id_utilisateur) {
+        try {
+            $this->db->select('v.*, tv.nom as type_vehicule');
+            $this->db->from('vehicule v');
+            $this->db->join('type_vehicule tv', 'v.id_type = tv.id');
+            $query = $this->db->get();
+
+            return $query->result_array();
+
+        } catch (\PDOException $e) {
+
+            throw new Exception("Erreur lors de la recuperation des vehicules: " . $e->getMessage(), 1);
+        
+        } catch(\Throwable $ex) {
+
+            throw new Exception("Erreur inattendue lors de la recuperation des vehicules: " . $ex->getMessage(), 1);
+            
+        }
+    }
 }
 
