@@ -7,14 +7,14 @@ class Vehicule extends CI_Model {
         parent::__construct();
     }
 
-    public function inscription_vehicule($id, $immatriculation, $puissance, $marque, $place, $id_type, $id_utilisateur) {
+    public function inscription_vehicule($immatriculation, $puissance, $marque, $place, $id_type, $id_utilisateur) {
         
         if (empty($immatriculation)) {
             throw new Exception("Le numero d'immatriculation ne peut pas être nul", 1);
             
         }
 
-        if (!preg_match('/^\d{4} [A-Z]{3}$/', $immatriculation)) {
+        if (!preg_match('/^\d{4}[A-Z]{3}$/', $immatriculation)) {
             throw new Exception("Le numero d'immatriculation est invalide", 1);
         }
 
@@ -39,7 +39,6 @@ class Vehicule extends CI_Model {
         }
 
         $data = array(
-            'id' => $id,
             'immatriculation' => $immatriculation,
             'puissance' => $puissance,
             'marque' => $marque,
