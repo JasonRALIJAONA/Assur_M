@@ -76,5 +76,20 @@ class Vehicule extends CI_Model {
             
         }
     }
+
+    public function etat_assurance($id_vehicule) {
+        
+        $this->db->select('f.*, a.nom nom_assurance');
+        $this->db->from('facture f');
+        $this->db->join('assurance a', 'f.id_assurance = a.id');
+        $this->db->where('f.id_vehicule', $id_vehicule);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            return $query->row_array();
+        } else {
+            return null; 
+        }
+    }
 }
 
