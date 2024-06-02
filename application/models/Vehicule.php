@@ -91,5 +91,23 @@ class Vehicule extends CI_Model {
             return null; 
         }
     }
+
+    // C.R.U.D VEHICULE
+
+    public function get_by_id($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get('vehicule');
+        return $query->row_array();
+    }
+
+    public function update_vehicule($id, $data) {
+        $this->db->where('id', $id);
+        return $this->db->update('vehicule', $data);
+    }
+
+    public function delete_vehicule($id) {
+        $this->db->where('id', $id);
+        return $this->db->delete('vehicule');
+    }
 }
 
