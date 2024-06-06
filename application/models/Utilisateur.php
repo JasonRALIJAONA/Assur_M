@@ -7,6 +7,29 @@ class Utilisateur extends CI_Model
     {
         parent::__construct();
         $this->load->database(); 
+        $this->load->library('email');
+        $this->load->library('session');
+    }
+
+    public function verifier_connexion($email, $mdp)
+    {
+        $this->db->where('email', $email);
+        $requete = $this->db->get('utilisateur');
+
+        if ($requete->num_rows() == 1) {
+            $user = $requete->row();
+            if (password_verify($mdp, $user->mot_de_passe)) {
+                $this->session->set_userdata('id_utilisateur', $user->id);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function verifier_numero_telephone($numero_telephone)
+    {
+        return preg_match('/^(032|033|034|038)\d{7}$/', $numero_telephone);
     }
 
     public function creer_profil($nom, $prenoms, $adresse, $date_naissance, $numero_telephone, $email, $mot_de_passe, $mot_de_passe2) 
@@ -63,8 +86,19 @@ class Utilisateur extends CI_Model
     {
         return str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);   
     }
-    // public function envoyer_code_confirmation($email, $code_confirmation)
-    // {}
+    
+    public function envoyer_code_confirmation($email, $code_confirmation)
+    {
+        $this->email->from('assur_m@gmail.com', 'Assur\'M Madagascar');
+        $this->email->to($email);
+        $this->email->subject('Code de confirmation');
+        $this->email->message("Votre code de confirmation est : $code_confirmation");
+
+        if (!$this->email->send()) {
+            throw new Exception("Échec de l'envoi de l'email de confirmation.");
+        }
+    }
+
     // public function valider_code_confirmation($code_saisi)
     // {}
 }
