@@ -89,7 +89,19 @@ class Utilisateur extends CI_Model
     
     public function envoyer_code_confirmation($email, $code_confirmation)
     {
-        $this->email->from('assur_m@gmail.com', 'Assur\'M Madagascar');
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'smtp.gmail.com',
+            'smtp_port' => 587,
+            'smtp_user' => 'assuremassurem@gmail.com',  // Remplacez par votre adresse email
+            'smtp_pass' => 'ptlimfezurdjdzjv',  // Remplacez par votre mot de passe
+            'smtp_crypto' => 'tls',  // Ajoutez cette ligne pour STARTTLS
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'wordwrap' => TRUE,
+            'newline' => "\r\n"  // Assurez-vous d'utiliser des sauts de ligne corrects
+        );
+        $this->email->from('assuremassurem@gmail.com', 'Assur\'M Madagascar');
         $this->email->to($email);
         $this->email->subject('Code de confirmation');
         $this->email->message("Votre code de confirmation est : $code_confirmation");
