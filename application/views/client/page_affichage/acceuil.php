@@ -26,8 +26,8 @@
     </div>
     
     <div class="bouton_redirection" >
-        <button class="btn btn-primary" > Voir plus </button>
-        <button class="btn btn-primary" > Payer </button>
+    <a href="<?php echo base_url("vehicule_controller/detail/1"); ?>"><button class="btn btn-primary" > Detail </button></a> 
+    <a href="<?php echo base_url("vehicule_controller/payement/1"); ?>"><button class="btn btn-primary" > Payer </button> </a> 
     </div>
 
     </div><!-- Fait div panel_vehicule1-->
@@ -58,8 +58,8 @@
     </div>
     
     <div class="bouton_redirection" >
-        <button class="btn btn-primary" > Voir plus </button>
-        <button class="btn btn-primary" > Payer </button>
+        <a href="<?php echo base_url("vehicule_controller/detail/2"); ?>"><button class="btn btn-primary" > Detail </button></a> 
+        <a href="<?php echo base_url("vehicule_controller/payement/2"); ?>"><button class="btn btn-primary" > Payer </button> </a> 
     </div>
 
     </div><!-- Fait div panel_vehicule2-->
@@ -90,8 +90,8 @@
     </div>
     
     <div class="bouton_redirection" >
-        <button class="btn btn-primary" > Voir plus </button>
-        <button class="btn btn-primary" > Payer </button>
+    <a href="<?php echo base_url("vehicule_controller/detail/3"); ?>"><button class="btn btn-primary" > Detail </button></a> 
+    <a href="<?php echo base_url("vehicule_controller/payement/3"); ?>"><button class="btn btn-primary" > Payer </button> </a> 
     </div>
 
     </div><!-- Fait div panel_vehicule3-->
@@ -122,8 +122,8 @@
     </div>
     
     <div class="bouton_redirection" >
-        <button class="btn btn-primary" > Voir plus </button>
-        <button class="btn btn-primary" > Payer </button>
+        <a href="<?php echo base_url("vehicule_controller/detail/4"); ?>"><button class="btn btn-primary" > Detail </button></a> 
+        <a href="<?php echo base_url("vehicule_controller/payement/4"); ?>"><button class="btn btn-primary" > Payer </button> </a> 
     </div>
 
     </div><!-- Fait div panel_vehicule4-->
@@ -154,8 +154,8 @@
     </div>
     
     <div class="bouton_redirection" >
-        <button class="btn btn-primary" > Voir plus </button>
-        <button class="btn btn-primary" > Payer </button>
+        <a href="<?php echo base_url("vehicule_controller/detail/4"); ?>"><button class="btn btn-primary" > Detail </button></a> 
+        <a href="<?php echo base_url("vehicule_controller/payement/4"); ?>"><button class="btn btn-primary" > Payer </button> </a> 
     </div>
 
     </div><!-- Fait div panel_vehicule5-->

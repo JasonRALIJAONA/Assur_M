@@ -53,3 +53,6 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['utilisateur/creer'] = 'Utilisateur_controlleur/creer';
+/* Pour les Ajax */
+$route['getCodeValidation'] = 'form_controller/getCodeValidation';
+$route['check_inscription'] = 'form_controller/check_inscription';

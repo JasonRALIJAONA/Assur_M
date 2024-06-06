@@ -25,7 +25,6 @@
 html, body {
   margin: 0;
   background: var(--background);
-  /* font-family: poppins; */
   display: flex;
   position: relative;
   width: 100%;
@@ -36,7 +35,7 @@ html, body {
 }
 #content-model{
   margin-top: 1em;
-  margin-left: 275px;
+  margin-left: 316px;
   width: 100%;
 }
 .titre_vehicule{
