@@ -3,12 +3,21 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Utilisateur extends CI_Model
 {
+    private $new_user = null; /* Rehefa confirmer le code dia miverina null ito */
     public function __construct()
     {
         parent::__construct();
-        $this->load->database(); 
+        //$this->load->database(); 
     }
 
+    /* @ la validation */ 
+    public function set_new_user($nouveau_user) {
+        $this->$new_user = $nouveau_user;
+    }
+    public function get_new_user() {
+        return $this->new_user;
+    }
+    /*---------------------------------------------*/
     public function creer_profil($nom, $prenoms, $adresse, $date_naissance, $numero_telephone, $email, $mot_de_passe, $mot_de_passe2) 
     {
         if ($mot_de_passe !== $mot_de_passe2) {
