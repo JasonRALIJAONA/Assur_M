@@ -7,10 +7,30 @@ class Utilisateur extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->database(); 
+        //$this->load->database(); 
     }
 
-    // Vérifier les informations de connexion d'un utilisateur
+    /* @ la validation */ 
+    public function set_new_user($nouveau_user) {
+        $this->$new_user = $nouveau_user;
+    }
+    public function get_new_user() {
+        return $this->new_user;
+    }
+
+    public function creer_profil($nom, $prenoms, $adresse, $date_naissance, $numero_telephone, $email, $mot_de_passe, $mot_de_passe2) 
+    {
+        $this->db->where('email', $email);
+        $requete = $this->db->get('utilisateur');
+
+        if ($requete->num_rows() == 1) {
+            $user = $requete->row();
+            return password_verify($mdp, $user->mdp);
+        }
+
+        return false;
+    }
+
     public function verifier_connexion($email, $mdp)
     {
         $this->db->where('email', $email);

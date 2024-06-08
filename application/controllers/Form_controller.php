@@ -51,6 +51,7 @@ class Form_controller extends CI_Controller {
 
 		echo json_encode(['exception'=>$exception]);
 	}
+	
 	public function getCodeValidation() {
 		$this->load->model('utilitaire');
 		$code = $this->utilitaire->generateCodeValidation(); 
