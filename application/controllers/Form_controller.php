@@ -5,21 +5,31 @@ class Form_controller extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+		$this->load->model('Utilisateur');
+		$this->load->library('session');
 	}
 
 	public function login(){
 		$this->load->view("client/page_formulaire/login.php");
 	}
+
 	public function checkLogin(){
-		/* Fonction mi cheque login dia tokony mankao anaty session */
+		$email = $this->input->post('login-mail');
+		$mdp = $this->input->post('login-pass');
 
-		//Ito atao raha diso ny login
-		//redirect("form_controller/login");
-
-		// Rehefa vita ny validation dia izay vao 
-        redirect("template_controller/acceuil");
-
+		try {
+            if ($this->Utilisateur->verifier_connexion($email, $mdp)) {
+                $utilisateur = $this->Utilisateur->get_user_id_by_email($email);
+                $this->session->set_userdata('utilisateur', $utilisateur);
+                redirect("form_controller/login");
+            } else {
+                redirect("template_controller/acceuil");
+            }
+        } catch (Exception $e) {
+            echo "Erreur : " . $e->getMessage();
+        }
 	}
+
 	public function check_inscription(){
 		/* Gerance d'exception d'insertion  */
 		/* Si ok , generer code validation */
@@ -32,14 +42,16 @@ class Form_controller extends CI_Controller {
 		$new_user["num_tel"] = $this->input->post('num_tel');
 		$new_user["email"] = $this->input->post('email');
 		$new_user["mdp"] = $this->input->post('mdp');
-		//$this->load->model('utilisateur');
-		//$this->utilisateur->set_new_user($new_user);
+		$new_user["confirm_mdp"] = $this->input->post('confirm_mdp');
+
+		$this->Utilisateur->creer_profil($new_user);
 
 		/* Manao gestion d'exception d retournena Ajax raha misy  */
 		//$exception = "patrick exception";
 
 		echo json_encode(['exception'=>$exception]);
 	}
+	
 	public function getCodeValidation() {
 		$this->load->model('utilitaire');
 		$code = $this->utilitaire->generateCodeValidation(); 
