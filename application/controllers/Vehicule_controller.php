@@ -22,6 +22,6 @@ class Vehicule_controller extends CI_Controller {
         /*...*/
         $this->load->view("client/page_formulaire/payement_assurance.php",$data);
     }
-
+    // something
 
 }
