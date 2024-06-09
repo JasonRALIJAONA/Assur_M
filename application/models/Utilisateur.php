@@ -11,25 +11,25 @@ class Utilisateur extends CI_Model
     }
 
     /* @ la validation */ 
-    public function set_new_user($nouveau_user) {
-        $this->$new_user = $nouveau_user;
-    }
+    // public function set_new_user($nouveau_user) {
+    //     $this->$new_user = $nouveau_user;
+    // }
     public function get_new_user() {
         return $this->new_user;
     }
 
-    public function creer_profil($nom, $prenoms, $adresse, $date_naissance, $numero_telephone, $email, $mot_de_passe, $mot_de_passe2) 
-    {
-        $this->db->where('email', $email);
-        $requete = $this->db->get('utilisateur');
+    // public function creer_profil($nom, $prenoms, $adresse, $date_naissance, $numero_telephone, $email, $mot_de_passe, $mot_de_passe2) 
+    // {
+    //     $this->db->where('email', $email);
+    //     $requete = $this->db->get('utilisateur');
 
-        if ($requete->num_rows() == 1) {
-            $user = $requete->row();
-            return password_verify($mdp, $user->mdp);
-        }
+    //     if ($requete->num_rows() == 1) {
+    //         $user = $requete->row();
+    //         return password_verify($mot_de_passe, $user->mdp);
+    //     }
 
-        return false;
-    }
+    //     return false;
+    // }
 
     public function verifier_connexion($email, $mdp)
     {
@@ -38,7 +38,15 @@ class Utilisateur extends CI_Model
 
         if ($requete->num_rows() == 1) {
             $user = $requete->row();
-            return password_verify($mdp, $user->mdp);
+            if ($user->mdp != $mdp) {
+                throw new Exception("Mot de passe ou email non invalide", 1);
+                
+            }else {
+                return true;
+            }
+        }else {
+            throw new Exception("Mot de passe ou email non invalide", 1);
+            
         }
 
         return false;

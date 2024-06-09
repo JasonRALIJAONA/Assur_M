@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css_client/login.css">
   <title>Login</title>
 </head>
+
 <body>
   <div class="panel_blur"></div>
   <div class="panel">
     <div class="panel__form-wrapper">
-      
+
+
 
       <ul class="panel__headers">
-       
+
         <li class="panel__header active"><a href="#login-form" class="panel__link" role="button">Connection</a></li>
       </ul>
 
@@ -39,11 +42,18 @@
           </div>
         </form>
 
-        
+
       </div>
     </div>
   </div>
+  <?php if (isset($erreur)) : ?>
+    <div style="color: red;">
+      <script>
+        alert("<?php echo $erreur ?>")
+      </script>
+    </div>
+  <?php endif; ?>
   <script src="<?php echo base_url(); ?>assets/js_client/login.js"></script>
 </body>
-</html>
 
+</html>

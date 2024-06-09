@@ -5,6 +5,9 @@ class Vehicule_controller extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+        $this->load->model('Vehicule');
+		$this->load->library('session');
+
 	}
 
     public function detail($id_vehicule){
@@ -19,5 +22,6 @@ class Vehicule_controller extends CI_Controller {
         /*...*/
         $this->load->view("client/page_formulaire/payement_assurance.php",$data);
     }
+
 
 }

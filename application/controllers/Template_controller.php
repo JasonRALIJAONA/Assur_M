@@ -5,10 +5,13 @@ class Template_controller extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+        $this->load->model('Vehicule');
+        $this->load->library('session');
 	}
 
     public function acceuil(){
-        $data = array();
+        $liste_vehicule = $this->Vehicule->liste_vehicules($this->session->userdata('utilisateur'));
+        $data['liste_vehicule'] = $liste_vehicule;
         $data["content"] = "page_affichage/acceuil";
         $this->load->view("client/template.php",$data);
     }
