@@ -1,4 +1,7 @@
 <h1 class="titre_vehicule"> Liste des vehicules </h1>
+<script>
+    alert("<?= $this->session->userdata('utilisateur') ?>");
+</script>
 
 <?php
 foreach ($liste_vehicule as $row) {

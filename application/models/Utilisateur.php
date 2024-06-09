@@ -42,14 +42,14 @@ class Utilisateur extends CI_Model
                 throw new Exception("Mot de passe ou email non invalide", 1);
                 
             }else {
-                return true;
+                return $user;
             }
         }else {
             throw new Exception("Mot de passe ou email non invalide", 1);
             
         }
 
-        return false;
+        return null;
     }
 
     public function get_user_id_by_email($email)

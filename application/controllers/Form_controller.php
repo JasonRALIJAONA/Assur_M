@@ -26,9 +26,9 @@ class Form_controller extends CI_Controller {
 			$email = $this->input->post('login-mail');
 			$mdp = $this->input->post('login-pass');
 			try {
-				$this->Utilisateur->verifier_connexion($email, $mdp); 
-					$utilisateur = $this->Utilisateur->get_user_id_by_email($email);
-					$this->session->set_userdata('utilisateur', $utilisateur);
+				$utilisateur = $this->Utilisateur->verifier_connexion($email, $mdp); 
+				// $utilisateur = $this->Utilisateur->get_user_id_by_email($email);
+				$this->session->set_userdata('utilisateur', 1);
 				redirect("template_controller/acceuil");
 			} catch (Exception $e) {
 				$data['erreur'] = $e->getMessage();

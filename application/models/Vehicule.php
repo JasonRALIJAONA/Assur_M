@@ -59,10 +59,8 @@ class Vehicule extends CI_Model {
 
     public function liste_vehicules($id_utilisateur) {
         try {
-            $this->db->select('v.*, tv.nom as type_vehicule');
-            $this->db->from('vehicule v');
-            $this->db->join('type_vehicule tv', 'v.id_type = tv.id');
-            $query = $this->db->get();
+            $this->db->where('id_utilisateur', $id_utilisateur);
+            $query = $this->db->get('info_vehicule');
 
             return $query->result_array();
 
