@@ -9,17 +9,20 @@ class Template_controller extends CI_Controller {
 	}
 
     public function acceuil(){
-        var_dump($this->session->userdata('utilisateur'));  
-        if ($this->session->userdata('utilisateur') == null) {
-            echo("null ehh");
-        }else {
+        // var_dump($this->session->userdata('utilisateur'));  
+        // if ($this->session->userdata('utilisateur') == null) {
+        //     echo("null ehh");
+        // }else {
 
-            $liste_vehicule = $this->Vehicule->liste_vehicules($this->session->userdata('utilisateur'));
-            // $liste_vehicule = $this->Vehicule->liste_vehicules(1);
-            $data['liste_vehicule'] = $liste_vehicule;
-            $data["content"] = "page_affichage/acceuil";
-            $this->load->view("client/template.php",$data);
-        }
+        //     $liste_vehicule = $this->Vehicule->liste_vehicules($this->session->userdata('utilisateur'));
+        //     // $liste_vehicule = $this->Vehicule->liste_vehicules(1);
+        //     $data['liste_vehicule'] = $liste_vehicule;
+        //     $data["content"] = "page_affichage/acceuil";
+        //     $this->load->view("client/template.php",$data);
+        // }
+        // $utilisateur = $this->session->userdata('utilisateur');
+        // log_message('debug', 'Utilisateur dans la session: ' . print_r($utilisateur, TRUE));
+        echo "huhu " . $this->session->userdata('utilisateur');
     }
 
 }

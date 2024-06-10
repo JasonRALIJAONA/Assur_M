@@ -6,8 +6,7 @@ class Form_controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Utilisateur');
-		$this->load->library('session');
-		$this->load->library('form_validation');
+		// $this->load->library('form_validation');
 
 	}
 
@@ -16,26 +15,28 @@ class Form_controller extends CI_Controller {
 	}
 
 	public function checkLogin(){
-		$this->form_validation->set_rules('login-mail', 'Email', 'required');
-		$this->form_validation->set_rules('login-pass', 'Password', 'required');
+		// $this->form_validation->set_rules('login-mail', 'Email', 'required');
+		// $this->form_validation->set_rules('login-pass', 'Password', 'required');
 		
-		if ($this->form_validation->run() == FALSE) {
-			$data['erreur'] = validation_errors();
-            $this->load->view('client/page_formulaire/login.php', $data);
-		}else {
-			$email = $this->input->post('login-mail');
-			$mdp = $this->input->post('login-pass');
-			try {
-				$utilisateur = $this->Utilisateur->verifier_connexion($email, $mdp); 
+		// if ($this->form_validation->run() == FALSE) {
+		// 	$data['erreur'] = validation_errors();
+        //     $this->load->view('client/page_formulaire/login.php', $data);
+		// }else {
+			// $email = $this->input->post('login-mail');
+			// $mdp = $this->input->post('login-pass');
+			// try {
+				// $utilisateur = $this->Utilisateur->verifier_connexion($email, $mdp); 
 				// $utilisateur = $this->Utilisateur->get_user_id_by_email($email);
 				$this->session->set_userdata('utilisateur', 1);
+				// $_SESSION['utilisateur'] = 1;
+				// echo $this->session->userdata('utilisateur')->nom;
 				redirect("template_controller/acceuil");
-			} catch (Exception $e) {
-				$data['erreur'] = $e->getMessage();
-				$this->load->view('client/page_formulaire/login.php', $data);
-			}
+			// } catch (Exception $e) {
+			// 	$data['erreur'] = $e->getMessage();
+			// 	$this->load->view('client/page_formulaire/login.php', $data);
+			// }
 
-		}
+		// }
 
 		// try {
         //     $this->Utilisateur->verifier_connexion($email, $mdp);
