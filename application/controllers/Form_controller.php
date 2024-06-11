@@ -6,8 +6,8 @@ class Form_controller extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model('Utilisateur');
-		// $this->load->library('form_validation');
-
+		$this->load->model('Vehicule');
+		$this->session->set_userdata('utilisateur');
 	}
 
 	public function login(){
@@ -15,39 +15,33 @@ class Form_controller extends CI_Controller {
 	}
 
 	public function checkLogin(){
-		// $this->form_validation->set_rules('login-mail', 'Email', 'required');
-		// $this->form_validation->set_rules('login-pass', 'Password', 'required');
-		
-		// if ($this->form_validation->run() == FALSE) {
-		// 	$data['erreur'] = validation_errors();
-        //     $this->load->view('client/page_formulaire/login.php', $data);
-		// }else {
-			// $email = $this->input->post('login-mail');
-			// $mdp = $this->input->post('login-pass');
-			// try {
-				// $utilisateur = $this->Utilisateur->verifier_connexion($email, $mdp); 
-				// $utilisateur = $this->Utilisateur->get_user_id_by_email($email);
-				$this->session->set_userdata('utilisateur', 1);
-				// $_SESSION['utilisateur'] = 1;
-				// echo $this->session->userdata('utilisateur')->nom;
-				redirect("template_controller/acceuil");
-			// } catch (Exception $e) {
-			// 	$data['erreur'] = $e->getMessage();
-			// 	$this->load->view('client/page_formulaire/login.php', $data);
-			// }
+		$email = $this->input->post('login-mail');
+		$mdp = $this->input->post('login-pass');
+		try {
+			$utilisateur = $this->Utilisateur->verifier_connexion($email, $mdp); 
+			$this->session->set_userdata('utilisateur', $utilisateur);
+			redirect('template_controller/accueil');
+		} catch (Exception $e) {
+			$data['erreur'] = $e->getMessage();
+			$this->load->view('client/page_formulaire/login.php', $data);
+		}
 
-		// }
 
-		// try {
-        //     $this->Utilisateur->verifier_connexion($email, $mdp);
-		// 	redirect("template_controller/acceuil");
-            
-        // } catch (Exception $e) {
-		// 	$this->session->set_flashdata('error', $e->getMessage());
-		// 	redirect("form_controller/login");
-        //     // echo "Erreur : " . $e->getMessage();
-        // }
 	}
+
+	public function dashboard() {
+        $utilisateur = $this->session->userdata('utilisateur');
+        if (!$utilisateur) {
+			$data['erreur'] = "y'a une erreur";
+            $this->load->view('client/page_formulaire/login.php', $data);  // Redirection vers la page de login si l'utilisateur n'est pas connecté
+        }
+
+        $liste_vehicule = $this->Vehicule->liste_vehicules($utilisateur->id);
+        $data['liste_vehicule'] = $liste_vehicule;
+        $data["content"] = "page_affichage/acceuil";
+        $this->load->view("client/template.php", $data);
+    }
+
 
 	public function check_inscription(){
 		/* Gerance d'exception d'insertion  */
@@ -92,7 +86,11 @@ class Form_controller extends CI_Controller {
 
 	public function inscription_vehicule()
 	{
-		$this->load->view("client/page_formulaire/inscription_vehicule.php");
+		$data = [
+			'liste_type' => $this->Vehicule->get_type_vehicule()
+
+		];
+		$this->load->view("client/page_formulaire/inscription_vehicule.php", $data);
 	}		
 	
 }

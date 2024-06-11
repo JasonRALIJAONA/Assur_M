@@ -1,6 +1,5 @@
 <h1 class="titre_vehicule"> Liste des vehicules </h1>
 <script>
-    alert("<?= $this->session->userdata('utilisateur') ?>");
 </script>
 
 <?php
@@ -14,26 +13,26 @@ foreach ($liste_vehicule as $row) {
             <table>
                 <tr>
                     <td>Assurance </td>
-                    <td>: ARO </td>
+                    <td>: <?= $row['nom_assurance'] ?> </td>
                 </tr>
                 <tr>
                     <td>Date expiration</td>
-                    <td>: 16/06/2024 </td>
+                    <td>: <?= $row['date_fin'] ?> </td>
                 </tr>
                 <tr>
                     <td>Type</td>
-                    <td>: Voiture </td>
+                    <td>: <?= $row['nom_type'] ?> </td>
                 </tr>
                 <tr>
                     <td>Marque</td>
-                    <td>: Crafter </td>
+                    <td>: <?= $row['marque'] ?> </td>
                 </tr>
             </table>
         </div>
 
         <div class="bouton_redirection">
             <a href="<?php echo base_url("vehicule_controller/detail/1"); ?>"><button class="btn btn-primary"> Detail </button></a>
-            <a href="<?php echo base_url("vehicule_controller/payement/1"); ?>"><button class="btn btn-primary"> Payer </button> </a>
+            <a href="<?php echo base_url("vehicule_controller/payement/"); ?>/<?= $row['id'] ?>"><button class="btn btn-primary"> Payer </button> </a>
         </div>
 
     </div><!-- Fait div panel_vehicule1-->

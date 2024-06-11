@@ -107,5 +107,10 @@ class Vehicule extends CI_Model {
         $this->db->where('id', $id);
         return $this->db->delete('vehicule');
     }
+
+    public function get_type_vehicule() {
+        $query = $this->db->get('type_vehicule');
+        return $query->result_array();
+    }
 }
 

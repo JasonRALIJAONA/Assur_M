@@ -100,5 +100,17 @@ class Utilisateur extends CI_Model
     {
         return str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
     }
+
+    public function get_by_id($id) {
+        $this->db->where('id', $id);
+        $requete = $this->db->get('utilisateur');
+
+        if ($requete->num_rows() == 1) {
+            $user = $requete->row();
+            return $user;
+        }
+
+        return null;
+    }
 }
 ?>
