@@ -124,22 +124,20 @@ CREATE TABLE facture (
 
 
 CREATE TABLE carte_grise (
-  id SERIAL PRIMARY KEY,
-   nom VARCHAR(50)  NOT NULL,
-   prenom VARCHAR(50)  NOT NULL,
-   adresse VARCHAR(100)  NOT NULL,
-   naissance DATE NOT NULL,
-  place int NOT NULL,
-  immatriculation VARCHAR(10) NOT NULL UNIQUE, 
-  marque VARCHAR(50) NOT NULL,
-  modele VARCHAR(50) NOT NULL,
---   couleur VARCHAR(50) NOT NULL,
-  puissance_administrative INTEGER NOT NULL,  
-  annee_fabrication year NOT NULL,
-  proprietaire_id INT NOT NULL,
-   annee_fabrication_id INT,
-   type_moteur_id INT,
-   mode_usage_id INT,
---   FOREIGN KEY (proprietaire_id) REFERENCES utilisateur(id)
+    id SERIAL PRIMARY KEY,
+    nom VARCHAR(50)  NOT NULL,
+    prenom VARCHAR(50)  NOT NULL,
+    adresse VARCHAR(100)  NOT NULL,
+    naissance DATE NOT NULL,
+    place int NOT NULL,
+    immatriculation VARCHAR(10) NOT NULL UNIQUE, 
+    marque VARCHAR(50) NOT NULL,
+    modele VARCHAR(50) NOT NULL,
+    puissance_administrative INTEGER NOT NULL,  
+    annee_fabrication year NOT NULL,
+    proprietaire_id INT NOT NULL,
+    annee_fabrication_id INT,
+    type_moteur_id INT,
+    mode_usage_id INT,
 );
 
