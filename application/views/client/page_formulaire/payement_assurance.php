@@ -75,11 +75,11 @@
 									</form>
 								</div>
 							</div>
-							<div class="col-md-6 d-flex align-items-stretch" >
-                                <div> 
-                                    <img src="<?php echo base_url("assets/img/MVOLA.png"); ?>" alt=""> 
-                                    <img src="<?php echo base_url("assets/img/ORANGE.png"); ?>" alt=""> 
-                                    <img src="<?php echo base_url("assets/img/AIRTEL.png"); ?>" alt=""> 
+							<div class="col-md-6 d-flex align-items-stretch img_payement" >
+                                <div style="position:relative;"> 
+                                    <img src="<?php echo base_url("assets/img/AIRTEL.png"); ?>" alt="" class="airtel_money" > 
+                                    <img src="<?php echo base_url("assets/img/MVOLA.png"); ?>" alt="" class="mvola"> 
+									<img src="<?php echo base_url("assets/img/ORANGE.png"); ?>" alt="" id="" class="orange_money" > 
                                     
                                 </div>
 
