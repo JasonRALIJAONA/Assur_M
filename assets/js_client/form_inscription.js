@@ -37,6 +37,7 @@
 	
 	// Ajax
 	async function check_inscription() {
+		console.log("check inscription");
 		// Récupérer les données des deux formulaires
 		var formData1 = $('.form_multimedia').serializeArray();
 		var formData2 = $('.form_perso').serializeArray();
@@ -51,8 +52,8 @@
 			data: $.param(combinedData),
 
 			beforeSend: function() { 
-				// console.log("Le data a envoyer "+$.param(combinedData),)
-				// //$submit.css('display', 'block').text(waitText);
+				console.log("Le data a envoyer "+$.param(combinedData),)
+				$submit.css('display', 'block').text(waitText);
 			},
 
 			success: function(response) {

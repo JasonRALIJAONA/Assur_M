@@ -57,13 +57,26 @@ class Form_controller extends CI_Controller {
 		$new_user["mdp"] = $this->input->post('mdp');
 		$new_user["confirm_mdp"] = $this->input->post('confirm_mdp');
 
-		$this->Utilisateur->creer_profil($new_user);
+		//$this->Utilisateur->creer_profil($new_user);
 
 		/* Manao gestion d'exception d retournena Ajax raha misy  */
-		//$exception = "patrick exception";
+		// $exception = "patrick exception";
 
 		echo json_encode(['exception'=>$exception]);
 	}
+
+	public function getText() {
+        // Définir l'en-tête de contenu pour indiquer que la réponse est en texte brut
+        header('Content-Type: text/plain');
+
+        // Le texte à renvoyer
+        $responseText = "Hello, this is a response text from CodeIgniter 3!";
+
+        // Renvoyer le texte
+        echo $responseText;
+    }
+
+	
 	
 	public function getCodeValidation() {
 		$this->load->model('utilitaire');
