@@ -92,5 +92,62 @@ class Utilisateur extends CI_Model
     {
         return str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
     }
+    public function payemment($numero_voiture, $frequence, $nom_Assurance)
+    {
+        $this->db->trans_start();
+        $this->db->where('immatriculation', $numero_voiture);
+        $vehicule_query = $this->db->get('vehicule');
+
+        if ($vehicule_query->num_rows() != 1) {
+            throw new Exception("Véhicule non trouvé.");
+        }
+        
+        $vehicule = $vehicule_query->row();
+        $this->db->where('nom', $nom_Assurance);
+        $assurance_query = $this->db->get('assurance');
+
+        if ($assurance_query->num_rows() != 1) {
+            throw new Exception("Assurance non trouvée.");
+        }
+
+        $assurance = $assurance_query->row();
+
+        $date_debut = date('Y-m-d');
+        switch($frequence) {
+            case '1':
+                $date_fin = date('Y-m-d', strtotime('+1 month'));
+                break;
+            case '3':
+                $date_fin = date('Y-m-d', strtotime('+3 month'));
+                break;
+            case '6':
+                $date_fin = date('Y-m-d', strtotime('+6 month'));
+                break;
+            case '12':
+                $date_fin = date('Y-m-d', strtotime('+1 year'));
+                break;
+            default:
+                throw new Exception("Fréquence de paiement non valide.");
+        }
+
+        $police_assurance = strtoupper(substr(md5(time() . rand()), 0, 10));
+        $facture_data = array(
+            'date_debut' => $date_debut,
+            'date_fin' => $date_fin,
+            'police_assurance' => $police_assurance,
+            'id_assurance' => $assurance->id,
+            'id_vehicule' => $vehicule->id,
+            'deleted' => FALSE
+        );
+
+        $this->db->insert('facture', $facture_data);
+        $this->db->trans_complete();
+
+        if ($this->db->trans_status() === FALSE) {
+            throw new Exception("Erreur lors de l'enregistrement du paiement.");
+        }
+
+        return true;
+    }
 }
 ?>
