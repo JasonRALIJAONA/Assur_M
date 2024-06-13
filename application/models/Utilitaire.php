@@ -3,6 +3,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Utilitaire extends CI_Model
 {
+    public function __construct() {
+        $this->load->library('email');
+        $this->load->config('email');
+    }
     public function generateCodeValidation()
     {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -33,15 +37,15 @@ class Utilitaire extends CI_Model
 
         // Configurer et envoyer l'email
         $this->email->from('assuremassurem@gmail.com', 'Assur M');
-        $this->email->to($email);
+        $this->email->to('kevinrakotondratsimba202@gmail.com');
         $this->email->subject('Code de validation');
-        $this->email->message($code);
+        $this->email->message('skdfjhskdf');
 
-        if ($this->email->send()) {
-            echo 'Email sent.';
-        } else {
-            echo 'Email failed to send.';
-            show_error($this->email->print_debugger());
-        }
+        // if ($this->email->send()) {
+        //     echo 'Email sent.';
+        // } else {
+        //     echo 'Email failed to send.';
+        //     show_error($this->email->print_debugger());
+        // }
     }
 }
