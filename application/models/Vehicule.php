@@ -54,7 +54,7 @@ class Vehicule extends CI_Model {
             
         } catch(\Throwable $th) {
             throw new Exception("Erreur inattendue: " . $th->getMessage(), 2);
-        }
+        }   
     }
 
     public function liste_vehicules($id_utilisateur) {

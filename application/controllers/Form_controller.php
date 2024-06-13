@@ -47,17 +47,23 @@ class Form_controller extends CI_Controller {
 		/* Gerance d'exception d'insertion  */
 		/* Si ok , generer code validation */
 		$exception = null;
-		$new_user = array();
-		$new_user["nom"] =  $this->input->post('nom');
-		$new_user["prenoms"] = $this->input->post('prenoms');
-		$new_user["adresse"] = $this->input->post('adresse');
-		$new_user["date_naissance"] = $this->input->post('date_naissance');
-		$new_user["num_tel"] = $this->input->post('num_tel');
-		$new_user["email"] = $this->input->post('email');
-		$new_user["mdp"] = $this->input->post('mdp');
-		$new_user["confirm_mdp"] = $this->input->post('confirm_mdp');
+		$data = array();
+		$data["nom"] =  $this->input->post('nom');
+		$data["prenoms"] = $this->input->post('prenoms');
+		$data["adresse"] = $this->input->post('adresse');
+		$data["date_naissance"] = $this->input->post('date_naissance');
+		$data["num_tel"] = $this->input->post('num_tel');
+		$data["email"] = $this->input->post('email');
+		$data["mdp"] = $this->input->post('mdp');
+		$data["confirm_mdp"] = $this->input->post('confirm_mdp');
 
-		//$this->Utilisateur->creer_profil($new_user);
+		try {
+			$this->Utilisateur->verifier_donnee($data);
+			$email = $data['email'];
+			//code...
+		} catch (Exception $e) {
+			$exception = $e->getMessage();
+		}
 
 		/* Manao gestion d'exception d retournena Ajax raha misy  */
 		// $exception = "patrick exception";
@@ -81,7 +87,14 @@ class Form_controller extends CI_Controller {
 	public function getCodeValidation() {
 		$this->load->model('utilitaire');
 		$code = $this->utilitaire->generateCodeValidation(); 
-		echo json_encode(['code'=>$code]);
+		$exception = "";
+		try {
+			//code...
+			$this->utilitaire->envoyer_email($this->input->post('email'), $code);
+		} catch (Exception $e) {
+			$exception = $e->getMessage();
+		}
+		echo json_encode(['code'=>$code, 'exception'=>$exception]);
 	}
 
 	public function confirm_inscription() {
@@ -104,6 +117,10 @@ class Form_controller extends CI_Controller {
 
 		];
 		$this->load->view("client/page_formulaire/inscription_vehicule.php", $data);
-	}		
+	}	
+	
+	
+
+
 	
 }

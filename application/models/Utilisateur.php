@@ -112,5 +112,39 @@ class Utilisateur extends CI_Model
 
         return null;
     }
+
+    public function verifier_donnee($data) {
+        if ($data['nom'] == '') {
+            throw new Exception("Veuillez saisir votre nom", 1);
+            
+        }
+        if ($data['prenoms'] == '') {
+            throw new Exception("Veuillez saisir votre prenom", 1);
+            
+        }
+        if ($data['adresse'] == '') {
+            throw new Exception("Le champ adresse est obligatoire", 1);
+            
+        }
+        if ($data['date_naissance'] != '') {
+            $date = new DateTime($data['date_naissance']);
+            $formattedDate = $date->format('d-M-Y');
+            // if ($formattedDate - date()) {
+            //     throw new Exception('sdfskdj', 1);
+            //     # code...
+            // }
+            
+        } else {
+            throw new Exception('Veuillez choisir une date de naissance', 1);
+        }
+        if ($data['num_tel'] == '') {
+            throw new Exception("Le numero de telephone est obligatoire");
+        }
+
+        if ($data['mdp'] != $data['confirm_mdp']) {
+            throw new Exception('Les mots de passe doivent etre identique', 1);
+        }
+
+    }
 }
 ?>

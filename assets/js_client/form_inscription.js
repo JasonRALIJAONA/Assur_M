@@ -70,18 +70,20 @@
 	}
 
 	async function get_code_validation() {
+		var formData1 = $('.form_multimedia').serializeArray();
 		let code = "";
 		await $.ajax({
 			url: 'getCodeValidation',
 			type: 'GET',
 			dataType: 'json',
+			data: $.param(formData1),
 
 			success: function (response) {
 				code = response.code;
 			},
 
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.error('Erreur: ' + textStatus, errorThrown);
+				console.error('Erreur dans get_code_validation(): ' + jqXHR, errorThrown);
 			}
 		});
 		return code;
@@ -204,6 +206,35 @@
 		}
 
 	}
+
+	async function send_email() {
+		var formData1 = $('.form_multimedia').serializeArray();
+		let exception = "";
+		await $.ajax({
+			url: 'send_email',
+			type: 'POST',
+			dataType: 'json',
+			data: $.param(combinedData),
+
+			beforeSend: function () {
+				// console.log("Le data a envoyer "+$.param(combinedData),)
+				// //$submit.css('display', 'block').text(waitText);
+			},
+
+			success: function (response) {
+				console.log("exceptionnFonc : ", response.exception);
+				exception = response.exception;
+
+			},
+
+			error: function (error) {
+
+				console.log('Erreur: ', error)
+			}
+		});
+		return exception;
+	}
+
 	inscription_perso();
 	inscription_multimedia();
 
