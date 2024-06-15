@@ -5,7 +5,7 @@ class Utilitaire extends CI_Model
 {
     public function __construct() {
         $this->load->library('email');
-        $this->load->config('email');
+        // $this->load->config('email');
     }
     public function generateCodeValidation()
     {
@@ -20,6 +20,7 @@ class Utilitaire extends CI_Model
 
     public function envoyer_email($email, $code)
     {
+        // echo $email, $code;
 		
         $config = array(
             'protocol' => 'smtp',
@@ -37,10 +38,10 @@ class Utilitaire extends CI_Model
 
         // Configurer et envoyer l'email
         $this->email->from('assuremassurem@gmail.com', 'Assur M');
-        $this->email->to('kevinrakotondratsimba202@gmail.com');
+        $this->email->to($email);
         $this->email->subject('Code de validation');
-        $this->email->message('skdfjhskdf');
-
+        $this->email->message($code);
+        $this->email->send();
         // if ($this->email->send()) {
         //     echo 'Email sent.';
         // } else {

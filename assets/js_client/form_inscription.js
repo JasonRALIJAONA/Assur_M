@@ -29,6 +29,7 @@
 			}
 			else {
 				let code = await get_code_validation();
+				console.log(code); 	
 				await check_code_validation(code); // Manapotra an'ilay code validation 	
 			}
 
@@ -71,12 +72,14 @@
 
 	async function get_code_validation() {
 		var formData1 = $('.form_multimedia').serializeArray();
+		var formData2 = $('.form_perso').serializeArray();
+		var combined = formData1.concat(formData2);
 		let code = "";
 		await $.ajax({
 			url: 'getCodeValidation',
 			type: 'GET',
 			dataType: 'json',
-			data: $.param(formData1),
+			data: $.param(combined),
 
 			success: function (response) {
 				code = response.code;
@@ -91,6 +94,7 @@
 
 	// SweetAlert
 
+
 	async function check_code_validation(validation) {
 		console.log(validation);
 		const { value: code } = await Swal.fire({
@@ -102,6 +106,7 @@
 			inputValidator: (value) => {
 				return new Promise((resolve) => {
 					if (value == validation) {
+						inscire_utilisateur();
 						resolve();
 					}
 					else {
@@ -114,7 +119,7 @@
 		if (code == validation) {
 			Swal.fire("Bienvenue : " + $("#nom").val() + "	" + $("#prenoms").val());
 			setTimeout(() => {
-				window.location = "http://localhost:8000/S4/Assur_M/form_controller/confirm_inscription";
+				window.location = "accueil";
 
 			}, 1000);
 		}
@@ -207,32 +212,24 @@
 
 	}
 
-	async function send_email() {
+	async function inscire_utilisateur() {
 		var formData1 = $('.form_multimedia').serializeArray();
-		let exception = "";
+		var formData2 = $('.form_perso').serializeArray();
+		var combined = formData1.concat(formData2);
 		await $.ajax({
-			url: 'send_email',
+			url: 'enregistrer_utilisateur',
 			type: 'POST',
 			dataType: 'json',
-			data: $.param(combinedData),
-
-			beforeSend: function () {
-				// console.log("Le data a envoyer "+$.param(combinedData),)
-				// //$submit.css('display', 'block').text(waitText);
-			},
+			data: $.param(combined),
 
 			success: function (response) {
-				console.log("exceptionnFonc : ", response.exception);
-				exception = response.exception;
-
+				// code = response.code;
 			},
 
-			error: function (error) {
-
-				console.log('Erreur: ', error)
+			error: function (jqXHR, textStatus, errorThrown) {
+				console.error('Erreur dans inscire_utilisateur(): ' + jqXHR, errorThrown);
 			}
 		});
-		return exception;
 	}
 
 	inscription_perso();

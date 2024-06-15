@@ -56,4 +56,6 @@ $route['utilisateur/creer'] = 'Utilisateur_controlleur/creer';
 /* Pour les Ajax */
 $route['getCodeValidation'] = 'form_controller/getCodeValidation';
 $route['check_inscription'] = 'form_controller/check_inscription';
-$route['send_email'] = 'form_controller/envoyer_email';
+$route['enregistrer_utilisateur'] = 'form_controller/enregistrer_utilisateur';
+$route['accueil'] = 'template_controller/accueil';
+

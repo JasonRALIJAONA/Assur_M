@@ -7,11 +7,13 @@ class Form_controller extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Utilisateur');
 		$this->load->model('Vehicule');
-		$this->session->set_userdata('utilisateur');
+		// $this->session->set_userdata('utilisateur');
+		$this->load->model('Utilitaire');
 	}
 
 	public function login(){
 		$this->load->view("client/page_formulaire/login.php");
+		// $this->load->view("test.php");
 	}
 
 	public function checkLogin(){
@@ -83,18 +85,44 @@ class Form_controller extends CI_Controller {
     }
 
 	
-	
+	// GENERER LE CODE DE VALIDATION ET ENVOYER L'EMAIL ET CONNECTE L'UTILISATEUR
 	public function getCodeValidation() {
-		$this->load->model('utilitaire');
-		$code = $this->utilitaire->generateCodeValidation(); 
+		$this->load->model('Utilitaire');
+		$code = $this->Utilitaire->generateCodeValidation(); 
 		$exception = "";
 		try {
 			//code...
-			$this->utilitaire->envoyer_email($this->input->post('email'), $code);
+			$this->Utilitaire->envoyer_email($this->input->get('email'), $code);
 		} catch (Exception $e) {
 			$exception = $e->getMessage();
 		}
-		echo json_encode(['code'=>$code, 'exception'=>$exception]);
+		
+
+		// RENVOIR LE CODE 
+		echo json_encode(['code'=>$code]);
+	}
+
+
+
+	public function enregistrer_utilisateur() {	
+		// CONNECTE L'UTILISATEUR
+		$date = $this->input->post('date_naissance');
+		DateTime::createFromFormat('Y-m-d', $date);
+		$donnee = array(
+			'nom' => $this->input->post('nom'),
+			'prenom' => $this->input->post('prenoms'),
+			'adresse' => $this->input->post('adresse'),
+			'naissance' => $date,
+			'telephone' => $this->input->post('num_tel'),
+			'email' => $this->input->post('email'),
+			'mdp' => $this->input->post('mdp')
+		);
+
+		
+		$id = $this->Utilisateur->enregistrer_utilisateur($donnee);
+		$utilisateur = $this->Utilisateur->get_by_id($id);
+		$this->session->set_userdata('utilisateur', $utilisateur);
+		echo json_encode(['status' => 'success', 'id' => $id]);
 	}
 
 	public function confirm_inscription() {
@@ -118,6 +146,10 @@ class Form_controller extends CI_Controller {
 		];
 		$this->load->view("client/page_formulaire/inscription_vehicule.php", $data);
 	}	
+
+	public function accueil() {
+		redirect('template_controller/accueil');
+	}
 	
 	
 

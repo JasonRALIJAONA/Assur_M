@@ -129,6 +129,7 @@ class Utilisateur extends CI_Model
         if ($data['date_naissance'] != '') {
             $date = new DateTime($data['date_naissance']);
             $formattedDate = $date->format('d-M-Y');
+            // throw new Exception($formattedDate);
             // if ($formattedDate - date()) {
             //     throw new Exception('sdfskdj', 1);
             //     # code...
@@ -145,6 +146,12 @@ class Utilisateur extends CI_Model
             throw new Exception('Les mots de passe doivent etre identique', 1);
         }
 
+    }
+
+    public function enregistrer_utilisateur($data) {
+        $this->db->insert('utilisateur', $data);
+        $id = $this->db->insert_id('utilisateur_id_seq');
+        return $id;
     }
 }
 ?>
