@@ -89,22 +89,51 @@ class Form_controller extends CI_Controller {
 	public function getCodeValidation() {
 		$this->load->model('Utilitaire');
 		$code = $this->Utilitaire->generateCodeValidation(); 
-		$exception = "";
 		try {
-			//code...
+			// Envoi de l'email
 			$this->Utilitaire->envoyer_email($this->input->get('email'), $code);
+			// Si l'email est envoyé avec succès
+			$response['status'] = 'success';
+			$response['code'] = $code;
 		} catch (Exception $e) {
-			$exception = $e->getMessage();
+			// En cas d'exception, envoyer le message d'erreur
+			$response['status'] = 'error';
+			$response['message'] = $e->getMessage();
 		}
-		
-
-		// RENVOIR LE CODE 
-		echo json_encode(['code'=>$code]);
+	
+		// Envoyer la réponse JSON
+		echo json_encode($response);
 	}
 
 
 
 	public function enregistrer_utilisateur() {	
+		$numero =  $this->input->post('num_tel');
+        $suffix = substr($numero, 0, 3);
+        $liste_operateur = $this->Utilisateur->get_operateur();
+        $id_operateur = 0;
+        if ($suffix == '033') {
+            foreach ($liste_operateur as $row) {
+                if (strcmp($row['nom'], 'Airtel') == 0) {
+                    $id_operateur = $row['id'];
+                    break;
+                }
+            }
+        } else if ($suffix == '034' || $suffix == '038') {
+            foreach ($liste_operateur as $row) {
+                if (strcmp($row['nom'], 'Telma') == 0) {
+                    $id_operateur = $row['id'];
+                    break;
+                }
+            }
+        } else if ($suffix == '032') {
+            foreach ($liste_operateur as $row) {
+                if (strcmp($row['nom'], 'Orange') == 0) {
+                    $id_operateur = $row['id'];
+                    break;
+                }
+            }
+        }
 		// CONNECTE L'UTILISATEUR
 		$date = $this->input->post('date_naissance');
 		DateTime::createFromFormat('Y-m-d', $date);
@@ -115,11 +144,11 @@ class Form_controller extends CI_Controller {
 			'naissance' => $date,
 			'telephone' => $this->input->post('num_tel'),
 			'email' => $this->input->post('email'),
-			'mdp' => $this->input->post('mdp')
+			'mdp' => $this->input->post('mdp'),
+			'id_operateur' => $id_operateur
 		);
 
-		
-		$id = $this->Utilisateur->enregistrer_utilisateur($donnee);
+		$id = $this->Utilisateur->save($donnee);
 		$utilisateur = $this->Utilisateur->get_by_id($id);
 		$this->session->set_userdata('utilisateur', $utilisateur);
 		echo json_encode(['status' => 'success', 'id' => $id]);

@@ -141,16 +141,6 @@ CREATE TABLE etat(
    FOREIGN KEY(id_assureur) REFERENCES assureur(id)
 );
 
-CREATE TABLE options(
-   id SERIAL,
-   nom VARCHAR(100)  NOT NULL,
-   descri TEXT,
-   valeur NUMERIC(12,2)   NOT NULL,
-   id_assureur INTEGER,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
-);
-
 CREATE TABLE payement(
    id SERIAL,
    date_payement DATE NOT NULL,

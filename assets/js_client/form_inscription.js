@@ -29,7 +29,7 @@
 			}
 			else {
 				let code = await get_code_validation();
-				console.log(code); 	
+				console.log(code);
 				await check_code_validation(code); // Manapotra an'ilay code validation 	
 			}
 
@@ -82,11 +82,26 @@
 			data: $.param(combined),
 
 			success: function (response) {
-				code = response.code;
+				// code = response.code;
+				if (response.status === 'success') {
+					code = response.code;
+				} else {
+					
+					console.error('Erreur: ' + response.status + response.message);
+					Swal.fire("Erreur", response.message, "error");
+				}
 			},
 
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.error('Erreur dans get_code_validation(): ' + jqXHR, errorThrown);
+				console.error('Erreur dans get_code_validation(): ' + jqXHR.responseText);
+				let errorMsg;
+				try {
+					const response = JSON.parse(jqXHR.responseText);
+					errorMsg = response.message || 'Une erreur inattendue est survenue.';
+				} catch (e) {
+					errorMsg = 'Une erreur inattendue est survenue.';
+				}
+				Swal.fire("Erreur", errorMsg, "error");
 			}
 		});
 		return code;
@@ -121,7 +136,7 @@
 			setTimeout(() => {
 				window.location = "accueil";
 
-			}, 1000);
+			}, 3000);
 		}
 	}
 
@@ -213,6 +228,7 @@
 	}
 
 	async function inscire_utilisateur() {
+		console.log('enregistrement des donnees');
 		var formData1 = $('.form_multimedia').serializeArray();
 		var formData2 = $('.form_perso').serializeArray();
 		var combined = formData1.concat(formData2);
@@ -224,10 +240,12 @@
 
 			success: function (response) {
 				// code = response.code;
+				console.log(response.nety);
+				console.log(response.error);
 			},
 
 			error: function (jqXHR, textStatus, errorThrown) {
-				console.error('Erreur dans inscire_utilisateur(): ' + jqXHR, errorThrown);
+				console.log('Erreur dans get_code_validation(): ' + errorThrown);
 			}
 		});
 	}

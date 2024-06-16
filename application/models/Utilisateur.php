@@ -10,11 +10,12 @@ class Utilisateur extends CI_Model
         //$this->load->database(); 
     }
 
-    /* @ la validation */ 
+    /* @ la validation */
     // public function set_new_user($nouveau_user) {
     //     $this->$new_user = $nouveau_user;
     // }
-    public function get_new_user() {
+    public function get_new_user()
+    {
         return $this->new_user;
     }
 
@@ -40,13 +41,11 @@ class Utilisateur extends CI_Model
             $user = $requete->row();
             if ($user->mdp != $mdp) {
                 throw new Exception("Mot de passe ou email non invalide", 1);
-                
-            }else {
+            } else {
                 return $user;
             }
-        }else {
+        } else {
             throw new Exception("Mot de passe ou email non invalide", 1);
-            
         }
 
         return null;
@@ -65,7 +64,7 @@ class Utilisateur extends CI_Model
         return null;
     }
 
-    public function creer_profil($data) 
+    public function creer_profil($data)
     {
         // Vérifier la correspondance des mots de passe
         if ($data['mdp'] !== $data['confirm_mdp']) {
@@ -101,7 +100,8 @@ class Utilisateur extends CI_Model
         return str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
     }
 
-    public function get_by_id($id) {
+    public function get_by_id($id)
+    {
         $this->db->where('id', $id);
         $requete = $this->db->get('utilisateur');
 
@@ -113,18 +113,16 @@ class Utilisateur extends CI_Model
         return null;
     }
 
-    public function verifier_donnee($data) {
+    public function verifier_donnee($data)
+    {
         if ($data['nom'] == '') {
             throw new Exception("Veuillez saisir votre nom", 1);
-            
         }
         if ($data['prenoms'] == '') {
             throw new Exception("Veuillez saisir votre prenom", 1);
-            
         }
         if ($data['adresse'] == '') {
             throw new Exception("Le champ adresse est obligatoire", 1);
-            
         }
         if ($data['date_naissance'] != '') {
             $date = new DateTime($data['date_naissance']);
@@ -134,7 +132,7 @@ class Utilisateur extends CI_Model
             //     throw new Exception('sdfskdj', 1);
             //     # code...
             // }
-            
+
         } else {
             throw new Exception('Veuillez choisir une date de naissance', 1);
         }
@@ -145,13 +143,23 @@ class Utilisateur extends CI_Model
         if ($data['mdp'] != $data['confirm_mdp']) {
             throw new Exception('Les mots de passe doivent etre identique', 1);
         }
-
     }
 
-    public function enregistrer_utilisateur($data) {
+    public function get_operateur()
+    {
+        $query = $this->db->get('operateur');
+        return $query->result_array();
+    }
+
+    public function save($data)
+    {
+        
+
+        // $data['id_operateur'] = $id_operateur;
+        echo json_encode($data);
         $this->db->insert('utilisateur', $data);
+
         $id = $this->db->insert_id('utilisateur_id_seq');
         return $id;
     }
 }
-?>

@@ -40,13 +40,13 @@ class Utilitaire extends CI_Model
         $this->email->from('assuremassurem@gmail.com', 'Assur M');
         $this->email->to($email);
         $this->email->subject('Code de validation');
-        $this->email->message($code);
-        $this->email->send();
-        // if ($this->email->send()) {
-        //     echo 'Email sent.';
-        // } else {
-        //     echo 'Email failed to send.';
-        //     show_error($this->email->print_debugger());
-        // }
+        $this->email->message('<html><body><p>Votre code de validation est: ' . $code . '</p></body></html>');
+        if ($this->email->send()) {
+            // echo json_encode(['code' => 'email sent']);
+        } else {
+            // Capturer les erreurs d'email
+            $error = $this->email->print_debugger(['headers']);
+            echo json_encode(['status' => 'error', 'message' => $error]);
+        }
     }
 }
