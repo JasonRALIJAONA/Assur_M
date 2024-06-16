@@ -108,6 +108,21 @@ body {
   color: white;
   background-color: #1c1e25;
 }
+.img_assurance{
+  position: relative;
+
+}
+.img_assurance input[type="radio"] {
+  position: absolute;
+  top: 5px;
+  left: 50px;
+}
+.img_assurance img{
+  width: 130px;
+  border-radius: 50%;
+  height: 130px;
+  border: 1px solid;
+}
 
 
 [tabindex="-1"]:focus {

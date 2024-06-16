@@ -23,17 +23,17 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-lg-10">
-					<div class="wrapper">
+				<div class="col-lg-10" style="display:flex;">
+					<div class="wrapper"  >
 						<div class="row no-gutters">
-							<div class="col-md-6 d-flex align-items-stretch" id="bloc1" >
+							<div class="col-md-6 d-flex align-items-stretch"  >
 								<div class="contact-wrap w-100 p-md-5 p-4 py-5">
 									<h3 class="mb-4">Information vehicule</h3>
 									<div id="form-message-warning" class="mb-4"></div> 
 				      		<div id="form-message-success" class="mb-4">
 				            Your message was sent, thank you!
 				      		</div>
-									<form method="POST" id="contactForm" name="contactForm" class="contactForm">
+									<form method="POST" id="contactForm" name="contactForm" class="contactForm" action="<?php echo site_url('form_controller/inscription_vehicule_page1'); ?>" >
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
@@ -89,112 +89,10 @@
 
 											<div class="col-md-12">
 												<div class="form-group">
-			
-													<select name="annee_fabrication" id="annee_fabrication" class="select-form" >
-														<option value="">Annee de Fabrication</option>
-														<?php for ($i=1900; $i < date("Y") ; $i++) { ?> 
-															<option value="<?php echo $i; ?>"><?php echo $i; ?></option>	
-														<?php } ?>
-								
-														
-													</select>
-												</div>
-											</div>
-
-											<div class="col-md-12">
-												<div class="form-group row">
-													<div class="col-md-4">Moteur :</div>
-													<div class="form-check col-md-4">
-														<input class="form-check-input" type="radio" name="type_moteur" id="type_moteur1">
-														<label class="form-check-label" for="type_moteur1">
-															Essence
-														</label>
-														</div>
-														<div class="form-check col-md-4">
-														<input class="form-check-input" type="radio" name="type_moteur" id="type_moteur2" checked>
-														<label class="form-check-label" for="type_moteur2">
-															Diesel
-														</label>
-														</div>
-													</div>
-											</div>
-											<hr style="color:white">
-											<div class="col-md-12">
-												<div class="form-group row">
-													<div class="col-md-12" style="color:white;" >Mode d'usage :</div>
-													<div class="form-check col-md-5">
-														<input class="form-check-input" type="radio" name="mode_usage" id="mode_usage1"  data-bs-toggle="popover" data-bs-custom-class='custom-popover' data-bs-trigger="hover focus" >
-														<label class="form-check-label" for="mode_usage1">
-															Transport
-														</label>
-													</div>
-													<div class="form-check col-md-5">
-													<input class="form-check-input" type="radio" name="mode_usage" id="mode_usage2" data-bs-toggle="popover" data-bs-custom-class='custom-popover' data-bs-trigger="hover focus" >
-													<label class="form-check-label" for="mode_usage2">
-														Personnel
-													</label>
-													</div>
-													<div class="form-check col-md-5">
-													<input class="form-check-input" type="radio" name="mode_usage" id="mode_usage3" data-bs-toggle="popover" data-bs-custom-class='custom-popover' data-bs-trigger="hover focus" >
-													<label class="form-check-label" for="mode_usage3">
-														mode_usage3
-													</label>
-													</div>
-													<div class="form-check col-md-5">
-													<input class="form-check-input" type="radio" name="mode_usage" id="mode_usage4" data-bs-toggle="popover" data-bs-custom-class='custom-popover' data-bs-trigger="hover focus" >
-													<label class="form-check-label" for="mode_usage4">
-														mode_usage4
-													</label>
-													</div>
-													<div class="form-check col-md-5">
-													<input class="form-check-input" type="radio" name="mode_usage" id="mode_usage5" data-bs-toggle="popover" data-bs-custom-class='custom-popover' data-bs-trigger="hover focus" >
-													<label class="form-check-label" for="mode_usage5">
-														mode_usage5
-													</label>
-													</div>
-												</div>
-											</div>
-											
-											<hr style="color:white">
-											<div class="col-md-12">
-												<div class="form-group row">
-												<div class="col-md-12" style="color:white;" >Cotisation :</div>
-													<div class="form-check col-md-5">
-														<input class="form-check-input" type="radio" name="cotisation" id="cotisation1"  data-bs-toggle="popover" data-bs-custom-class='custom-popover_cotisation' data-bs-trigger="hover focus" >
-														<label class="form-check-label" for="cotisation1">
-															Cotisation 1
-														</label>
-													</div>
-
-													<div class="form-check col-md-5">
-														<input class="form-check-input" type="radio" name="cotisation" id="cotisation2"  data-bs-toggle="popover" data-bs-custom-class='custom-popover_cotisation' data-bs-trigger="hover focus" >
-														<label class="form-check-label" for="cotisation2">
-															Cotisation 2
-														</label>
-													</div>
-
-													<div class="form-check col-md-5">
-														<input class="form-check-input" type="radio" name="cotisation" id="cotisation3"  data-bs-toggle="popover" data-bs-custom-class='custom-popover_cotisation' data-bs-trigger="hover focus" >
-														<label class="form-check-label" for="cotisation3">
-															Cotisation 3
-														</label>
-													</div>
-
-													<div class="form-check col-md-5">
-														<input class="form-check-input" type="radio" name="cotisation" id="cotisation4"  data-bs-toggle="popover" data-bs-custom-class='custom-popover_cotisation' data-bs-trigger="hover focus" >
-														<label class="form-check-label" for="cotisation4">
-															Cotisation 4
-														</label>
-													</div>
-
-												</div>
-											</div>
-
-											<div class="col-md-12">
-												<div class="form-group">
 													<input type="submit" value="ENREGISTRER" class="btn btn-primary">
 													<div class="submitting"></div>
 												</div>
+											
 												
 											</div>
 										</div>
@@ -243,7 +141,10 @@
 			          </div>
 							</div>
 						</div>
-					</div>
+					</div> <!--  fin wrapper -->
+
+					
+
 				</div>
 			</div>
 		</div>

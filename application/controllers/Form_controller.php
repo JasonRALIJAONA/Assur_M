@@ -33,6 +33,7 @@ class Form_controller extends CI_Controller {
 		$new_user["email"] = $this->input->post('email');
 		$new_user["mdp"] = $this->input->post('mdp');
 		//$this->load->model('utilisateur');
+		// Manao new_user ();
 		//$this->utilisateur->set_new_user($new_user);
 
 		/* Manao gestion d'exception d retournena Ajax raha misy  */
@@ -40,9 +41,13 @@ class Form_controller extends CI_Controller {
 
 		echo json_encode(['exception'=>$exception]);
 	}
+
 	public function getCodeValidation() {
+		$to = "jasonralijaona@gmail.com";
+		
 		$this->load->model('utilitaire');
-		$code = $this->utilitaire->generateCodeValidation(); 
+		$code = $this->utilitaire->generateCodeValidation();
+		/* Mandefa code par email */ 
 		echo json_encode(['code'=>$code]);
 	}
 
@@ -62,6 +67,20 @@ class Form_controller extends CI_Controller {
 	public function inscription_vehicule()
 	{
 		$this->load->view("client/page_formulaire/inscription_vehicule.php");
+	}
+	public function inscription_vehicule_page1(){
+		$this->input->post('type_vehicule');
+		$this->input->post('marque');
+		$this->input->post('num_plaque');
+		$this->input->post('puissance');
+		$this->load->view("client/page_formulaire/inscription_vehicule2.php");
+	}
+
+	public function inscription_vehicule_page2(){
+		$this->input->post('annee_fabrication');
+		$this->input->post('mode_usage');
+		$this->input->post('cotisation');
+		$this->input->post('assureur');
 	}		
 	
 }

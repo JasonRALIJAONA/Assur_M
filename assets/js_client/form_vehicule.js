@@ -43,8 +43,8 @@
 		html:true
 		
 	};
-	$("#mode_usage1").attr('title','<h3>Madagascar</h3>');
-	$("#mode_usage1").attr("data-bs-content",'<p class="para1"> <i> Imaginez une île </i></p>');
+	$("#mode_usage1").attr('title','<h3>Mode usage 1</h3>');
+	$("#mode_usage1").attr("data-bs-content",'<p class="para1"> <i> A propos de mode usage 1 </i></p>');
 	
 	$("#mode_usage2").attr('title','<h3>Mode usage 2</h3>');
 	$("#mode_usage2").attr("data-bs-content",'<p class="para2"> <i> A propos de mode usage 2  </i></p>');
