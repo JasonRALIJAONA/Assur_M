@@ -82,7 +82,6 @@
 			data: $.param(combined),
 
 			success: function (response) {
-				// code = response.code;
 				if (response.status === 'success') {
 					code = response.code;
 				} else {
@@ -136,7 +135,7 @@
 			setTimeout(() => {
 				window.location = "accueil";
 
-			}, 3000);
+			}, 1000);
 		}
 	}
 
