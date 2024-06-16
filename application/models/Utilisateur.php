@@ -92,5 +92,66 @@ class Utilisateur extends CI_Model
     {
         return str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    public function envoyer_message($data) 
+    {
+        try {
+            if ($data['message'] == null) throw new Exception("Message vide");
+            if ($data['id_envoyeur'] == null || $data['id_receveur'] == null) throw new Exception("Erreur: id_envoyeur ou id_receveur manquant");
+
+            if (!$this->db->insert('message', $data)) {
+                throw new Exception("Erreur lors de l'insertion du message");
+            }
+            return true;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function get_liste_message_non_lu($id_utilisateur)
+    {
+        try {
+            $query = $this->db->get_where('message', array('id_receveur' => $id_utilisateur, 'vue' => false));
+            if (!$query) {
+                throw new Exception("Erreur lors de la récupération des messages non lus");
+            }
+            return $query->result();
+        } catch (Exception $e) {
+            return array('error' => $e->getMessage());
+        }
+    }
+
+    public function get_message_by_id($id_message)
+    {
+        try {
+            $query = $this->db->get_where('message', array('id' => $id_message));
+            if (!$query) {
+                throw new Exception("Erreur lors de la récupération du message");
+            }
+            return $query->row_array();
+        } catch (Exception $e) {
+            return array('error' => $e->getMessage());
+        }
+    }
+
+    public function vue_message($id_message)
+    {
+        try {
+            $message = $this->get_message_by_id($id_message);
+            if (isset($message['error'])) {
+                throw new Exception($message['error']);
+            }
+
+            $message['vue'] = true;
+            $this->db->where('id', $id_message);
+            if (!$this->db->update('message', $message)) {
+                throw new Exception("Erreur lors de la mise à jour du message");
+            }
+            return true;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }
 ?>
