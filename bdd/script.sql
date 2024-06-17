@@ -61,6 +61,9 @@ CREATE TABLE vehicule(
    id_utilisateur INTEGER NOT NULL,
    id_assureur INTEGER,
    id_options INTEGER,
+   carburant VARCHAR(50) ,
+   utilisation VARCHAR(100) ,
+
    PRIMARY KEY(id),
    FOREIGN KEY(id_type) REFERENCES type_vehicule(id),
    FOREIGN KEY(id_options) REFERENCES options(id),
