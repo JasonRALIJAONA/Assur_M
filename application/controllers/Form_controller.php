@@ -180,7 +180,20 @@ class Form_controller extends CI_Controller {
 		redirect('template_controller/accueil');
 	}
 	
-	
+	public function inscription_vehicule_page1(){
+		$this->input->post('type_vehicule');
+		$this->input->post('marque');
+		$this->input->post('num_plaque');
+		$this->input->post('puissance');
+		$this->load->view("client/page_formulaire/inscription_vehicule2.php");
+	}
+
+	public function inscription_vehicule_page2(){
+		$this->input->post('annee_fabrication');
+		$this->input->post('mode_usage');
+		$this->input->post('cotisation');
+		$this->input->post('assureur');
+	}	
 
 
 	

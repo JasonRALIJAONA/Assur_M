@@ -57,5 +57,6 @@ $route['utilisateur/creer'] = 'Utilisateur_controlleur/creer';
 $route['getCodeValidation'] = 'form_controller/getCodeValidation';
 $route['check_inscription'] = 'form_controller/check_inscription';
 $route['enregistrer_utilisateur'] = 'form_controller/enregistrer_utilisateur';
-$route['accueil'] = 'template_controller/accueil';
+$route['accueil'] = 'Template_controller/accueil';
+$route['get_annee_fabrication'] = 'Donnee_controller/get_annee_fabrication';
 
