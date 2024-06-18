@@ -59,4 +59,5 @@ $route['check_inscription'] = 'form_controller/check_inscription';
 $route['enregistrer_utilisateur'] = 'form_controller/enregistrer_utilisateur';
 $route['accueil'] = 'Template_controller/accueil';
 $route['get_annee_fabrication'] = 'Donnee_controller/get_annee_fabrication';
+$route['get_carburants'] = 'Donnee_controller/get_carburants';
 

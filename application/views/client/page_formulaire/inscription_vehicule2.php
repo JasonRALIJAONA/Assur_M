@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css_client/style_inscription.css">
+	
 </head>
 
 <body>
@@ -69,39 +70,42 @@
 											</div>
 
 											<!-- ANNEE DE FABRICATION -->
-											<div class="col-md-12" id="annee_fabrication_input" style="display: none;">
+											<div class="col-md-12" id="annee_fabrication_box" style="display: none;">
 												<div class="form-group">
-
 													<select name="annee_fabrication" id="annee_fabrication" class="select-form">
-
-
 													</select>
 												</div>
 											</div>
 
 											<!-- CARBURANT -->
-											<div class="col-md-12">
+											<div class="col-md-12" id="carburant_box" style="display: none;">
 												<div class="form-group row">
-													<div class="col-md-4">Moteur :</div>
-													<div class="form-check col-md-4">
-														<input class="form-check-input" type="radio" name="type_moteur" id="type_moteur1">
+													<div class="col-md-3">Moteur :</div>
+													<div class="form-check col-md-3 carburant_box_2">
+														<input class="form-check-input" type="radio" name="type_moteur" id="type_moteur1" value="1">
 														<label class="form-check-label" for="type_moteur1">
 															Essence
 														</label>
 													</div>
-													<div class="form-check col-md-4">
-														<input class="form-check-input" type="radio" name="type_moteur" id="type_moteur2" checked>
+													<div class="form-check col-md-3 carburant_box_2">
+														<input class="form-check-input" type="radio" name="type_moteur" id="type_moteur2" value="2">
 														<label class="form-check-label" for="type_moteur2">
 															Diesel
+														</label>
+													</div>
+													<div class="form-check col-md-3 carburant_box_2">
+														<input class="form-check-input" type="radio" name="type_moteur" id="type_moteur2" value="3">
+														<label class="form-check-label" for="type_moteur2">
+															GPL
 														</label>
 													</div>
 												</div>
 											</div>
 											<hr style="color:white">
 											<!-- MODE D'USAGE -->
-											<div class="col-md-12">
-												<div class="form-group row">
-													<div class="col-md-12" style="color:white;">Mode d'usage :</div>
+											<div class="col-md-12" >
+												<div class="form-group row" id="box_usage" style="display: none;">
+													<!-- <div class="col-md-12" style="color:white;">Mode d'usage :</div>
 													<div class="form-check col-md-5">
 														<input class="form-check-input" type="radio" name="mode_usage" id="mode_usage1" data-bs-toggle="popover" data-bs-custom-class='custom-popover' data-bs-trigger="hover focus">
 														<label class="form-check-label" for="mode_usage1">
@@ -131,13 +135,13 @@
 														<label class="form-check-label" for="mode_usage5">
 															mode_usage5
 														</label>
-													</div>
+													</div> -->
 												</div>
 											</div>
 
 											<hr style="color:white">
 
-											<div class="col-md-12">
+											<div class="col-md-12" style="display: none;">
 												<div class="form-group row">
 													<div class="col-md-12" style="color:white;">Options :</div>
 													<div class="form-check col-md-5">
@@ -171,7 +175,7 @@
 												</div>
 											</div>
 
-											<div class="col-md-12">
+											<div class="col-md-12" style="display: none;">
 												<div class="form-group">
 													<input type="submit" value="ENREGISTRER" class="btn btn-primary">
 													<div class="submitting"></div>
@@ -198,70 +202,14 @@
 	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 	<!-- <script src="js/popper.js"></script>-->
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.js"></script>
+	<script>
+        var baseUrl = "<?php echo base_url(); ?>";
+    </script>
+	<script src="<?php echo base_url(); ?>assets/js_client/inscription_vehicule2.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js_client/form_vehicule.js"></script>
+	
 
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			const radios = document.getElementsByName('assureur');
-			for (let radio of radios) {
-				radio.addEventListener('change', function() {
-					if (this.checked) {
-						display_annee_fabrication(this.value);
-					}
-				});
-			}
-
-			// FAIRE APPARAITRE LE CHAMP ANNEE DE FABRICATION:
-			const annee_fabrication = document.getElementById('annee_fabrication_input');
-
-			function display_annee_fabrication(id_assurance) {
-				var liste_annee = {};
-				baseUrl = '<?= base_url() ?>';
-				$.ajax({
-					url: baseUrl + 'get_annee_fabrication',
-					method: 'GET',
-					data: {
-						id_assureur: id_assurance
-					},
-					dataType: 'json',
-					success: function(data) {
-						liste_annee = data.liste_annee;
-						update_option(liste_annee);
-					},
-					error: function(xhr, status, error) {
-						console.error('Erreur lors de la récupération des années de fabrication:', status, error);
-					}
-				});
-				
-			}
-
-			function update_option(liste_annee) {
-
-				
-				let annee_option = document.getElementById('annee_fabrication');
-				annee_option.innerHTML = '';
-				
-				let optionVide = document.createElement('option');
-				optionVide.value = '';
-				optionVide.textContent = 'Sélectionner une année de fabrication';
-				annee_option.appendChild(optionVide);
-				console.log(liste_annee);
-				
-				for (let option of liste_annee) {
-						let optionElement = document.createElement('option');
-					optionElement.value = option.id;
-					optionElement.textContent = option.debut + ' - ' + option.fin;
-					annee_option.appendChild(optionElement);
-				};
-				
-				annee_fabrication.style.display = 'block';
-			} 
-
-
-
-		});
-	</script>
 
 </body>
 

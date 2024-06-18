@@ -19,4 +19,19 @@ class Donnee_controller extends CI_Controller
         echo json_encode(['liste_annee' => $liste]);
     }
 
+    public function get_carburants() {
+        $id_assureur = $this->input->get('id_assureur');
+
+        $liste = $this->Donnee->liste_carburant($id_assureur);
+        echo json_encode(['liste_carburant' => $liste]);
+
+    }
+
+    public function get_usages() {
+        $id_assureur = $this->input->get('id_assureur');
+
+        $liste = $this->Donnee->liste_usage($id_assureur);
+        echo json_encode(['liste_usage' => $liste]);
+    }
+
 }

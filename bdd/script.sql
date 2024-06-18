@@ -51,6 +51,24 @@ CREATE TABLE type_vehicule(
    PRIMARY KEY(id)
 );
 
+CREATE TABLE carburant(
+   id SERIAL,
+   nom VARCHAR(50) ,
+   prix NUMERIC(12,2)  ,
+   id_assureur INTEGER,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
+);
+
+CREATE TABLE usage(
+   id SERIAL,
+   nom VARCHAR(100) ,
+   valeur NUMERIC(8,2)  ,
+   id_assureur INTEGER,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
+);
+
 CREATE TABLE vehicule(
    id SERIAL,
    immatriculation VARCHAR(10)  NOT NULL,
@@ -61,8 +79,8 @@ CREATE TABLE vehicule(
    id_utilisateur INTEGER NOT NULL,
    id_assureur INTEGER,
    id_options INTEGER,
-   carburant VARCHAR(50) ,
-   utilisation VARCHAR(100) ,
+   id_carburant INTEGER REFERENCES carburant(id) ,
+   id_utilisation INTEGER REFERENCES usage(id) ,
 
    PRIMARY KEY(id),
    FOREIGN KEY(id_type) REFERENCES type_vehicule(id),
@@ -99,14 +117,7 @@ CREATE TABLE service(
    PRIMARY KEY(id)
 );
 
-CREATE TABLE carburant(
-   id SERIAL,
-   nom VARCHAR(50) ,
-   prix NUMERIC(12,2)  ,
-   id_assureur INTEGER,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
-);
+
 
 CREATE TABLE annee_fabrication(
    id SERIAL,
@@ -126,14 +137,7 @@ CREATE TABLE puissance(
    FOREIGN KEY(id_assureur) REFERENCES assureur(id)
 );
 
-CREATE TABLE usage(
-   id SERIAL,
-   nom VARCHAR(100) ,
-   valeur NUMERIC(8,2)  ,
-   id_assureur INTEGER,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
-);
+
 
 CREATE TABLE etat(
    id SERIAL,

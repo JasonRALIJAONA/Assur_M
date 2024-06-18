@@ -41,35 +41,48 @@
 												<div class="form-group">
 
 													<select name="type_vehicule" id="type_vehicule" class="select-form">
-														<option value="">Selectionner un type vehicule</option>
-														<option value="voiture">Voiture</option>
-														<option value="moto">Moto</option>
-														<option value="camion">Camion</option>
-														<option value="autre">Autre</option>
+														<option value="" selected disabled>Selectionner un type vehicule</option>
+														<?php
+														foreach ($liste_type as $row) {
+														?>
+															<option value="<?= $row['id'] ?>"><?= $row['nom'] ?></option>
+														<?php
+														}
+														?>
 													</select>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="form-group">
 													<select id="marque" name="marque" class="select-form" required>
-														<option value=""> Selectionner une marque </option>
-														<optgroup label="Allemagne">
-															<option value="Audi">Audi</option>
-															<option value="BMW">BMW</option>
-															<option value="Mercedes-Benz">Mercedes-Benz</option>
-															<option value="Volkswagen">Volkswagen</option>
-														</optgroup>
-														<optgroup label="États-Unis">
-															<option value="Chevrolet">Chevrolet</option>
-															<option value="Ford">Ford</option>
-															<option value="Tesla">Tesla</option>
-														</optgroup>
-														<optgroup label="Japon">
-															<option value="Honda">Honda</option>
-															<option value="Toyota">Toyota</option>
-															<option value="Nissan">Nissan</option>
-														</optgroup>
-														<!-- Ajoutez d'autres marques et pays ici -->
+														<option value="" disabled selected> Selectionner une marque </option>
+														<option value="Toyota">Toyota</option>
+														<option value="Ford">Ford</option>
+														<option value="Honda">Honda</option>
+														<option value="Chevrolet">Chevrolet</option>
+														<option value="Nissan">Nissan</option>
+														<option value="BMW">BMW</option>
+														<option value="Mercedes-Benz">Mercedes-Benz</option>
+														<option value="Volkswagen">Volkswagen</option>
+														<option value="Audi">Audi</option>
+														<option value="Hyundai">Hyundai</option>
+														<option value="Kia">Kia</option>
+														<option value="Mazda">Mazda</option>
+														<option value="Subaru">Subaru</option>
+														<option value="Lexus">Lexus</option>
+														<option value="Jaguar">Jaguar</option>
+														<option value="Porsche">Porsche</option>
+														<option value="Ferrari">Ferrari</option>
+														<option value="Lamborghini">Lamborghini</option>
+														<option value="Tesla">Tesla</option>
+														<option value="Peugeot">Peugeot</option>
+														<option value="Renault">Renault</option>
+														<option value="Citroën">Citroën</option>
+														<option value="Fiat">Fiat</option>
+														<option value="Alfa Romeo">Alfa Romeo</option>
+														<option value="Mitsubishi">Mitsubishi</option>
+														<option value="Suzuki">Suzuki</option>
+
 													</select>
 
 												</div>

@@ -32,6 +32,11 @@ INSERT INTO options (nom, descri, valeur, id_assureur) VALUES
 ('Dommages collision', 'Couverture des dommages au véhicule en cas de collision.', 180.00, 2),
 ('Assistance médicale', 'Couverture des frais médicaux pour les passagers en cas d accident.', 90.00, 2);
 
+-- Insérer des options pour l'assureur 'MAMA'
+INSERT INTO options (nom, descri, valeur, id_assureur) VALUES
+('Assistance voyage', 'Couverture des incidents lors de voyages à l étranger.', 100.00, 3),
+('Vandalisme', 'Couverture des dommages causés par des actes de vandalisme.', 80.00, 3),
+('Protection du conducteur', 'Couverture des blessures du conducteur en cas d accident.', 70.00, 3);
 
 INSERT INTO annee_fabrication (debut, fin, prix, id_assureur) VALUES
     (1900, 1910, 100.00, 1),
@@ -76,10 +81,37 @@ INSERT INTO annee_fabrication (debut, fin, prix, id_assureur) VALUES
     (2011, 2020, 210.00, 3),
     (2021, 2024, 220.00, 3);
 
--- Insérer des options pour l'assureur 'MAMA'
-INSERT INTO options (nom, descri, valeur, id_assureur) VALUES
-('Assistance voyage', 'Couverture des incidents lors de voyages à l étranger.', 100.00, 3),
-('Vandalisme', 'Couverture des dommages causés par des actes de vandalisme.', 80.00, 3),
-('Protection du conducteur', 'Couverture des blessures du conducteur en cas d accident.', 70.00, 3);
+INSERT INTO carburant (nom, prix, id_assureur) VALUES 
+('Essence', 4200.50, 1),
+('Diesel', 3800.75, 1),
+('GPL', 3000.00, 1),
+('Essence', 4000.50, 2),
+('Diesel', 4000.75, 2),
+('GPL', 29000.00, 2),
+('Essence', 4100.50, 3),
+('Diesel', 3600.75, 3),
+('GPL', 4000.00, 3);
+
+
+-- Insérer des données dans la table usage pour l'assureur Aro
+INSERT INTO usage (nom, valeur, id_assureur) VALUES 
+('Transport de personnes', 100.00, 1),
+('Transport de marchandises', 150.00, 1),
+('Usage agricole', 200.00, 1);
+
+-- Insérer des données dans la table usage pour l'assureur Ny Havana
+INSERT INTO usage (nom, valeur, id_assureur) VALUES 
+('Transport scolaire', 110.00, 2),
+('Transport de matériaux', 160.00, 2),
+('Véhicule utilitaire', 210.00, 2);
+
+-- Insérer des données dans la table usage pour l'assureur MAMA
+INSERT INTO usage (nom, valeur, id_assureur) VALUES 
+('Transport public', 120.00, 3),
+('Transport de produits frais', 170.00, 3),
+('Usage personnel', 220.00, 3);
+
+
+
 
 

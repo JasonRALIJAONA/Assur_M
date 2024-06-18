@@ -181,14 +181,21 @@ class Form_controller extends CI_Controller {
 	}
 	
 	public function inscription_vehicule_page1(){
-		$this->input->post('type_vehicule');
-		$this->input->post('marque');
-		$this->input->post('num_plaque');
-		$this->input->post('puissance');
+		$data = array(
+			'immatriculation' => $this->input->post('num_plaque'),
+			'puissance' => $this->input->post('puissance'),
+			'place' => $this->input->post('place'),
+			'marque' => $this->input->post('marque'),
+			'id_type' => $this->input->post('type_vehicule')
+		);
+
+		$this->session->set_userdata('donnee_vehicule', $data);
+
+
 		$this->load->view("client/page_formulaire/inscription_vehicule2.php");
 	}
 
-	public function inscription_vehicule_page2(){
+	public function inscription_vehicule_page2() {
 		$this->input->post('annee_fabrication');
 		$this->input->post('mode_usage');
 		$this->input->post('cotisation');

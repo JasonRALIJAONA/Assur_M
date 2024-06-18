@@ -14,4 +14,17 @@ class Donnee extends CI_Model {
         return $query->result_array();
     }
 
+    public function liste_carburant($id_assureur) {
+        $this->db->where('id_assureur', $id_assureur);
+        $query = $this->db->get('carburant');
+        return $query->result_array();
+
+    }
+
+    public function liste_usage($id_assureur) {
+        $this->db->where('id_assureur', $id_assureur);
+        $query = $this->db->get('usage');
+        return $query->result_array();
+    }
+
 }
