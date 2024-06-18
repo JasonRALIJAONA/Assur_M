@@ -24,8 +24,8 @@ foreach ($liste_vehicule as $row) {
                     <td>: <?= $row['nom_type'] ?> </td>
                 </tr>
                 <tr>
-                    <td>Marque</td>
-                    <td>: <?= $row['marque'] ?> </td>
+                    <td>Immatriculation</td>
+                    <td>: <?= $row['immatriculation'] ?> </td>
                 </tr>
             </table>
         </div>
