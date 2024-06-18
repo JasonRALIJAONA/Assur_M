@@ -34,4 +34,11 @@ class Donnee_controller extends CI_Controller
         echo json_encode(['liste_usage' => $liste]);
     }
 
+    public function get_options() {
+        $id_assureur = $this->input->get('id_assureur');
+
+        $liste = $this->Donnee->liste_options($id_assureur);
+        echo json_encode(['liste_options' => $liste]);
+    }
+
 }

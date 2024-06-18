@@ -26,5 +26,10 @@ class Donnee extends CI_Model {
         $query = $this->db->get('usage');
         return $query->result_array();
     }
+    public function liste_options($id_assureur) {
+        $this->db->where('id_assureur', $id_assureur);
+        $query = $this->db->get('options');
+        return $query->result_array();
+    }
 
 }

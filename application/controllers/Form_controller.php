@@ -181,26 +181,65 @@ class Form_controller extends CI_Controller {
 	}
 	
 	public function inscription_vehicule_page1(){
-		$data = array(
+		$data1 = array(
 			'immatriculation' => $this->input->post('num_plaque'),
-			'puissance' => $this->input->post('puissance'),
+			'chevaux' => $this->input->post('puissance'),
 			'place' => $this->input->post('place'),
 			'marque' => $this->input->post('marque'),
 			'id_type' => $this->input->post('type_vehicule')
 		);
 
-		$this->session->set_userdata('donnee_vehicule', $data);
+		$this->session->set_userdata('donnee_vehicule', $data1);
 
 
 		$this->load->view("client/page_formulaire/inscription_vehicule2.php");
 	}
 
 	public function inscription_vehicule_page2() {
-		$this->input->post('annee_fabrication');
-		$this->input->post('mode_usage');
-		$this->input->post('cotisation');
-		$this->input->post('assureur');
+		$data2 = array(
+			'id_assureur' => $this->input->post('assureur'),
+			'id_option' => $this->input->post('option'),
+			'id_usage' => $this->input->post('mode_usage'),
+			'id_annee_fabrication' => $this->input->post('annee_fabrication'),
+			'id_carburant' => $this->input->post('type_moteur'),
+		);
+
+		$data = array_merge($this->session->userdata('donnee_vehicule'), $data2);
+
+		$prix = $this->Vehicule->choix_assurance($data, $data['id_assureur']);
+
+		echo json_encode(['prix' => $prix]);
+		// echo json_encode($this->session->userdata('donnee_vehicule'));
 	}	
+
+	public function inscrire_vehicule() {
+		$data1 = $this->session->userdata('donnee_vehicule');
+		$data = array(
+			'immatriculation' => $data1['immatriculation'],
+			'puissance' => $data1['chevaux'],
+			'marque' => $data1['marque'],
+			'place' => $data1['place'],
+			'id_type' => $data1['id_type'],
+			'id_utilisateur' => $this->session->userdata('utilisateur')->id,
+			'id_assureur' => $this->input->post('assureur'),
+			'id_options' => $this->input->post('option'),
+			'id_carburant' => $this->input->post('type_moteur'),
+			'id_utilisation' => $this->input->post('mode_usage'),
+			'id_annee_fabrication' => $this->input->post('annee_fabrication')
+		);
+
+		
+		try {
+			$this->Vehicule->inscription_vehicule($data);
+		} catch (Exception $e) {
+			$exception = $e->getMessage();
+			echo $e;
+		}
+
+		echo json_encode('Done');
+
+		
+	}
 
 
 	
