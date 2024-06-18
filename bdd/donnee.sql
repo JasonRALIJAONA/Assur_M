@@ -112,6 +112,12 @@ INSERT INTO usage (nom, valeur, id_assureur) VALUES
 ('Usage personnel', 220.00, 3);
 
 
+INSERT INTO puissance (prix_chevaux, id_assureur) VALUES
+(94, 1),
+(87, 2),
+(99, 3);
+
+
 
 
 
