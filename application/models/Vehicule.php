@@ -7,45 +7,45 @@ class Vehicule extends CI_Model {
         parent::__construct();
     }
 
-    public function inscription_vehicule($immatriculation, $puissance, $marque, $place, $id_type, $id_utilisateur) {
+    public function inscription_vehicule($data) {
         
-        if (empty($immatriculation)) {
+        if (empty($data['immatriculation'])) {
             throw new Exception("Le numero d'immatriculation ne peut pas être nul", 1);
             
         }
 
-        if (!preg_match('/^\d{4}[A-Z]{3}$/', $immatriculation)) {
+        if (!preg_match('/^\d{4}[A-Z]{3}$/', $data['immatriculation'])) {
             throw new Exception("Le numero d'immatriculation est invalide", 1);
         }
 
-        if (!is_numeric($puissance) || $puissance <= 0) {
+        if (!is_numeric($data['puissance']) || $data['puissance'] <= 0) {
             throw new Exception("La puissance doit être un nombre positif", 1);
         }
 
-        if (empty($marque)) {
+        if (empty($data['marque'])) {
             throw new Exception("La marque ne peut pas être vide", 1004);
         }
 
-        if (!is_int($place) || $place <= 0) {
-            throw new Exception("Le nombre de places doit être un entier positif", 1005);
+        if (!is_numeric($data['place']) || $data['place'] <= 0) {
+            throw new Exception("Le nombre de places doit être un entier positif ", 1005);
         }
     
-        if (!is_int($id_type) || $id_type <= 0) {
+        if (!is_numeric($data['id_type']) || $data['id_type'] <= 0) {
             throw new Exception("L'ID du type de véhicule est invalide", 1006);
         }
     
-        if (!is_int($id_utilisateur) || $id_utilisateur <= 0) {
+        if (!is_numeric($data['id_utilisateur']) || $data['id_utilisateur'] <= 0) {
             throw new Exception("L'ID de l'utilisateur est invalide", 1007);
         }
 
-        $data = array(
-            'immatriculation' => $immatriculation,
-            'puissance' => $puissance,
-            'marque' => $marque,
-            'place' => $place,
-            'id_type' => $id_type,
-            'id_utilisateur' => $id_utilisateur
-        );
+        // $data = array(
+        //     'immatriculation' => $immatriculation,
+        //     'puissance' => $puissance,
+        //     'marque' => $marque,
+        //     'place' => $place,
+        //     'id_type' => $id_type,
+        //     'id_utilisateur' => $id_utilisateur
+        // );
 
         try {
             $this->db->insert('vehicule', $data);
@@ -185,7 +185,7 @@ class Vehicule extends CI_Model {
     public function get_prix_carburant($id_carburant, $id_assureur) 
     {
         try {
-            $query = $this->db->get_where('carburant', array('id' => $id_carburant, 'id_assureur' => $id_assureur));
+            $query = $this->db->get_where('carburant', array('id' => $id_carburant));
             if (!$query) {
                 throw new Exception("Erreur lors de la récupération du prix du carburant");
             }
@@ -408,7 +408,7 @@ class Vehicule extends CI_Model {
             $facteur[] = $this->get_prix_par_annee_fabrication($data['id_annee_fabrication'], $i)['prix'];
             $facteur[] = $this->get_prix_par_puissance($i)['prix_chevaux'] * $data['chevaux'];
             $facteur[] = $this->get_prix_par_usage($data['id_usage'], $i)['valeur'];
-            $facteur[] = $this->get_prix_par_etat($data['id_etat'], $i)['valeur'];
+            // $facteur[] = $this->get_prix_par_etat($data['id_etat'], $i)['valeur'];
             $facteur[] = $this->get_prix_par_option($data['id_option'], $i)['valeur'];
             // sommer facteur
             foreach ($facteur as $f) {
