@@ -5,44 +5,56 @@ class Vehicule_controller extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-        $this->load->model('Vehicule');
-		$this->load->library('session');
-
 	}
 
     public function detail($id_vehicule){
         echo $id_vehicule;
+        /* Maka info vehicule avy any base */
+        $data = array();
+        $data['assurance'] = "ARO";
+        $data['marque'] = "VOLSWAGEN";
+        $data['puissance'] = 15500;
+        $data['carburant'] = "Essence";
+        $data['annee_fabrication'] = "2006-07-17";
+        $data['type_usage'] = "Usage";
+        $data['formule'] = "Incendie";
+        $data['immatriculation'] = "2665TBG";
+        $data["date_expiration"] = "2022-02-04";
+        $this->load->view('client/page_affichage/detail.php',$data);
+
     }
     public function payement ($id_vehicule) {
-        // echo $id_vehicule;
+        echo $id_vehicule;
         $data = array();
         /* Avy any anaty base */
         $data["immatriculation"] = "immatriculation ".$id_vehicule;
         $data["id_vehicule"] = $id_vehicule;
-        $data['content'] = 'page_formulaire/payment_assurance.php';
         /*...*/
         $this->load->view("client/page_formulaire/payement_assurance.php",$data);
-        // $this->load->view("client/template.php",$data);
     }
-    // something
+    public function get_argent_a_payer(){
+        $this->input->get('frequence');
+        $this->input->get('operateur');
+        $this->input->get('numero_tel'); 
+        $immatriculation = $this->input->get('immatriculation');
+        /* Atao eto ilay calcul argent a payer */
+        $somme_a_payer = 4900;
+        //
+        
+        $data['somme']=$somme_a_payer;
+        $data['immatriculation'] = $immatriculation;
+        
+        $response = array('status'=>'success',
+            'message'=>'Données envoyés avec success',
+            'data'=>$data
+        );
 
-    public function enregistrer_vehicule() {
-        $type = $this->input->post('type_vehicule');
-        $numero = $this->input->post('num_plaque');
-        $marque = $this->input->post('marque');
-        $marque = $this->input->post('marque');
-        $place = $this->input->post('nombre_place');
-        $puissance = $this->input->post('puissance');
-        $user = $this->session->userdata('utilisateur');
-        echo $user;
-
-        try {
-            // $this->Vehicule->inscription_vehicule($numero, $puissance, $marque, $place, $type, $user->id);
-            echo "succes";
-        } catch (Exception $e) {
-            echo $e->getMessage();  
-        }
-
+        echo json_encode($response);
+    }
+    public function confirmer_payement(){
+        // Apres mitsindry ok izy 
+        $this->input->post('somme');
+        $this->input->post('immatriculation');
     }
 
 }
