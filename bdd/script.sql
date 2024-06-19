@@ -40,6 +40,7 @@ CREATE TABLE utilisateur(
    supprime BOOLEAN DEFAULT FALSE NOT NULL,
    id_operateur INT,
    solde DECIMAL(12,2),
+   admin BOOLEAN DEFAULT FALSE NOT NULL,
    FOREIGN KEY(id_operateur) REFERENCES operateur(id),
    PRIMARY KEY(id)
 );
@@ -177,7 +178,6 @@ CREATE TABLE liste_vehicule(
    place INTEGER NOT NULL,
    marque VARCHAR(50) NOT NULL,
    carburant VARCHAR(50),
-   email_utilisateur INTEGER NOT NULL,
-   id_annee_fabrication INTEGER NOT NULL REFERENCES annee_fabrication(id)
+   email_utilisateur INTEGER NOT NULL
 );
 
