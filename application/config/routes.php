@@ -61,3 +61,7 @@ $route['accueil'] = 'Template_controller/accueil';
 $route['get_annee_fabrication'] = 'Donnee_controller/get_annee_fabrication';
 $route['get_carburants'] = 'Donnee_controller/get_carburants';
 
+$route['argent_a_payer'] = 'vehicule_controller/get_argent_a_payer';
+$route['confirmer_payement'] = 'vehicule_controller/confirmer_payement';
+
+
