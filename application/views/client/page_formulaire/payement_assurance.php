@@ -28,7 +28,7 @@
 									<h3 class="mb-4">Pour le vehicule : <?php echo $immatriculation; ?></h3>
 									<div id="form-message-warning" class="mb-4"></div> 
 				      		
-									<form method="POST" id="contactForm" name="contactForm" class="contactForm form_perso">
+									<form method="POST" id="contactForm" name="contactForm" class="contactForm form_perso" >
 										<div class="row">
 											
 											<div class="col-md-12"> 
@@ -72,6 +72,7 @@
 
 											
 										</div>
+										<input type="hidden" name="immatriculation" value="<?php echo $immatriculation; ?>">
 									</form>
 								</div>
 							</div>
