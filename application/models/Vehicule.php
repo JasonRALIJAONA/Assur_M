@@ -116,6 +116,7 @@ class Vehicule extends CI_Model {
             return null; 
         }
     }
+    
 
     // C.R.U.D VEHICULE
 

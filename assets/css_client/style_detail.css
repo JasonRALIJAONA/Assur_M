@@ -1,0 +1,57 @@
+@font-face {
+    font-family: poppins;
+    src: url("../fonts/Poppins-Medium.ttf");
+  }
+  
+  @font-face {
+    font-family: kallisto;
+    src: url("../fonts/fonnts.com-Kallisto_Medium.otf");
+  }
+  @font-face {
+    font-family: eurostyle;
+    src: url("../fonts/eurostileextended.ttf");
+}
+.bloc_info{
+    color: white;
+    font-family: poppins;
+    background-color: #2c2929;
+    backdrop-filter: blur(28px);
+    border-radius: 12px;
+    padding: 25px 35px;
+    border: 1px solid black;
+}
+.colonne div{
+    margin-bottom: 15px;
+}
+.logo_petit{
+    height: 50px;
+    width: 68px;
+}
+.titre{
+    font-size: 35px;
+    font-family: kallisto;
+}
+.body_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.expiration{
+    text-align: center;
+    font-family: eurostyle;
+    margin-top: 40px;
+    font-size: 28px;
+}
+.inner_bloc_info {
+    font-size: 17px;
+}
+.inner_bloc_info img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+.inner_bloc_info span{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 20px;
+}
