@@ -7,6 +7,33 @@ class Vehicule extends CI_Model {
         parent::__construct();
     }
 
+    public function verifier_donnee($data) {
+        if (empty($data['immatriculation'])) {
+            throw new Exception("Le numero d'immatriculation ne peut pas être nul", 1);
+            
+        }
+
+        if (!preg_match('/^\d{4}[A-Z]{3}$/', $data['immatriculation'])) {
+            throw new Exception("Le numero d'immatriculation est invalide", 1);
+        }
+
+        if (!is_numeric($data['puissance']) || $data['puissance'] <= 0) {
+            throw new Exception("La puissance doit être un nombre positif", 1);
+        }
+
+        if (empty($data['marque'])) {
+            throw new Exception("La marque ne peut pas être vide", 1004);
+        }
+
+        if (!is_numeric($data['place']) || $data['place'] <= 0) {
+            throw new Exception("Le nombre de places doit être un entier positif ", 1005);
+        }
+    
+        if (!is_numeric($data['id_type']) || $data['id_type'] <= 0) {
+            throw new Exception("L'ID du type de véhicule est invalide", 1006);
+        }
+    }
+
     public function inscription_vehicule($data) {
         
         if (empty($data['immatriculation'])) {
@@ -404,12 +431,26 @@ class Vehicule extends CI_Model {
             $somme = 0;
             // boucler pour chaque assureur
             $facteur = array();
+            if ($data['id_option'] != '') {
+                $facteur[] = $this->get_prix_par_option($data['id_option'], $i)['valeur'];
+            }
+            if ($data['id_usage'] != '') {
+                $facteur[] = $this->get_prix_par_usage($data['id_usage'], $i)['valeur'];
+            }
+            if ($data['id_carburant'] == '') {
+                throw new Exception("Vous devez choisir le carburant", 1);
+            }
+            if ($data['id_annee_fabrication'] == '') {
+                throw new Exception("Vous devez choisir l'annee de fabrication", 1);
+            }
+
+
+
             $facteur[] = $this->get_prix_carburant($data['id_carburant'], $i)['prix'];
             $facteur[] = $this->get_prix_par_annee_fabrication($data['id_annee_fabrication'], $i)['prix'];
             $facteur[] = $this->get_prix_par_puissance($i)['prix_chevaux'] * $data['chevaux'];
-            $facteur[] = $this->get_prix_par_usage($data['id_usage'], $i)['valeur'];
             // $facteur[] = $this->get_prix_par_etat($data['id_etat'], $i)['valeur'];
-            $facteur[] = $this->get_prix_par_option($data['id_option'], $i)['valeur'];
+            
             // sommer facteur
             foreach ($facteur as $f) {
                 if ($f === null) {
@@ -419,8 +460,11 @@ class Vehicule extends CI_Model {
             }
             return $somme;
         } catch (Exception $e) {
-            return array('error' => $e->getMessage());
+            // return array('error' => $e->getMessage());
+            throw $e;
         }
     }
+
+    
 }
 

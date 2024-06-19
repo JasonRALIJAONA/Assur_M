@@ -7,6 +7,7 @@ class Form_controller extends CI_Controller {
 		parent::__construct();
 		$this->load->model('Utilisateur');
 		$this->load->model('Vehicule');
+		$this->load->model('Donnee');
 		// $this->session->set_userdata('utilisateur');
 		$this->load->model('Utilitaire');
 	}
@@ -179,8 +180,13 @@ class Form_controller extends CI_Controller {
 	public function accueil() {
 		redirect('template_controller/accueil');
 	}
+
+	public function insert_vehicule_2() {
+		$this->load->view("client/page_formulaire/inscription_vehicule2.php");
+	}
 	
 	public function inscription_vehicule_page1(){
+		$exception = '';
 		$data1 = array(
 			'immatriculation' => $this->input->post('num_plaque'),
 			'chevaux' => $this->input->post('puissance'),
@@ -189,13 +195,23 @@ class Form_controller extends CI_Controller {
 			'id_type' => $this->input->post('type_vehicule')
 		);
 
+		try {
+			$this->Donnee->verifier_donnee1($data1);
+		} catch (Exception $e) {
+			$exception = $e->getMessage();
+		}
+
 		$this->session->set_userdata('donnee_vehicule', $data1);
 
+		echo json_encode(['exception' => $exception]);
 
-		$this->load->view("client/page_formulaire/inscription_vehicule2.php");
+
+		// $this->load->view("client/page_formulaire/inscription_vehicule2.php");
 	}
 
 	public function inscription_vehicule_page2() {
+		$exception = '';
+		$prix = 0;
 		$data2 = array(
 			'id_assureur' => $this->input->post('assureur'),
 			'id_option' => $this->input->post('option'),
@@ -206,9 +222,14 @@ class Form_controller extends CI_Controller {
 
 		$data = array_merge($this->session->userdata('donnee_vehicule'), $data2);
 
-		$prix = $this->Vehicule->choix_assurance($data, $data['id_assureur']);
+		try {
+			
+			$prix = $this->Vehicule->choix_assurance($data, $data['id_assureur']);
+		} catch (Exception $e) {
+			$exception = $e->getMessage();
+		}
 
-		echo json_encode(['prix' => $prix]);
+		echo json_encode(['prix' => $prix, 'exception' => $exception]);
 		// echo json_encode($this->session->userdata('donnee_vehicule'));
 	}	
 
@@ -230,6 +251,7 @@ class Form_controller extends CI_Controller {
 
 		
 		try {
+			
 			$this->Vehicule->inscription_vehicule($data);
 		} catch (Exception $e) {
 			$exception = $e->getMessage();
@@ -239,6 +261,10 @@ class Form_controller extends CI_Controller {
 		echo json_encode('Done');
 
 		
+	}
+
+	public function verifier_donnee() {
+
 	}
 
 

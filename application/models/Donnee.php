@@ -32,4 +32,25 @@ class Donnee extends CI_Model {
         return $query->result_array();
     }
 
+    public function verifier_donnee1($data) {
+        $this->db->where('immatriculation', $data['immatriculation']);
+        $query = $this->db->get('liste_vehicule');
+
+        $vrai = $query->row_array();
+
+        if (!$vrai) {
+            throw new Exception('Immatriculation non reconnu');
+        }
+
+        if ($data['chevaux'] != $vrai['puissance']) {
+            throw new Exception("La valeur de la puissance n'est pas vraie");
+        }
+        if ($data['place'] != $vrai['place']) {
+            throw new Exception("Le nombre de place que vous avez saisi n'est pas vrai");
+        }
+
+        
+    }
+
+
 }

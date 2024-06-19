@@ -239,22 +239,26 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             prix = await calculer_assurance();
         } catch (error) {
-            console.log(error);
+            Swal.fire({
+                icon: "error",
+                text: error
+            });
+            return;
         }
         Swal.fire({
             icon: "question",
-            text: "Ce sera " + prix + " par mois, enregistrer ?",
+            text: "Ce sera " + prix + " Ar par mois, enregistrer ?",
             showCancelButton: true,
             confirmButtonText: 'Enregistrer',
             cancelButtonText: 'Annuler'
 
-        }).then( async (result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
                 // Action à réaliser lorsque l'utilisateur clique sur "Oui"
                 await enregistrer();
                 setTimeout(() => {
                     window.location = "accueil";
-    
+
                 }, 1000);
 
                 // Ajoutez ici le code pour enregistrer les données ou effectuer une action
@@ -268,6 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function calculer_assurance() {
         var prix;
+        var exception;
         var formData = $('.contactForm').serializeArray();
 
         await $.ajax({
@@ -275,12 +280,20 @@ document.addEventListener("DOMContentLoaded", function () {
             type: 'POST',
             dataType: 'json',
             data: $.param(formData),
-
             success: function (response) {
-                console.log(response.prix);
                 prix = response.prix;
+                exception = response.exception;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                // Gérer les erreurs de l'appel AJAX
+                throw new Error(textStatus);
             }
         });
+
+        if (exception) {
+            throw new Error(exception);
+        }
+
         return prix;
     }
 
@@ -300,6 +313,10 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         return prix;
+    }
+
+    async function verifier_vehicule() {
+        
     }
 
 })(jQuery);

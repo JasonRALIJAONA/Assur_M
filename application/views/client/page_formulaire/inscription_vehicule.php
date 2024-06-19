@@ -35,7 +35,7 @@
 									<div id="form-message-success" class="mb-4">
 										Your message was sent, thank you!
 									</div>
-									<form method="POST" id="contactForm" name="contactForm" class="contactForm" action="<?php echo site_url('form_controller/inscription_vehicule_page1'); ?>">
+									<form method="POST" id="contactForm" name="contactForm" class="contactForm formulaire" action="#">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group">
@@ -175,8 +175,59 @@
 	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 	<!-- <script src="js/popper.js"></script>-->
 	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.js"></script>
+	<script>
+		var baseUrl = "<?php echo base_url(); ?>";
+	</script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js_client/form_vehicule.js"></script>
+	<script>
+		(function($) {
+			console.log("working");
+			$(".formulaire").on("submit", async function(event) {
+				event.preventDefault();
+				console.log("huhu");
+
+				$(".formulaire").validate().form();
+				let exception;
+				try {
+					await valider_formulaire();
+				} catch (error) {
+					Swal.fire({
+						icon: "error",
+						text: error
+					});
+					return;
+				}
+				setTimeout(() => {
+                    window.location = baseUrl + 'form_controller/insert_vehicule_2';
+
+                }, 1000);
+			});
+
+			async function valider_formulaire() {
+				var prix;
+				var exception;
+				var formData = $('.contactForm').serializeArray();
+
+				await $.ajax({
+					url: baseUrl + 'form_controller/inscription_vehicule_page1',
+					type: 'POST',
+					dataType: 'json',
+					data: $.param(formData),
+					success: function(response) {
+						exception = response.exception;
+					},
+				});
+
+				if (exception) {
+					throw new Error(exception);
+				}
+
+				return prix;
+			}
+		})(jQuery);
+	</script>
 
 </body>
 
