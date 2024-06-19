@@ -49,4 +49,5 @@ class Utilitaire extends CI_Model
             echo json_encode(['status' => 'error', 'message' => $error]);
         }
     }
+
 }

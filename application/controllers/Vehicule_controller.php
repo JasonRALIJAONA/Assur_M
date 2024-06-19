@@ -5,6 +5,8 @@ class Vehicule_controller extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
+        $this->load->model('Vehicule');
+        $this->load->model('Utilisateur');
 	}
 
     public function detail($id_vehicule){
@@ -23,15 +25,7 @@ class Vehicule_controller extends CI_Controller {
         $this->load->view('client/page_affichage/detail.php',$data);
 
     }
-    public function payement ($id_vehicule) {
-        echo $id_vehicule;
-        $data = array();
-        /* Avy any anaty base */
-        $data["immatriculation"] = "immatriculation ".$id_vehicule;
-        $data["id_vehicule"] = $id_vehicule;
-        /*...*/
-        $this->load->view("client/page_formulaire/payement_assurance.php",$data);
-    }
+    
     public function get_argent_a_payer(){
         $this->input->get('frequence');
         $this->input->get('operateur');
@@ -55,6 +49,20 @@ class Vehicule_controller extends CI_Controller {
         // Apres mitsindry ok izy 
         $this->input->post('somme');
         $this->input->post('immatriculation');
+    }
+
+    public function payement ($id_vehicule) {
+        $data = array();
+        /* Avy any anaty base */
+        $data["immatriculation"] = "immatriculation ".$id_vehicule;
+        $data["id_vehicule"] = $id_vehicule;
+        $data = array(
+            'vehicule' => $this->Vehicule->get_by_id($id_vehicule),
+            'utilisateur' => $this->session->userdata('utilisateur'),
+            'operateur' => $this->Utilisateur->get_operateur()
+        );
+        /*...*/
+        $this->load->view("client/page_formulaire/payement_assurance.php",$data);
     }
 
 }

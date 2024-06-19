@@ -102,6 +102,7 @@ CREATE TABLE vehicule(
    id_carburant INTEGER REFERENCES carburant(id) ,
    id_utilisation INTEGER REFERENCES usage(id) ,
    id_annee_fabrication INTEGER REFERENCES annee_fabrication(id),
+   a_payer NUMERIC(10,2),                                            -- VOLA ALOHA RAHA PAR MOIS
    
    PRIMARY KEY(id),
    FOREIGN KEY(id_type) REFERENCES type_vehicule(id),

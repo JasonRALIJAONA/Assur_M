@@ -246,7 +246,8 @@ class Form_controller extends CI_Controller {
 			'id_options' => $this->input->post('option'),
 			'id_carburant' => $this->input->post('type_moteur'),
 			'id_utilisation' => $this->input->post('mode_usage'),
-			'id_annee_fabrication' => $this->input->post('annee_fabrication')
+			'id_annee_fabrication' => $this->input->post('annee_fabrication'),
+			'a_payer' => $this->input->post('prix')
 		);
 
 		

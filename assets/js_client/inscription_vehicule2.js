@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // Action à réaliser lorsque l'utilisateur clique sur "Oui"
-                await enregistrer();
+                await enregistrer(prix);
                 setTimeout(() => {
                     window.location = "accueil";
 
@@ -297,9 +297,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return prix;
     }
 
-    async function enregistrer() {
+    async function enregistrer(prix) {
         var prix;
         var formData = $('.contactForm').serializeArray();
+        formData.push({ name: 'prix', value: prix });
 
         await $.ajax({
             url: baseUrl + 'form_controller/inscrire_vehicule',
