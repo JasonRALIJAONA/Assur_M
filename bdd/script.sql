@@ -39,6 +39,8 @@ CREATE TABLE utilisateur(
    telephone VARCHAR(20)  NOT NULL,
    supprime BOOLEAN DEFAULT FALSE NOT NULL,
    id_operateur INT,
+   solde DECIMAL(12,2) DEFAULT 100000.0,
+   admin BOOLEAN DEFAULT FALSE NOT NULL,
    solde DECIMAL(12,2),
    FOREIGN KEY(id_operateur) REFERENCES operateur(id),
    PRIMARY KEY(id)
@@ -51,6 +53,45 @@ CREATE TABLE type_vehicule(
    PRIMARY KEY(id)
 );
 
+
+CREATE TABLE carburant(
+   id SERIAL,
+   nom VARCHAR(50) ,
+   prix NUMERIC(12,2)  ,
+   id_assureur INTEGER,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
+);
+
+CREATE TABLE usage(
+   id SERIAL,
+   nom VARCHAR(100) ,
+   valeur NUMERIC(8,2)  ,
+   id_assureur INTEGER,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
+);
+
+CREATE TABLE annee_fabrication(
+   id SERIAL,
+   debut INTEGER,
+   fin INTEGER,
+   prix NUMERIC(12,2)  ,
+   id_assureur INTEGER,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
+);
+
+CREATE TABLE puissance(
+   id SERIAL,
+   prix_chevaux NUMERIC(12,2)  ,
+   id_assureur INTEGER,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_assureur) REFERENCES assureur(id)
+);
+
+
+
 CREATE TABLE vehicule(
    id SERIAL,
    immatriculation VARCHAR(10)  NOT NULL,
@@ -61,9 +102,13 @@ CREATE TABLE vehicule(
    id_utilisateur INTEGER NOT NULL,
    id_assureur INTEGER,
    id_options INTEGER,
+
+   id_carburant INTEGER REFERENCES carburant(id) ,
+   id_utilisation INTEGER REFERENCES usage(id) ,
+   id_annee_fabrication INTEGER REFERENCES annee_fabrication(id),
+   a_payer NUMERIC(10,2),                                            -- VOLA ALOHA RAHA PAR MOIS
    carburant VARCHAR(50) ,
    utilisation VARCHAR(100) ,
-
    PRIMARY KEY(id),
    FOREIGN KEY(id_type) REFERENCES type_vehicule(id),
    FOREIGN KEY(id_options) REFERENCES options(id),
@@ -98,6 +143,7 @@ CREATE TABLE service(
    nom VARCHAR(100)  NOT NULL,
    PRIMARY KEY(id)
 );
+
 
 CREATE TABLE carburant(
    id SERIAL,
@@ -135,6 +181,7 @@ CREATE TABLE usage(
    FOREIGN KEY(id_assureur) REFERENCES assureur(id)
 );
 
+
 CREATE TABLE etat(
    id SERIAL,
    libelle VARCHAR(100) ,
@@ -165,4 +212,17 @@ CREATE TABLE payement(
    FOREIGN KEY(id_vehicule) REFERENCES vehicule(id),
    FOREIGN KEY(id_utilisateur) REFERENCES utilisateur(id)
 );
+
+
+
+CREATE TABLE liste_vehicule(
+   id SERIAL,
+   immatriculation VARCHAR(10) NOT NULL,
+   puissance INTEGER NOT NULL,
+   place INTEGER NOT NULL,
+   marque VARCHAR(50) NOT NULL,
+   carburant VARCHAR(50),
+   email_utilisateur INTEGER NOT NULL
+);
+
 
