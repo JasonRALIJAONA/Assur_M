@@ -41,7 +41,6 @@ CREATE TABLE utilisateur(
    id_operateur INT,
    solde DECIMAL(12,2) DEFAULT 100000.0,
    admin BOOLEAN DEFAULT FALSE NOT NULL,
-   solde DECIMAL(12,2),
    FOREIGN KEY(id_operateur) REFERENCES operateur(id),
    PRIMARY KEY(id)
 );
