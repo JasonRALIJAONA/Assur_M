@@ -247,7 +247,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         Swal.fire({
             icon: "question",
-            text: "Ce sera " + prix + " Ar par mois, enregistrer ?",
+            text: "Ce sera " + prix.toLocaleString('fr-FR') + " Ar par mois, enregistrer ?",
             showCancelButton: true,
             confirmButtonText: 'Enregistrer',
             cancelButtonText: 'Annuler'
@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", function () {
             data: $.param(formData),
 
             success: function (response) {
-                console.log(response);
+                console.log('assureur ' + response.assureur);
                 // prix = response.prix;
             }
         });

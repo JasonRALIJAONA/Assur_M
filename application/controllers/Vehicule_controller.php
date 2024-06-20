@@ -12,43 +12,87 @@ class Vehicule_controller extends CI_Controller {
     public function detail($id_vehicule){
         echo $id_vehicule;
         /* Maka info vehicule avy any base */
+        $donnee = $this->Vehicule->detail($id_vehicule);
         $data = array();
-        $data['assurance'] = "ARO";
-        $data['marque'] = "VOLSWAGEN";
-        $data['puissance'] = 15500;
-        $data['carburant'] = "Essence";
+        $data['assurance'] = $donnee['nom_assurance'];
+        $data['marque'] = $donnee['marque'];
+        $data['puissance'] = $donnee['puissance'];
+        $data['carburant'] = $donnee['nom_carburant'];
         $data['annee_fabrication'] = "2006-07-17";
-        $data['type_usage'] = "Usage";
-        $data['formule'] = "Incendie";
-        $data['immatriculation'] = "2665TBG";
-        $data["date_expiration"] = "2022-02-04";
+        $data['type_usage'] = $donnee['nom_usage'];
+        $data['formule'] = $donnee['nom_option'];
+        $data['immatriculation'] = $donnee['immatriculation'];
+        $data["date_expiration"] = $donnee['date_fin'];
         $this->load->view('client/page_affichage/detail.php',$data);
 
     }
     
     public function get_argent_a_payer(){
-        $this->input->get('frequence');
-        $this->input->get('operateur');
+        $fq = $this->input->get('frequence');
+        $id_vehicule = $this->input->get('id_vehicule');
         $this->input->get('numero_tel'); 
         $immatriculation = $this->input->get('immatriculation');
+
         /* Atao eto ilay calcul argent a payer */
-        $somme_a_payer = 4900;
+        $somme_a_payer = $fq * $this->Vehicule->get_by_id($id_vehicule)['a_payer'];
         //
-        
-        $data['somme']=$somme_a_payer;
-        $data['immatriculation'] = $immatriculation;
+
+        $data = array(
+            'somme' => $somme_a_payer,
+            'immatriculation' => $immatriculation
+        );
         
         $response = array('status'=>'success',
             'message'=>'Données envoyés avec success',
             'data'=>$data
         );
 
+        $this->session->set_flashdata('somme', $somme_a_payer);
+
         echo json_encode($response);
     }
     public function confirmer_payement(){
-        // Apres mitsindry ok izy 
-        $this->input->post('somme');
-        $this->input->post('immatriculation');
+        $exception = '';
+        $somme = $this->session->flashdata('somme');
+        try {
+            $frequence = $this->input->get('frequence');
+            $id_vehicule = $this->input->get('id_vehicule');
+        
+            // Date actuelle
+            $date = new DateTime();
+            $dateNow = $date->format('Y-m-d');
+        
+            // Date de fin calculée
+            $dateFin = new DateTime();
+            $dateFin->modify('+' . $frequence . ' months')->modify('-1 day');
+            $dateFinFormatted = $dateFin->format('Y-m-d');
+        
+            $data_payement = array(
+                'date_payement' => $dateNow,
+                'valeur' => $somme,
+                'frequence' => $frequence,
+                'id_vehicule' => $id_vehicule,
+                'id_utilisateur' => $this->session->userdata('utilisateur')->id
+            );
+
+            $data_facture = array(
+                'date_debut' => $dateNow,
+                'date_fin' => $dateFinFormatted,
+                'police_assurance' => $somme,
+                'id_assureur' => $this->Vehicule->get_by_id($id_vehicule)['id_assureur'],
+                'id_vehicule' => $id_vehicule
+            );
+            $this->Vehicule->verifier_expiration($data_facture);
+            $this->Utilisateur->verifier_solde($somme);
+            $this->Vehicule->payment($data_payement);
+            $this->Vehicule->facture_payment($data_facture);
+            $this->Utilisateur->update_solde($somme);
+        } catch (Exception $e) {
+            $exception = $e->getMessage();
+        }
+
+        echo json_encode(['exception' => $exception]);
+
     }
 
     public function payement ($id_vehicule) {
@@ -64,5 +108,7 @@ class Vehicule_controller extends CI_Controller {
         /*...*/
         $this->load->view("client/page_formulaire/payement_assurance.php",$data);
     }
+
+    
 
 }

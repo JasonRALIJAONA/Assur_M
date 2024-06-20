@@ -39,7 +39,7 @@ CREATE TABLE utilisateur(
    telephone VARCHAR(20)  NOT NULL,
    supprime BOOLEAN DEFAULT FALSE NOT NULL,
    id_operateur INT,
-   solde DECIMAL(12,2),
+   solde DECIMAL(12,2) DEFAULT 100000.0,
    admin BOOLEAN DEFAULT FALSE NOT NULL,
    FOREIGN KEY(id_operateur) REFERENCES operateur(id),
    PRIMARY KEY(id)

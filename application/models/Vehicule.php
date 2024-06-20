@@ -466,6 +466,36 @@ class Vehicule extends CI_Model {
         }
     }
 
-    
+    public function payment($data) {  
+        $this->db->insert('payement', $data);
+    }
+
+    public function facture_payment($data) {
+
+        $this->db->insert('facture', $data);
+    }
+
+    public function verifier_expiration($data) {
+
+        $this->db->select('*');
+        $this->db->from('facture');
+        $this->db->where('date_fin', "(SELECT MAX(date_fin) FROM facture)", false); // Utilisation d'une sous-requête
+        $this->db->where('id_vehicule', $data['id_vehicule']);
+        $query = $this->db->get();
+
+        $result = $query->row_array();
+
+        if ($result) {
+            if ($data['date_debut'] < $result['date_fin']) {
+                throw new Exception("Vous pouvez pas payer, votre assurance est à jour!");
+            }
+        }
+    }
+
+    public function detail($id_vehicule) {
+        $this->db->where('id', $id_vehicule);
+        $query = $this->db->get('detail');
+        return $query->row_array();
+    }
 }
 

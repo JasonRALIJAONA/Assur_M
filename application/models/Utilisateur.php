@@ -162,4 +162,22 @@ class Utilisateur extends CI_Model
         $id = $this->db->insert_id('utilisateur_id_seq');
         return $id;
     }
+
+    public function verifier_solde($prix) {
+        $utilisateur = $this->session->userdata('utilisateur');
+        if ($utilisateur->solde < $prix) {
+            throw new Exception('Votre solde est insuffisant');
+            // throw new Exception($utilisateur->solde . ' < ' . $prix);
+        }
+
+    }
+
+    public function update_solde($prix) {
+        $utilisateur = $this->session->userdata('utilisateur');
+        $this->db->set('solde', 'solde - ' . $prix, FALSE);
+        $this->db->where('id', $utilisateur->id);
+        $this->db->update('utilisateur');
+
+        $this->session->set_userdata('utilisateur', $this->get_by_id($utilisateur->id));
+    }
 }

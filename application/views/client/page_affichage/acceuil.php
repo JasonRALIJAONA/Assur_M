@@ -31,7 +31,7 @@ foreach ($liste_vehicule as $row) {
         </div>
 
         <div class="bouton_redirection">
-            <a href="<?php echo base_url("vehicule_controller/detail/1"); ?>"><button class="btn btn-primary"> Detail </button></a>
+            <a href="<?php echo base_url("vehicule_controller/detail/"); ?>/<?= $row['id'] ?>"><button class="btn btn-primary"> Detail </button></a>
             <a href="<?php echo base_url("vehicule_controller/payement/"); ?>/<?= $row['id'] ?>"><button class="btn btn-primary"> Payer </button> </a>
         </div>
 

@@ -4,9 +4,9 @@ INSERT INTO operateur (nom) VALUES
 ('Telma');
 
 INSERT INTO assureur (nom, commission, num_telma, num_orange, num_airtel) VALUES
+('MAMA', 4.80, '0343456789', '0323456789', '0333456789'),
 ('Aro', 5.50, '0341234567', '0321234567', '0331234567'),
-('Ny Havana', 6.75, '0342345678', '0322345678', '0332345678'),
-('MAMA', 4.80, '0343456789', '0323456789', '0333456789');
+('Ny Havana', 6.75, '0342345678', '0322345678', '0332345678');
 
 INSERT INTO type_vehicule (nom) VALUES
 ('Voiture'),
@@ -117,27 +117,27 @@ INSERT INTO puissance (prix_chevaux, id_assureur) VALUES
 (87, 2),
 (99, 3);
 
-INSERT INTO liste_vehicule (immatriculation, puissance, place, marque, carburant, email_utilisateur, id_annee_fabrication) VALUES
-('2021ABC', 100, 5, 'Toyota', 'Essence', 1, 1),
-('2022DEF', 150, 5, 'Honda', 'Diesel', 2, 2),
-('2023GHI', 120, 4, 'Ford', 'Essence', 3, 3),
-('2024JKL', 130, 4, 'BMW', 'GPL', 4, 4),
-('2025MNO', 110, 5, 'Audi', 'Essence', 5, 5),
-('2026PQR', 140, 4, 'Chevrolet', 'Diesel', 6, 6),
-('2027STU', 125, 5, 'Kia', 'Essence', 7, 7),
-('2028VWX', 135, 5, 'Hyundai', 'GPL', 8, 8),
-('2029YZA', 115, 4, 'Nissan', 'Diesel', 9, 9),
-('2030BCD', 150, 5, 'Mazda', 'Essence', 10, 10),
-('2031EFG', 110, 4, 'Subaru', 'GPL', 11, 11),
-('2032HIJ', 130, 5, 'Volkswagen', 'Diesel', 12, 12),
-('2033KLM', 145, 4, 'Mercedes', 'Essence', 13, 13),
-('2034NOP', 125, 5, 'Porsche', 'GPL', 14, 14),
-('2035QRS', 135, 4, 'Lexus', 'Diesel', 15, 15),
-('2036TUV', 140, 5, 'Jaguar', 'Essence', 16, 16),
-('2037WXY', 120, 4, 'Ferrari', 'Diesel', 17, 17),
-('2038ZAB', 150, 5, 'Lamborghini', 'Essence', 18, 18),
-('2039CDE', 115, 4, 'Bugatti', 'GPL', 19, 19),
-('2040FGH', 145, 5, 'Aston Martin', 'Diesel', 20, 20);
+INSERT INTO liste_vehicule (immatriculation, puissance, place, marque, carburant, email_utilisateur) VALUES
+('2021ABC', 100, 5, 'Toyota', 'Essence', 1),      
+('2022DEF', 150, 5, 'Honda', 'Diesel', 2),
+('2023GHI', 120, 4, 'Ford', 'Essence', 3),
+('2024JKL', 130, 4, 'BMW', 'GPL', 4),
+('2025MNO', 110, 5, 'Audi', 'Essence', 5),
+('2026PQR', 140, 4, 'Chevrolet', 'Diesel', 6),
+('2027STU', 125, 5, 'Kia', 'Essence', 7),
+('2028VWX', 135, 5, 'Hyundai', 'GPL', 8),
+('2029YZA', 115, 4, 'Nissan', 'Diesel', 9),
+('2030BCD', 150, 5, 'Mazda', 'Essence', 10),
+('2031EFG', 110, 4, 'Subaru', 'GPL', 11),
+('2032HIJ', 130, 5, 'Volkswagen', 'Diesel', 12),
+('2033KLM', 145, 4, 'Mercedes', 'Essence', 13),
+('2034NOP', 125, 5, 'Porsche', 'GPL', 14),
+('2035QRS', 135, 4, 'Lexus', 'Diesel', 15),
+('2036TUV', 140, 5, 'Jaguar', 'Essence', 16),
+('2037WXY', 120, 4, 'Ferrari', 'Diesel', 17),
+('2038ZAB', 150, 5, 'Lamborghini', 'Essence', 18),
+('2039CDE', 115, 4, 'Bugatti', 'GPL', 19),
+('2040FGH', 145, 5, 'Aston Martin', 'Diesel', 20);
 
 
 

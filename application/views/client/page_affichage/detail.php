@@ -16,10 +16,9 @@
             <div> <img src="<?php echo base_url(); ?>assets/img/bouclier.png" alt=""> Assurance: <span> <?php echo $assurance; ?> </span>   </div>
             <div> <img src="<?php echo base_url(); ?>assets/img/marque.png" alt=""> Marque : <span> <?php echo $marque; ?> </span>  </div>
             <div> <img src="<?php echo base_url(); ?>assets/img/puissance.png" alt=""> Puissance : <span> <?php echo $puissance; ?> chevaux </span>  </div>
-            <div>  <img src="<?php echo base_url(); ?>assets/img/moteur.png" alt=""> Carburant : <span> <?php echo $carburant; ?> </span>  </div>
         </div>
         <div class="col-md-6 colonne">
-            <div> <img src="<?php echo base_url(); ?>assets/img/calendrier.png" alt=""> Annee de fabrication:  <span> <?php echo $annee_fabrication; ?>  </span>  </div>
+            <div>  <img src="<?php echo base_url(); ?>assets/img/moteur.png" alt=""> Carburant : <span> <?php echo $carburant; ?> </span>  </div>
             <div> <img src="<?php echo base_url(); ?>assets/img/usage.png" alt=""> Type d'usage  : <span> <?php echo $type_usage; ?> </span>  </div>
             <div> <img src="<?php echo base_url(); ?>assets/img/formule.png" alt=""> Formule : <span> <?php echo $formule; ?> </span>  </div>
         </div>

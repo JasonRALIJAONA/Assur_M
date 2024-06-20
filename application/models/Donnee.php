@@ -49,6 +49,16 @@ class Donnee extends CI_Model {
             throw new Exception("Le nombre de place que vous avez saisi n'est pas vrai");
         }
 
+        $this->db->where('immatriculation', $data['immatriculation']);
+        $query2 = $this->db->get('vehicule');
+
+        $existe = $query2->row_array();
+
+        if ($existe) {
+            throw new Exception("Ce vehicule a déjà une assurance");
+            
+        }
+
         
     }
 

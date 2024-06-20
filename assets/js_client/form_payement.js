@@ -5,8 +5,9 @@
         event.preventDefault();
         $("#contactForm").validate().form();
         let result = await get_somme_payer();
-
-        if (result.somme == 0) {
+        let exception;
+    
+        if (result.data.somme == 0) {
             exception = "Erreur lors du remplissage du formulaire";
             Swal.fire({
                 icon: "error",
@@ -14,67 +15,66 @@
                 text: `
                     ${exception}
                 `,
-                icon: 'error',
                 confirmButtonText: 'Ressayer'
-
-            })
-        }
-        else {
+            });
+        } else {
             Swal.fire({
                 title: "<strong><u>Demande confirmation</u></strong>",
                 icon: "info",
                 html: `
-                    Voulez vous accepter de payer la 
-                  somme de <b>${result.somme} Ar </b>
+                    Voulez-vous accepter de payer la 
+                    somme de <b>${result.data.somme.toLocaleString('fr-FR')} Ar </b>
                 `,
                 showCloseButton: true,
                 showCancelButton: true,
                 focusConfirm: false,
-                confirmButtonText: `
-                  <i>Accepter</i> 
-                `,
-
-                cancelButtonText: `
-                  <i> Annuler </i>
-                `
-            }).then((result) => {
-                // Ici, result est un objet qui contient des informations sur la réponse de l'utilisateur.
-                if (result.isConfirmed) {
+                confirmButtonText: `<i>Accepter</i>`,
+                cancelButtonText: `<i>Annuler</i>`
+            }).then(async (res) => {
+                if (res.isConfirmed) {
+                    var formData = $('#contactForm').serializeArray();
                     $.ajax({
-                        url: 'confirmer_payement',
-                        type: 'POST',
+                        url: baseUrl + 'vehicule_controller/confirmer_payement',
+                        type: 'GET',
                         dataType: 'json',
-                        data: {
-                            immatriculation: result.immatriculation,
-                            somme: result.somme
-                        },
-
+                        data: $.param(formData),
                         beforeSend: function () {
-
                         },
-
                         success: function (response) {
-                            window.location = "http://localhost:8000/S4/Assur_M/form_controller/acceuil";
+                            exception = response.exception;
+                            if (exception) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Erreur!',
+                                    text: 'Erreur lors du paiement.',
+                                    footer: `<span>${exception}</span>`
+                                });
+                            } else {
+                                window.location = baseUrl + "form_controller/accueil";
+                            }
                         },
-
                         error: function (error) {
-
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erreur!',
+                                text: 'Erreur lors de la requête AJAX.'
+                            });
                         }
                     });
-
                 }
-            }).catch(() => {
-                console.log('L\'utilisateur a cliqué sur le bouton d\'annulation.');
-                // Ajoutez ici le code à exécuter si l'utilisateur annule.
+            }).catch((error) => {
+                console.log(error);
             });
         }
     });
+    
     async function get_somme_payer() {
         var formData = $('#contactForm').serialize();
         let sommeAndImmatriculation;
-        console.log('Le form data ', formData);
+        console.log('Le form data ' + baseUrl);
         await $.ajax({
-            url: 'argent_a_payer',
+            url: baseUrl + 'vehicule_controller/get_argent_a_payer',
+            dataType: 'json',
             type: 'GET',
             data: formData,
 
@@ -85,7 +85,7 @@
 
             success: function (response) {
 
-                console.log(response);
+                console.log(response.data.somme);
                 sommeAndImmatriculation = response;
             },
 
@@ -110,8 +110,7 @@
                 rules: {
                     frequence: {
                         required: true,
-                        number: true,
-                        range: [1, 4]
+                        number: true
                     },
                     operateur: {
                         required: true,
@@ -129,8 +128,7 @@
                 messages: {
                     frequence: {
                         required: "Choisir une frequence",
-                        number: "Valeur ne dois pas être modifier",
-                        range: "Valeur ne dois pas être modifier"
+                        number: "Valeur ne dois pas être modifier"
                     },
                     operateur: {
                         required: "Choisir une frequence",

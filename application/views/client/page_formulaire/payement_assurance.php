@@ -38,9 +38,9 @@
 													<select name="frequence" id="frequence" placeholder="Frequence de paiement" class="select-form">
 														<option value="" selected disabled>Frequence</option>
 														<option value='1'>Mensuel</option>
-														<option value="3">Trimestriel</option>
-														<option value="6">Semestriel</option>
-														<option value="12">Annuel</option>
+														<option value='3'>Trimestriel</option>
+														<option value='6'>Semestriel</option>
+														<option value='12'>Annuel</option>
 													</select>
 
 												</div>
@@ -79,7 +79,7 @@
 
 
 										</div>
-										<input type="hidden" name="immatriculation" value="<?php echo $vehicule['immatriculation']; ?>">
+										<input type="hidden" name="id_vehicule" value="<?php echo $vehicule['id']; ?>">
 									</form>
 								</div>
 							</div>
@@ -106,9 +106,12 @@
 
 	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 	<!-- <script src="js/popper.js"></script>
-  <script src="js/bootstrap.min.js"></script> -->
+	<script src="js/bootstrap.min.js"></script> -->
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+	<script>
+		baseUrl = "<?php echo base_url() ?>";
+	</script>
 	<script src="<?php echo base_url(); ?>assets/js_client/form_payement.js"></script>
 
 </body>

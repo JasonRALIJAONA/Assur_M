@@ -259,7 +259,9 @@ class Form_controller extends CI_Controller {
 			echo $e;
 		}
 
-		echo json_encode('Done');
+		$this->session->unset_userdata('donnee_vehicule');
+
+		echo json_encode(['assureur' => $data['id_assureur']]);
 
 		
 	}

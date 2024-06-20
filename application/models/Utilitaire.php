@@ -18,8 +18,7 @@ class Utilitaire extends CI_Model
         return $code;
     }
 
-    public function envoyer_email($email, $code)
-    {
+    public function envoyer_email($email, $code) {
         // echo $email, $code;
 		
         $config = array(
@@ -49,5 +48,7 @@ class Utilitaire extends CI_Model
             echo json_encode(['status' => 'error', 'message' => $error]);
         }
     }
+
+    
 
 }
