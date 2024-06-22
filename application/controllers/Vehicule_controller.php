@@ -126,6 +126,16 @@ class Vehicule_controller extends CI_Controller {
         }
     }
 
+    public function search_facture () {
+        $this->input->get('immatriculation');
+        $this->input->get('assurance');
+        $this->input->get('date_paye_min');
+        $this->input->get('date_paye_max');
+        $this->input->get('date_exp_min');
+        $this->input->get('date_exp_max');
+        
+    }
+
     
 
 }
