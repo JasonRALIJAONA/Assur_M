@@ -8,10 +8,10 @@
   <div id="nav-content">
     <div class="nav-button"><i class="fas fa-palette"></i><span> <a href="<?php echo base_url("template_controller/acceuil");  ?>"> Acceuil </a> </span></div>
     <div class="nav-button"><i class="fas fa-images"></i><span> <a href="<?php echo base_url("form_controller/inscription_vehicule"); ?>">Ajouter vehicule</a> </span></div>
-    <div class="nav-button"><i class="fas fa-thumbtack"></i><span>Pinned Items</span></div>
+    <div class="nav-button"><i class="fas fa-thumbtack"></i><span> <a href="<?php echo base_url("template_controller/historique_facture");  ?>"> Historique </a>  </span></div>
     <hr/>
-    <div class="nav-button"><i class="fas fa-heart"></i><span>Following</span></div>
-    <div class="nav-button"><i class="fas fa-chart-line"></i><span>Trending</span></div>
+    <div class="nav-button"><i class="fas fa-heart"></i><span><a href="<?php echo base_url("template_controller/profile_user");  ?>"> Profil </a></span></div>
+    <div class="nav-button"><i class="fas fa-heart"></i><span><a href="<?php echo base_url("/");  ?>"> Deconnecter </a></span></div>
     <div class="nav-button"><i class="fas fa-fire"></i><span>Challenges</span></div>
     <div class="nav-button"><i class="fas fa-magic"></i><span>Spark</span></div>
     <hr/>

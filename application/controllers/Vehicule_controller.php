@@ -8,7 +8,6 @@ class Vehicule_controller extends CI_Controller {
 	}
 
     public function detail($id_vehicule){
-        echo $id_vehicule;
         /* Maka info vehicule avy any base */
         $data = array();
         $data['assurance'] = "ARO";
@@ -55,6 +54,22 @@ class Vehicule_controller extends CI_Controller {
         // Apres mitsindry ok izy 
         $this->input->post('somme');
         $this->input->post('immatriculation');
+    }
+
+    /* PDF */
+    public function to_generate_pdf () {
+        $this->load->view('client/page_pdf/generate_pdf.php');
+    }
+    public function to_facture ($assurance="")  {
+        if ($assurance==1) {
+            $this->load->view('client/page_pdf/factureAro.php');
+        }
+        else if ($assurance==2) {
+            $this->load->view('client/page_pdf/factureHavana.php');
+        }
+        else if ($assurance==3) {
+            $this->load->view('client/page_pdf/factureMAMA.php');
+        }
     }
 
 }

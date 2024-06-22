@@ -1,9 +1,15 @@
 <h1 class="titre_vehicule"> Liste des vehicules  </h1> 
-    
+    <div class="recherche_vehicule">
+        <input type="text" class="form-control"  placeholder="Immatriculation">
+        <input type="button" value="RECHERCHER" class="btn btn-primary" >
+    </div>
+
     <div class="panel_vehicule">
-    <div class="image">
+    
+    <div class="image" id="expirer" >
         <img src="<?php echo base_url("assets/img/icon_voiture.png"); ?>" alt="">
     </div>
+    
     <div class="information">
         <table>
             <tr>
@@ -65,7 +71,7 @@
     </div><!-- Fait div panel_vehicule2-->
     
     <div class="panel_vehicule">
-    <div class="image">
+    <div class="image" id="presque_expirer" >
         <img src="<?php echo base_url("assets/img/icon_moto.png"); ?>" alt="">
     </div>
     <div class="information">
@@ -97,7 +103,7 @@
     </div><!-- Fait div panel_vehicule3-->
     
     <div class="panel_vehicule">
-    <div class="image">
+    <div class="image" id="expirer">
         <img src="<?php echo base_url("assets/img/icon_moto.png"); ?>" alt="">
     </div>
     <div class="information">
