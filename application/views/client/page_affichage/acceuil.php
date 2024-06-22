@@ -1,6 +1,11 @@
 <h1 class="titre_vehicule"> Liste des vehicules </h1>
-<script>
-</script>
+<form class="recherche_vehicule" action="<?php echo site_url('form_controller/search_vehicule'); ?>" mathod="GET">
+    <input type="text" class="form-control" placeholder="Immatriculation" name="immatriculation">
+    <button type="submit" class="btn btn-primary btn_search">
+        <img src="<?php echo base_url("assets/img/search.png"); ?>" alt="" width:> RECHERCHER
+    </button>
+</form>
+
 
 <?php
 foreach ($liste_vehicule as $row) {
