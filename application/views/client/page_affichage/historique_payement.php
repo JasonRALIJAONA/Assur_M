@@ -1,4 +1,55 @@
 <h1 class="titre_vehicule"> Historique des factures <img src="<?php echo base_url("assets/img/calendrier.png"); ?>" alt="" class="logo_facture"> </h1>
+<div style="display:flex;justify-content:center;">
+        <a data-bs-toggle="collapse" href="#multi_critere">  <img src="<?php echo base_url("assets/img/search.png"); ?>" alt="" style="width:95px;" > </a>
+
+    </div>
+    <form class="recherche_vehicule row collapse" id="multi_critere" action="<?php echo site_url('vehicule_controller/search_facture'); ?>" mathod="GET" >
+        <div class="bloc_search_facture col-md-8 row"  >
+            <div class="col-md-4 col-sm-12 ">
+                Voiture:
+            </div>
+            <div class="col-md-4 col-sm-6 ">
+                <input type="text" class="form-control"  placeholder="Immatriculation" name="immatriculation">
+            </div>
+            <div class="col-md-4  col-sm-6">
+                <select class="form-select" name="assurance" >
+                    <option selected value="">Assurance</option>
+                    <option value="1">ARO</option>
+                    <option value="2">MAMA</option>
+                    <option value="3">HAVANA</option>
+                </select>
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                Date payement:
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <input type="date" class="form-control"  name="date_paye_min">
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <input type="date" class="form-control"  name="date_paye_max">
+            </div>
+
+            <div class="col-md-4 col-sm-12">
+                Date expiration:
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <input type="date" class="form-control"   name="date_exp_min">
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <input type="date" class="form-control"  name="date_exp_max">
+            </div>
+
+
+        </div>
+        <div class="col-md-4 div_submit">
+            <button type="submit" class="btn btn-primary btn_search" >
+                <img src="<?php echo base_url("assets/img/search.png"); ?>" alt=""> RECHERCHER 
+            </button>
+
+        </div>
+    </form>
+
 <?php
 foreach ($liste_facture as $row) {
 ?>
