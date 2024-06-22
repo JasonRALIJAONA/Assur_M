@@ -266,8 +266,12 @@ class Form_controller extends CI_Controller {
 		
 	}
 
-	public function verifier_donnee() {
-
+	//Recherche simple
+	public function search_vehicule() {
+		$immatriculation = $this->input->get('immatriculation');
+		$data = array();
+		/* Otrany nampidirinlah t@ acceuil ihany */
+		redirect("template_controller/acceuil",$data);
 	}
 
 
