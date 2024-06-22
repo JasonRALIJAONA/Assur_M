@@ -41,7 +41,6 @@ CREATE TABLE utilisateur(
    id_operateur INT,
    solde DECIMAL(12,2) DEFAULT 100000.0,
    admin BOOLEAN DEFAULT FALSE NOT NULL,
-   solde DECIMAL(12,2),
    FOREIGN KEY(id_operateur) REFERENCES operateur(id),
    PRIMARY KEY(id)
 );
@@ -123,6 +122,7 @@ CREATE TABLE facture(
    police_assurance VARCHAR(50)  NOT NULL,
    id_assureur INTEGER NOT NULL,
    id_vehicule INTEGER NOT NULL,
+   id_utilisateur INTEGER NOT NULL REFERENCES utilisateur(id),
    PRIMARY KEY(id),
    FOREIGN KEY(id_assureur) REFERENCES assureur(id),
    FOREIGN KEY(id_vehicule) REFERENCES vehicule(id)

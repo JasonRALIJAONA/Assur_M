@@ -93,23 +93,26 @@ class Vehicule extends CI_Model
 
             $liste = $query->result_array();
 
+            $date1 = new DateTime('now');
+            $i = 0;
             foreach ($liste as $row) {
-                $date1 = new DateTime('now');
+                if (isset($row['date_fin']) && !empty($row['date_fin'])) {
+                    $date2 = new DateTime($row['date_fin']);
+                    $interval = $date1->diff($date2);
 
-                $date2 = $row['date_fin'];
+                    $days = $interval->days;
 
-                $interval = $date1->diff($date2);
-
-                $days = $interval->days;
-                if ($row['date_fin'] == null || $interval->invert) {
-                    $row['id_css'] = 'expirer'; // presque_expirer
-                    continue;
-                } else if ($days <= 10) {
-                    $row['id_css'] = "presque_expirer";
-                    continue;
+                    if ($interval->invert) {
+                        $liste[$i]['id_css'] = 'expirer';
+                    } else if ($days <= 10) {
+                        $liste[$i]['id_css'] = 'presque_expirer';
+                    } else {
+                        $liste[$i]['id_css'] = 'huhu';
+                    }
                 } else {
-                    $row['id_css'] = "huhu";
+                    $liste[$i]['id_css'] = 'expirer';
                 }
+                $i++;
             }
 
             return $liste;
@@ -498,8 +501,30 @@ class Vehicule extends CI_Model
         $this->db->insert('payement', $data);
     }
 
+    function generatePolicyNumber() {
+        $prefix = 'PA';
+        $randomNumber = mt_rand(100000000, 999999999); // Génère un nombre aléatoire de 9 chiffres
+        return $prefix . $randomNumber;
+    }
+
+    function verifier_police($police) {
+        $this->db->where('police_assurance', $police);
+        $query = $this->db->get('facture');
+        $result = $query->row_array();
+        return $result ? true : false; 
+    }
+
     public function facture_payment($data)
     {
+        // Generer la police d'assurance
+        $police = null;
+
+        // Verifier si ce nombre existe deja
+        do {
+            $police = $this->generatePolicyNumber();
+        } while ($this->verifier_police($police));
+
+        $data['police_assurance'] = $police;
 
         $this->db->insert('facture', $data);
     }
@@ -509,7 +534,7 @@ class Vehicule extends CI_Model
 
         $this->db->select('*');
         $this->db->from('facture');
-        $this->db->where('date_fin', "(SELECT MAX(date_fin) FROM facture)", false); // Utilisation d'une sous-requête
+        $this->db->where('date_fin <=', "(SELECT MAX(date_fin) FROM facture)", false); // Utilisation d'une sous-requête
         $this->db->where('id_vehicule', $data['id_vehicule']);
         $query = $this->db->get();
 
@@ -517,7 +542,7 @@ class Vehicule extends CI_Model
 
         if ($result) {
             if ($data['date_debut'] < $result['date_fin']) {
-                throw new Exception("Vous pouvez pas payer, votre assurance est à jour!");
+                throw new Exception("Votre assurance est à jour!");
             }
         }
     }
@@ -527,5 +552,12 @@ class Vehicule extends CI_Model
         $this->db->where('id', $id_vehicule);
         $query = $this->db->get('detail');
         return $query->row_array();
+    }
+
+    public function get_liste_facture($id_utilisateur) {
+        $this->db->where('id_utilisateur', $id_utilisateur);
+        $query = $this->db->get('info_facture');
+
+        return $query->result_array();
     }
 }

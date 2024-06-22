@@ -32,7 +32,7 @@ html {
   
   body {
     position: relative;
-    background: url("../img/road2.webp") no-repeat center fixed;
+    background: url("../img/road_forest.jpg") no-repeat center fixed;
     background-size: cover;
     /*overflow-y: auto;*/
   }
@@ -45,7 +45,8 @@ html {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow-y: visible;
+      overflow-y: hidden;
+      overflow-x: hidden;
     }
   }
   

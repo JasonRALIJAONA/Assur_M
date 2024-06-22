@@ -5,23 +5,23 @@
     <table class="table_profil">
         <tr>
             <td class="attribut" >Nom</td>
-            <td class="valeur" >: <?php echo $user['nom']; ?> </td>
+            <td class="valeur" >: <?php echo $user->nom; ?> </td>
         </tr>
         <tr>
             <td class="attribut" >Prénoms</td>
-            <td class="valeur">: <?php echo $user['prenoms'];?></td>
+            <td class="valeur">: <?php echo $user->prenom;?></td>
         </tr>
         <tr>
             <td class="attribut" >Date de Naissance</td>
-            <td class="valeur"> : <?php echo $user['date_naissance']; ?> </td>
+            <td class="valeur"> : <?php echo $user->naissance; ?> </td>
         </tr>
         <tr>
             <td class="attribut" >Adresse</td>
-            <td class="valeur" >: <?php echo $user['adresse']; ?></td>
+            <td class="valeur" >: <?php echo $user->adresse; ?></td>
         </tr>
         <tr>
             <td class="attribut" >Numéro</td>
-            <td class="valeur" >: <?php echo $user['num_tel']; ?></td>
+            <td class="valeur" >: <?php echo $user->email; ?></td>
         </tr>
     </table>
     

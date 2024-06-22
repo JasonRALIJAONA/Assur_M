@@ -11,10 +11,14 @@ class Template_controller extends CI_Controller {
 
     public function accueil(){
         if ($this->session->has_userdata('utilisateur')) {
-            $liste_vehicule = $this->Vehicule->liste_vehicules($this->session->userdata('utilisateur')->id);
-            $data['liste_vehicule'] = $liste_vehicule;
-            $data["content"] = "page_affichage/acceuil";
-            $this->load->view("client/template.php",$data);
+            try {
+                $liste_vehicule = $this->Vehicule->liste_vehicules($this->session->userdata('utilisateur')->id);
+                $data['liste_vehicule'] = $liste_vehicule;
+                $data["content"] = "page_affichage/acceuil";
+                $this->load->view("client/template.php",$data);
+            } catch (Exception $e) {
+                echo $e;
+            }
         }else {
             echo 'session vide';
         }
@@ -23,7 +27,7 @@ class Template_controller extends CI_Controller {
     }
     public function historique_facture () {
         // Maka ireo facture rehetra
-        $data = array();
+        $data['liste_facture'] = $this->Vehicule->get_liste_facture($this->session->userdata('utilisateur')->id);
         $data["content"] = "page_affichage/historique_payement";
         $this->load->view("client/template.php",$data); 
     }
@@ -38,7 +42,7 @@ class Template_controller extends CI_Controller {
         $user["adresse"] = "Andoharanofotsy"; 
         $user['num_tel'] = "0345623578";
         
-        $data["user"] = $user; 
+        $data["user"] = $this->session->userdata('utilisateur'); 
         $this->load->view("client/template.php",$data);
     }
     public function deconnecter() {

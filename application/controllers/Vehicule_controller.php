@@ -78,9 +78,10 @@ class Vehicule_controller extends CI_Controller {
             $data_facture = array(
                 'date_debut' => $dateNow,
                 'date_fin' => $dateFinFormatted,
-                'police_assurance' => $somme,
                 'id_assureur' => $this->Vehicule->get_by_id($id_vehicule)['id_assureur'],
-                'id_vehicule' => $id_vehicule
+                'id_vehicule' => $id_vehicule,
+                'id_utilisateur' => $this->session->userdata('utilisateur')->id
+
             );
             $this->Vehicule->verifier_expiration($data_facture);
             $this->Utilisateur->verifier_solde($somme);

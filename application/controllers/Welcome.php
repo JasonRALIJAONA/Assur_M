@@ -8,6 +8,7 @@ class Welcome extends CI_Controller {
 	}
 
     public function index(){
+        $this->session->sess_destroy();
         $this->load->view('client/index.php');
     }
     public function to_login(){

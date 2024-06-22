@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
             input.togglePopover
             input.setAttribute('data-bs-toggle', 'popover');
             input.setAttribute('data-bs-custom-class', 'custom-popover');
-            input.setAttribute('data-bs-trigger', 'hover focus');
+            input.setAttribute('data-bs-trigger', 'hover');
             input.setAttribute('title', `<h3>${row['nom']}</h3>`);
 
             var popover = new bootstrap.Popover(input, {
@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
             input.togglePopover
             input.setAttribute('data-bs-toggle', 'popover');
             input.setAttribute('data-bs-custom-class', 'custom-popover_cotisation');
-            input.setAttribute('data-bs-trigger', 'hover focus');
+            input.setAttribute('data-bs-trigger', 'hover');
             input.setAttribute('title', `<h3>${row['nom']}</h3>`);
             input.setAttribute("data-bs-content", `<p class="para3"><i>${row['descri']}</i></p>`);
 
