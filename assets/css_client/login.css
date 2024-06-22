@@ -32,9 +32,9 @@ html {
   
   body {
     position: relative;
-    background: url("../img/image_voiture.jpg") no-repeat center fixed;
-    background-size: 100% 100%;
-    overflow-y: auto;
+    background: url("../img/road2.webp") no-repeat center fixed;
+    background-size: cover;
+    /*overflow-y: auto;*/
   }
   @media screen and (min-width: 768px) {
     body {
@@ -93,7 +93,7 @@ html {
    */
   .panel_blur {
     position: absolute;
-    background: url("../img/image_voiture.jpg") no-repeat center fixed;
+    background: url("../img/road2.webp") no-repeat center fixed;
     background-size: 100% 100%;
     filter: blur(5px);
   }
@@ -116,7 +116,7 @@ html {
     height: 100%;
     padding: 10%;
     background-color: rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
+    /*overflow-y: auto;*/
   }
   @media screen and (min-width: 768px) {
     .panel__form-wrapper {
