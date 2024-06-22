@@ -7,7 +7,7 @@ foreach ($liste_vehicule as $row) {
 ?>
     <div class="panel_vehicule">
         <div class="image">
-            <img src="<?php echo base_url("assets/img/icon_voiture.png"); ?>" alt="">
+            <img src="<?php echo base_url("assets/img/" . $row['nom_type'] . ".png"); ?>" alt="">
         </div>
         <div class="information">
             <table>
