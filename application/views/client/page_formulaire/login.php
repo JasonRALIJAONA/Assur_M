@@ -41,15 +41,17 @@
             <a href="<?php echo base_url("form_controller/inscription_personne"); ?>" class="form__retrieve-pass" role="button">Vous n'avez pas encore de compte?</a>
           </div>
         </form>
-
-
       </div>
     </div>
   </div>
+  <script src="<?php echo base_url(); ?>assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
   <?php if (isset($erreur)) : ?>
     <div style="color: red;">
       <script>
-        alert("<?php echo $erreur ?>")
+        Swal.fire({
+          icon: "error",
+          text: '<?= $erreur ?>'
+        });
       </script>
     </div>
   <?php endif; ?>

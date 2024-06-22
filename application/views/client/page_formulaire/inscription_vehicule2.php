@@ -79,23 +79,23 @@
 														</label>
 													</div> -->
 
-													
+
 
 												</div>
 											</div>
-											
+
 											<hr style="color:white">
 											<!-- MODE D'USAGE -->
 											<div class="col-md-12">
 												<div class="form-group row" style="display: none;" id="box_usage">
-													
-													
+
+
 												</div>
 											</div>
 
 											<hr style="color:white">
 
-											
+
 
 											<!-- ANNEE DE FABRICATION -->
 											<div class="col-md-12" id="annee_fabrication_box" style="display: none;">
@@ -133,7 +133,7 @@
 											<div class="col-md-12" id="bouton_box" style="display: none;">
 												<div class="form-group">
 													<input type="submit" value="SIMULER" class="btn btn-primary">
-													<div class="submitting"></div> 
+													<div class="submitting"></div>
 												</div>
 
 
@@ -154,15 +154,15 @@
 		</div>
 	</section>
 
-	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 	<!-- <script src="js/popper.js"></script>-->
-	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.js"></script>
 	<script>
 		var baseUrl = "<?php echo base_url(); ?>";
 	</script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js_client/form_vehicule.js"></script>
+	<!-- <script src="<?php echo base_url(); ?>assets/js_client/form_vehicule.js"></script> -->
 	<script src="<?php echo base_url(); ?>assets/js_client/inscription_vehicule2.js"></script>
 
 
