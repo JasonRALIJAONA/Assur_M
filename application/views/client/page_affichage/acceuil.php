@@ -1,8 +1,10 @@
 <h1 class="titre_vehicule"> Liste des vehicules  </h1> 
-    <div class="recherche_vehicule">
-        <input type="text" class="form-control"  placeholder="Immatriculation">
-        <input type="button" value="RECHERCHER" class="btn btn-primary" >
-    </div>
+    <form class="recherche_vehicule" action="<?php echo site_url('form_controller/search_vehicule'); ?>" mathod="GET" >
+        <input type="text" class="form-control"  placeholder="Immatriculation" name="immatriculation">
+        <button type="submit" class="btn btn-primary btn_search" >
+            <img src="<?php echo base_url("assets/img/search.png"); ?>" alt="" width: > RECHERCHER 
+        </button>
+    </form>
 
     <div class="panel_vehicule">
     

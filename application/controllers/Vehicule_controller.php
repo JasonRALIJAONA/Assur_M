@@ -58,7 +58,7 @@ class Vehicule_controller extends CI_Controller {
 
     /* PDF */
     public function to_generate_pdf () {
-        $this->load->view('client/page_pdf/generate_pdf.php');
+        $this->load->view('client/page_pdf/generate_pdf1.php');
     }
     public function to_facture ($assurance="")  {
         if ($assurance==1) {
@@ -71,5 +71,13 @@ class Vehicule_controller extends CI_Controller {
             $this->load->view('client/page_pdf/factureMAMA.php');
         }
     }
-
+    public function search_facture () {
+        $this->input->get('immatriculation');
+        $this->input->get('assurance');
+        $this->input->get('date_paye_min');
+        $this->input->get('date_paye_max');
+        $this->input->get('date_exp_min');
+        $this->input->get('date_exp_max');
+        
+    }
 }

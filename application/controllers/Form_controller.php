@@ -81,6 +81,14 @@ class Form_controller extends CI_Controller {
 		$this->input->post('mode_usage');
 		$this->input->post('cotisation');
 		$this->input->post('assureur');
-	}		
+	}
+	
+	//Recherche simple
+	public function search_vehicule() {
+		$immatriculation = $this->input->get('immatriculation');
+		$data = array();
+		/* Otrany nampidirinlah t@ acceuil ihany */
+		redirect("template_controller/acceuil",$data);
+	}
 	
 }
