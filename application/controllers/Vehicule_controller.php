@@ -109,6 +109,22 @@ class Vehicule_controller extends CI_Controller {
         $this->load->view("client/page_formulaire/payement_assurance.php",$data);
     }
 
+    /* PDF */
+    public function to_generate_pdf () {
+        $this->load->view('client/page_pdf/generate_pdf.php');
+    }
+    public function to_facture ($assurance="")  {
+        if ($assurance==1) {
+            $this->load->view('client/page_pdf/factureAro.php');
+        }
+        else if ($assurance==2) {
+            $this->load->view('client/page_pdf/factureHavana.php');
+        }
+        else if ($assurance==3) {
+            $this->load->view('client/page_pdf/factureMAMA.php');
+        }
+    }
+
     
 
 }
