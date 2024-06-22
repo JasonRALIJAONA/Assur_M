@@ -35,13 +35,6 @@ class Template_controller extends CI_Controller {
         $data = array();
         $data["content"] = "page_affichage/profil";
         
-        $user = array();
-        $user["nom"] = "Patrick";
-        $user["prenoms"] = "Le grand";
-        $user["date_naissance"] = "2004-02-23";
-        $user["adresse"] = "Andoharanofotsy"; 
-        $user['num_tel'] = "0345623578";
-        
         $data["user"] = $this->session->userdata('utilisateur'); 
         $this->load->view("client/template.php",$data);
     }

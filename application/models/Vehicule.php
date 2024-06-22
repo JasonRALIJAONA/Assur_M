@@ -560,4 +560,62 @@ class Vehicule extends CI_Model
 
         return $query->result_array();
     }
+
+    public function search_by_immatriculation($immatriculation) {
+        $this->db->select('*');
+        $this->db->from('info_vehicule');
+        $this->db->like('immatriculation', $immatriculation);
+        $query = $this->db->get();
+        $liste = $query->result_array();
+        
+        $date1 = new DateTime('now');
+            $i = 0;
+            foreach ($liste as $row) {
+                if (isset($row['date_fin']) && !empty($row['date_fin'])) {
+                    $date2 = new DateTime($row['date_fin']);
+                    $interval = $date1->diff($date2);
+
+                    $days = $interval->days;
+
+                    if ($interval->invert) {
+                        $liste[$i]['id_css'] = 'expirer';
+                    } else if ($days <= 10) {
+                        $liste[$i]['id_css'] = 'presque_expirer';
+                    } else {
+                        $liste[$i]['id_css'] = 'huhu';
+                    }
+                } else {
+                    $liste[$i]['id_css'] = 'expirer';
+                }
+                $i++;
+            }
+        return $liste;
+    }
+
+    public function search_facture($criteria) {
+        $this->db->select('*');
+        $this->db->from('info_facture');
+
+        if (!empty($criteria['immatriculation'])) {
+            $this->db->like('immatriculation', $criteria['immatriculation']);
+        }
+        if (!empty($criteria['assurance'])) {
+            $this->db->where('id_assureur', $criteria['assurance']);
+        }
+        if (!empty($criteria['date_paye_min'])) {
+            $this->db->where('date_debut >=', $criteria['date_paye_min']);
+        }
+        if (!empty($criteria['date_paye_max'])) {
+            $this->db->where('date_debut <=', $criteria['date_paye_max']);
+        }
+        if (!empty($criteria['date_exp_min'])) {
+            $this->db->where('date_fin >=', $criteria['date_exp_min']);
+        }
+        if (!empty($criteria['date_exp_max'])) {
+            $this->db->where('date_fin <=', $criteria['date_exp_max']);
+        }
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
 }

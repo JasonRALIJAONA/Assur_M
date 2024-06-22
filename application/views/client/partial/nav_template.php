@@ -6,9 +6,9 @@
     <hr/>
   </div>
   <div id="nav-content">
-    <div class="nav-button"><i class="fas fa-palette"></i><span> <a href="<?php echo base_url("template_controller/acceuil");  ?>"> Acceuil </a> </span></div>
+    <div class="nav-button"><i class="fas fa-palette"></i><span> <a href="<?php echo base_url("template_controller/accueil");  ?>"> Acceuil </a> </span></div>
     <div class="nav-button"><i class="fas fa-images"></i><span> <a href="<?php echo base_url("form_controller/inscription_vehicule"); ?>">Ajouter vehicule</a> </span></div>
-    <div class="nav-button"><i class="fas fa-thumbtack"></i><span> <img src="<?php echo base_url("assets/img/calendrier.png"); ?>" alt=""> <a href="<?php echo base_url("template_controller/historique_facture");  ?>"> Historique </a>  </span></div>
+    <div class="nav-button"><i class="fas fa-thumbtack"></i><span> <a href="<?php echo base_url("template_controller/historique_facture");  ?>"> Historique </a>  </span></div>
     <hr/>
     <div class="nav-button"><i class="fas fa-heart"></i><span><a href="<?php echo base_url("template_controller/profile_user");  ?>"> Profil </a></span></div>
     
@@ -19,6 +19,8 @@
   <input id="nav-footer-toggle" type="checkbox"/>
   <div id="nav-footer">
     <div id="nav-footer-heading">
+      <div id="nav-footer-avatar"><img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547"/></div>
+      <div id="nav-footer-titlebox"><a id="nav-footer-title" href="https://codepen.io/uahnbu/pens/public" target="_blank"><?= $this->session->userdata('utilisateur')->nom ?></a><span id="nav-footer-subtitle"><?= $this->session->userdata('utilisateur')->prenom ?></span></div>
     <div class="nav-button"><i class="fas fa-heart"></i><span><a href="<?php echo base_url("/");  ?>"> Deconnecter </a></span></div>
       <label for="nav-footer-toggle"><i class="fas fa-caret-up"></i></label>
     </div>

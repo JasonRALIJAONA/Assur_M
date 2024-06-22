@@ -269,9 +269,12 @@ class Form_controller extends CI_Controller {
 	//Recherche simple
 	public function search_vehicule() {
 		$immatriculation = $this->input->get('immatriculation');
-		$data = array();
+		$data['liste_vehicule'] = $this->Vehicule->search_by_immatriculation($immatriculation);
+		$data["content"] = "page_affichage/acceuil";
+		// echo json_encode($data['liste_vehicule']);
+		$this->load->view("client/template.php",$data);
 		/* Otrany nampidirinlah t@ acceuil ihany */
-		redirect("template_controller/acceuil",$data);
+		// redirect("template_controller/accueil",$data);
 	}
 
 

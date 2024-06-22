@@ -127,12 +127,18 @@ class Vehicule_controller extends CI_Controller {
     }
 
     public function search_facture () {
-        $this->input->get('immatriculation');
-        $this->input->get('assurance');
-        $this->input->get('date_paye_min');
-        $this->input->get('date_paye_max');
-        $this->input->get('date_exp_min');
-        $this->input->get('date_exp_max');
+        $criteria = array(
+            'immatriculation' => $this->input->get('immatriculation'),
+            'assurance' => $this->input->get('assurance'),
+            'date_paye_min' => $this->input->get('date_paye_min'),
+            'date_paye_max' => $this->input->get('date_paye_max'),
+            'date_exp_min' => $this->input->get('date_exp_min'),
+            'date_exp_max' => $this->input->get('date_exp_max')
+        );
+        $data['liste_facture'] = $this->Vehicule->search_facture($criteria);
+        $data["content"] = "page_affichage/historique_payement";
+        $this->load->view("client/template.php",$data);
+
         
     }
 
