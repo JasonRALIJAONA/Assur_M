@@ -80,7 +80,7 @@
     </div>
     
     <div class="bouton_redirection" >
-        <a href="<?php echo base_url("vehicule_controller/detail/1"); ?>"><button class="btn btn-primary" > Voir facture </button></a> 
+        <a href="<?php echo base_url("vehicule_controller/to_generate_pdf/1"); ?>"><button class="btn btn-primary" > Voir facture </button></a> 
     </div>
 
     </div><!-- Fait div panel_vehicule1-->
@@ -115,7 +115,7 @@
     </div>
     
     <div class="bouton_redirection" >
-        <a href="<?php echo base_url("vehicule_controller/detail/1"); ?>"><button class="btn btn-primary" > Voir facture </button></a> 
+        <a href="<?php echo base_url("vehicule_controller/to_generate_pdf/2"); ?>"><button class="btn btn-primary" > Voir facture </button></a> 
     </div>
 
     </div><!-- Fait div panel_vehicule2-->
@@ -150,7 +150,7 @@
     </div>
     
     <div class="bouton_redirection" >
-        <a href="<?php echo base_url("vehicule_controller/detail/1"); ?>"><button class="btn btn-primary" > Voir facture </button></a> 
+        <a href="<?php echo base_url("vehicule_controller/to_generate_pdf/3"); ?>"><button class="btn btn-primary" > Voir facture </button></a> 
     </div>
 
     </div><!-- Fait div panel_vehicule3-->

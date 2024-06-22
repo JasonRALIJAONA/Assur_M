@@ -57,8 +57,27 @@ class Vehicule_controller extends CI_Controller {
     }
 
     /* PDF */
-    public function to_generate_pdf () {
-        $this->load->view('client/page_pdf/generate_pdf1.php');
+    public function to_generate_pdf ($id_facture="") {
+
+        $data = array();
+        /* Mamorona fonction mamadika ireo date en lettre et en Malagasy*/
+        $data['date_debut_malagasy'] = "23 Jiona 2023"; 
+        $data['date_debut'] = "23 Juin 2023"; 
+        $data['date_fin_malagasy'] = "06 Febroary 2023";
+        $data['date_fin'] = "06 Fevrier 2023";
+        $data['police_assurance'] = "01840/PSP/24";
+        $data['immatriculation'] = "2777TBG";
+        $data['marque'] = "BMW E30";
+        $data['puissance'] = "120";
+        $data['place'] = "6";
+
+        $data['assureur'] = "MAMA"; /* HAVANA na MAMA na ARO fa misy fiantraikany @ le sary */
+        $data['nom_complet'] = "FALIHERISON KANTO MIHAJA";
+        $data['adresse'] = "LOT TIC 37 ANKADIVORIBE ANTANANARIVO";        
+        $this->load->view('client/page_pdf/generate_pdf.php',$data);
+    }
+    public function to_generate_pdf_html () {
+        $this->load->view('client/page_pdf/factureAro.php');
     }
     public function to_facture ($assurance="")  {
         if ($assurance==1) {

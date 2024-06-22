@@ -1,98 +1,189 @@
 <?php
-require('fpdf185/fpdf.php');
+require 'dompdf/autoload.inc.php';
+define("DOMPDF_ENABLE_REMOTE", false);
 
-class PDF extends FPDF
-{
-    // En-tête
-    function Header()
-    {
-        // Logo
-        $this->Image( base_url().'assets/img/MAMA.png', 10, 6, 30);
-        $this->SetFont('Arial', 'B', 12);
-        // Titre
-        $this->Cell(80);
-        $this->Cell(30, 10, 'FANAMARIHAM-PIANTOHANA', 0, 1, 'C');
-        $this->SetFont('Arial', 'I', 10);
-        $this->Cell(190, 10, '(Lalana tamin\'ny 02 Aogositra 1999)', 0, 1, 'C');
-        $this->Ln(20);
-    }
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
-    // Pied de page
-    function Footer()
-    {
-        $this->SetY(-15);
-        $this->SetFont('Arial', 'I', 8);
-        $this->Cell(0, 10, 'Page ' . $this->PageNo(), 0, 0, 'C');
-    }
-}
+$base = base_url();
+//$base = __DIR__; // Utilisez __DIR__ pour obtenir le chemin absolu du répertoire courant
+// Initialiser Dompdf
+$options = new Options();
+$options->set('isRemoteEnabled',true);      
+$dompdf = new Dompdf( $options );
+$dompdf->getOptions()->setChroot($base);
 
-// Instanciation de la classe PDF
-$pdf = new PDF();
-$pdf->AddPage();
-$pdf->SetFont('Arial', '', 12);
 
-// Données de la facture
-$leftContent = [
-    'MPIKAMBANA',
-    'FALIHERISON KANTO MIHAJA',
-    'Adhesion: LOT TIC 37 ANKADIVORIBE ANTANANARIVO'
-];
+// Charger le contenu HTML
+$html = '
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            /*width: 1000px;*/
+            /*margin: 20px auto;*/
+            border: 2px solid #000;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .facture {
+            /*padding: 20px;*/
+        }
+        .header, .content, .footer, .car-info {
+            margin-bottom: 20px;
+        }
+        .header, .content {
+            display: flex;
+            justify-content: space-between;
+        }
+        .header .left, .header .right, .content .left-content, .content .right-content {
+            width: 75%;
+        }
+        .right-content{
+            margin-top:-80px;
+            margin-left:600px;
+        }
+        .header .left p, .header .right p, .content .left-content p, .content .right-content p, .footer p {
+            margin: 5px 0;
+        }
+        .italic {
+            font-style: italic;
+        }
+        .car-info table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .car-info table, .car-info th, .car-info td {
+            border: 1px solid #000;
+            text-align: center;
+            padding: 8px;
+        }
+        .car-info th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto 0;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .right {
+            /*background: url(\''.$base.'/assets/img/'.$assureur.'_pdf.png\') no-repeat left;*/
+            display:flex;
+            padding-left: 100px;
+            margin-left: 600px;
+            margin-top:-90px;
+            
+        }
+        
+        .date{
+            margin-top:20px;
+            margin-bottom:10px;
+        }
+        .left{
+            margin-bottom:50px;
+            
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="facture">
+            <div class="header">
+                <div class="left">
+                    <p class="italic"><strong>FANAMARIHAM-PIANTOHANA</strong></p>
+                    <p><strong>ATTESTATION D\'ASSURANCE</strong></p>
+                    <p class="italic">(Lalana tamin\'ny 02 Aogositra 1999)</p>
+                </div>
+                <div class="right">
+                    <img src="'.$base.'/assets/img/'.$assureur.'_pdf.png">
+                    <p style="display:inline"><strong>'.$assureur.'</strong></p>
+                </div>
+            </div>
+           
+            <div class="content">
+                <div class="left-content">
+                    <p><strong>MPIKAMBANA</strong></p>
+                    <p class="italic">'.$nom_complet.'</p>
+                    <p class="italic">Adiresy: '.$adresse.'</p>
+                </div>
+                <div class="right-content">
+                    <p class="italic">Fanekem-piantohana: Tsy aiko hoe inona ito</p>
+                    <p>Police d\'Assurance</p>
+                    <p class="italic">Nomena tamin\'ny: '.$date_debut_malagasy.'</p>
+                    <p>Deliver le: '. $date_debut .' </p>
+                    <p>Police d\'assurance: '. $police_assurance.'</p>
+                    <p>Voiture: '. $immatriculation .'</p>
+                    
+                </div>
+            </div>
+            <div class="footer">
+                <p class="italic">Manankery ny: '.$date_debut_malagasy.' - Tsy aiko koa raha misy ora</p>
+                <p class="italic">Ka hatramin\'ny: '. $date_fin_malagasy.' - misakalina</p>
+                <p class="italic" style="margin-top:10px;" >Valable du: '. $date_debut .'</p>
+                <p class="italic" > Jusqu\' à: '. $date_fin .' </p>
+            </div>
+            <div class="car-info">
+                <table>
+                    <tr>
+                        <th>Karazany / Marque</th>
+                        <th>Nomerao fiara / Immatriculation</th>
+                        <th>Heriny / Puissance</th>
+                        <th>Toerana / Place</th>
+                    </tr>
+                    <tr>
+                        <td>'.$marque.'</td>
+                        <td>'.$immatriculation.'</td>
+                        <td> '. $puissance.' CV</td>
+                        <td class="italic">'.$place.'</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>';
 
-$rightContent = [
-    'Fanekem-piantohana: 01840/PSP/24',
-    'Police d\'Assurance',
-    'Nomena tamin\'ny: 03 Fevrier 2024',
-    'Deliver le:',
-    'Police d\'assurance: .......................',
-    'Voiture: ...................................',
-    'Valide le: ................................... jusqu\'à ...................................',
-    'Cotisation: .................................'
-];
+// Charger le contenu HTML dans Dompdf
+$dompdf->loadHtml($html);
 
-$footerContent = [
-    'Manankery ny: 03 Fevrier 2024 - 11:09:00',
-    '  Valable du: 03 Fevrier 2024',
-    'Ka hatramin\'ny: 03 Fevrier 2025 - misakalina'
-];
+// (Optionnel) Configurer la taille et l'orientation de la page
+$dompdf->setPaper('A3', 'paysage');
 
-// Affichage des données
-foreach ($leftContent as $line) {
-    $pdf->Cell(0, 10, $line, 0, 1);
-}
+$options = new Options();
+$options->setIsRemoteEnabled(true); // Active le chargement d'images depuis Internet
 
-$pdf->Ln(10); // Espace entre les sections
+// Render le HTML en PDF
+$dompdf->render();
 
-foreach ($rightContent as $line) {
-    $pdf->Cell(0, 10, $line, 0, 1);
-}
+// Télécharger le PDF
+$dompdf->stream("facture.pdf", array("Attachment" => false));
 
-$pdf->Ln(10); // Espace entre les sections
+// Génération du fichier PDF temporaire
+// $pdfFilePath = 'path/to/facture_'. $nomClient. '.pdf';
+// file_put_contents($pdfFilePath, $dompdf->output());
 
-foreach ($footerContent as $line) {
-    $pdf->Cell(0, 10, $line, 0, 1);
-}
+// // Lien de téléchargement
+// echo '<br><a href="'. $pdfFilePath. '">Télécharger la facture</a>';
 
-$pdf->Ln(10); // Espace entre les sections
-
-// Informations sur la voiture
-$pdf->SetFont('Arial', 'B', 12);
-$pdf->Cell(0, 10, 'Informations sur la voiture', 0, 1);
-$pdf->SetFont('Arial', '', 12);
-
-$carInfoHeader = ['Karazany / Marque', 'Nomerao fiara / Immatriculation', 'Heriny / Puissance', 'Toerana / Place'];
-$carInfoData = ['BMW E30', '2418 TAA', '120 CV', 'SIX'];
-
-// En-tête du tableau
-foreach ($carInfoHeader as $header) {
-    $pdf->Cell(48, 10, $header, 1);
-}
-$pdf->Ln();
-
-// Données du tableau
-foreach ($carInfoData as $data) {
-    $pdf->Cell(48, 10, $data, 1);
-}
-$pdf->Ln();
-
-$pdf->Output();
 ?>
