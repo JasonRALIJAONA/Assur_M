@@ -6,7 +6,7 @@
     <hr/>
   </div>
   <div id="nav-content">
-    <div class="nav-button"><i class="fas fa-palette"></i><span>  <a href="<?php echo base_url("template_controller/acceuil");  ?>"> <img src="<?php echo base_url("assets/img/home_png.png"); ?>" alt=""> Acceuil </a> </span></div>
+    <div class="nav-button"><i class="fas fa-palette"></i><span>  <a href="<?php echo base_url("template_controller/accueil");  ?>"> <img src="<?php echo base_url("assets/img/home_png.png"); ?>" alt=""> Acceuil </a> </span></div>
     <div class="nav-button"><i class="fas fa-images"></i><span>  <a href="<?php echo base_url("form_controller/inscription_vehicule"); ?>"> <img src="<?php echo base_url("assets/img/icon_voiture.png"); ?>" alt=""> Ajouter vehicule</a> </span></div>
     <div class="nav-button"><i class="fas fa-thumbtack"></i><span>  <a href="<?php echo base_url("template_controller/historique_facture");  ?>"> <img src="<?php echo base_url("assets/img/calendrier_png.png"); ?>" alt=""> Historique </a>  </span></div>
     <hr/>
