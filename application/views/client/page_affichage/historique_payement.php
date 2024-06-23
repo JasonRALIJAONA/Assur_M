@@ -89,19 +89,25 @@ foreach ($liste_facture as $row) {
 ?>
 <nav aria-label="Page navigation example" style="display:flex;justify-content:center">
     <ul class="pagination">
-        <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-        </a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="<?php echo base_url("pagination_controller/display_page_facture/1"); ?>">1</a></li>
-        <li class="page-item"><a class="page-link" href="<?php echo base_url("pagination_controller/display_page_facture/2"); ?>">2</a></li>
-        <li class="page-item"><a class="page-link" href="<?php echo base_url("pagination_controller/display_page_facture/3"); ?>">3</a></li>
-        <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-        </li>
+        <!-- <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li> -->
+        <?php
+        for ($i = 1; $i <= $total_pages; $i++) {
+        ?>
+            <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>"><a class="page-link" href="<?= base_url('template_controller/historique_facture/' . $i) ?>"><?= $i ?></a></li>
+
+        <?php
+        } ?>
+
+        <!-- <li class="page-item active"><a class="page-link" href="<?php echo base_url("pagination_controller/display_page_facture/1"); ?>">1</a></li>
+        <li class="page-item"><a class="page-link" href="<?php echo base_url("pagination_controller/display_page_facture/3"); ?>">3</a></li> -->
+        <!-- <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li> -->
     </ul>
 </nav>
-

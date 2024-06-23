@@ -7,6 +7,7 @@ class Template_controller extends CI_Controller {
 		parent::__construct();
         $this->load->model('Vehicule');
         $this->load->model('Utilisateur');
+        $this->load->model('Pagination');
 	}
 
     public function accueil(){
@@ -25,9 +26,15 @@ class Template_controller extends CI_Controller {
 
         // echo $this->session->flashdata('utilisateur');
     }
-    public function historique_facture () {
-        // Maka ireo facture rehetra
-        $data['liste_facture'] = $this->Vehicule->get_liste_facture($this->session->userdata('utilisateur')->id);
+    public function historique_facture ($page = 1) {
+        $limit = 3;
+        $offset = ($page - 1) * $limit;
+
+        $total_facture = $this->Pagination->get_nombre_facture();
+
+        $data['liste_facture'] = $this->Pagination->get_page($limit, $offset);
+        $data['total_pages'] = ceil($total_facture / $limit);
+        $data['current_page'] = $page;
         $data["content"] = "page_affichage/historique_payement";
         $this->load->view("client/template.php",$data); 
     }

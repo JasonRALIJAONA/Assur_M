@@ -45,7 +45,7 @@ foreach ($liste_vehicule as $row) {
 <?php
 }
 ?>
-<nav aria-label="Page navigation example" style="display:flex;justify-content:center">
+<!-- <nav aria-label="Page navigation example" style="display:flex;justify-content:center">
     <ul class="pagination">
         <li class="page-item">
         <a class="page-link" href="#" aria-label="Previous">
@@ -61,4 +61,4 @@ foreach ($liste_vehicule as $row) {
         </a>
         </li>
     </ul>
-</nav>
+</nav> -->
