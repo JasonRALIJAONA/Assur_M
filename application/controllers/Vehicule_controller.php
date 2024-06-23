@@ -111,23 +111,32 @@ class Vehicule_controller extends CI_Controller {
     }
 
     /* PDF */
-    public function to_generate_pdf ($id_facture="") {
+    public function to_generate_pdf ($id_facture) {
+
+        // RECUPERER TOUTES LES DONNEES
+
+        //DONNEE UTILISATEUR
+        $utilisateur = $this->session->userdata('utilisateur');
+
+        // DONNEE FACTURE
+        $facture = $this->Vehicule->get_facture_by_id($id_facture);
+        
 
         $data = array();
         /* Mamorona fonction mamadika ireo date en lettre et en Malagasy*/
         $data['date_debut_malagasy'] = "23 Jiona 2023"; 
-        $data['date_debut'] = "23 Juin 2023"; 
-        $data['date_fin_malagasy'] = "06 Febroary 2023";
-        $data['date_fin'] = "06 Fevrier 2023";
-        $data['police_assurance'] = "01840/PSP/24";
-        $data['immatriculation'] = "2777TBG";
-        $data['marque'] = "BMW E30";
-        $data['puissance'] = "120";
-        $data['place'] = "6";
+        $data['date_debut'] = $facture['date_debut']; 
+        $data['date_fin_malagasy'] = "23 Juin 2023";
+        $data['date_fin'] = $facture['date_fin'];
+        $data['police_assurance'] = $facture['police_assurance'];
+        $data['immatriculation'] = $facture['immatriculation'];
+        $data['marque'] = $facture['marque'];
+        $data['puissance'] = $facture['puissance'];
+        $data['place'] = $facture['place'];
 
-        $data['assureur'] = "MAMA"; /* HAVANA na MAMA na ARO fa misy fiantraikany @ le sary */
-        $data['nom_complet'] = "FALIHERISON KANTO MIHAJA";
-        $data['adresse'] = "LOT TIC 37 ANKADIVORIBE ANTANANARIVO";        
+        $data['assureur'] = $facture['nom_assureur']; /* HAVANA na MAMA na ARO fa misy fiantraikany @ le sary */
+        $data['nom_complet'] = $utilisateur->nom . " " . $utilisateur->prenom;
+        $data['adresse'] = $utilisateur->adresse;        
         $this->load->view('client/page_pdf/generate_pdf.php',$data);
     }
     public function to_generate_pdf_html () {

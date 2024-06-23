@@ -124,31 +124,27 @@ $html = '
                 <div class="left-content">
                     <p><strong>MPIKAMBANA</strong></p>
                     <p class="italic">'.$nom_complet.'</p>
-                    <p class="italic">Adiresy: '.$adresse.'</p>
+                    <p class="italic">Adresse: '.$adresse.'</p>
                 </div>
                 <div class="right-content">
-                    <p class="italic">Fanekem-piantohana: Tsy aiko hoe inona ito</p>
                     <p>Police d\'Assurance</p>
-                    <p class="italic">Nomena tamin\'ny: '.$date_debut_malagasy.'</p>
-                    <p>Deliver le: '. $date_debut .' </p>
+                    <p>Delivrée le: '. $date_debut .' </p>
                     <p>Police d\'assurance: '. $police_assurance.'</p>
                     <p>Voiture: '. $immatriculation .'</p>
                     
                 </div>
             </div>
             <div class="footer">
-                <p class="italic">Manankery ny: '.$date_debut_malagasy.' - Tsy aiko koa raha misy ora</p>
-                <p class="italic">Ka hatramin\'ny: '. $date_fin_malagasy.' - misakalina</p>
                 <p class="italic" style="margin-top:10px;" >Valable du: '. $date_debut .'</p>
                 <p class="italic" > Jusqu\' à: '. $date_fin .' </p>
             </div>
             <div class="car-info">
                 <table>
                     <tr>
-                        <th>Karazany / Marque</th>
-                        <th>Nomerao fiara / Immatriculation</th>
-                        <th>Heriny / Puissance</th>
-                        <th>Toerana / Place</th>
+                        <th>Marque</th>
+                        <th>Immatriculation</th>
+                        <th>Puissance</th>
+                        <th>Nombre de place</th>
                     </tr>
                     <tr>
                         <td>'.$marque.'</td>

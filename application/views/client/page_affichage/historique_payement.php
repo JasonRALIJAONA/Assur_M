@@ -80,7 +80,7 @@ foreach ($liste_facture as $row) {
         </div>
 
         <div class="bouton_redirection">
-            <a href="<?php echo base_url("vehicule_controller/to_generate_pdf/1"); ?>"><button class="btn btn-primary"> Voir facture </button></a>
+            <a href="<?php echo base_url("vehicule_controller/to_generate_pdf/" . $row['id']); ?>"><button class="btn btn-primary"> Voir facture </button></a>
         </div>
 
     </div><!-- Fait div panel_vehicule1-->

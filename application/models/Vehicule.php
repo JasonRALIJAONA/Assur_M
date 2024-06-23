@@ -618,4 +618,10 @@ class Vehicule extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function get_facture_by_id($id_facture) {
+        $this->db->where('id', $id_facture);
+        $query = $this->db->get('info_pdf');
+        return $query->row_array();
+    }
 }

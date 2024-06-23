@@ -12,3 +12,6 @@ CREATE OR REPLACE VIEW info_facture AS
 select f.*, a.nom nom_assureur, v.immatriculation from facture f join assureur a  
 on f.id_assureur = a.id join vehicule v on f.id_vehicule = v.id
 join utilisateur u on f.id_utilisateur = u.id;
+
+CREATE OR REPLACE VIEW info_pdf AS
+select f.*, v.marque, puissance, place from info_facture f join info_vehicule v on f.id_vehicule = v.id;
