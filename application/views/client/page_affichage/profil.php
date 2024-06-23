@@ -21,6 +21,10 @@
         </tr>
         <tr>
             <td class="attribut" >Numéro</td>
+            <td class="valeur" >: <?php echo $user->telephone; ?></td>
+        </tr>
+        <tr>
+            <td class="attribut" >Email</td>
             <td class="valeur" >: <?php echo $user->email; ?></td>
         </tr>
     </table>

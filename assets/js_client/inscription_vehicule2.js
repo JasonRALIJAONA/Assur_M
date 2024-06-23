@@ -281,7 +281,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // Action à réaliser lorsque l'utilisateur clique sur "Oui"
-                await enregistrer(prix);
+                var is_simulation = await enregistrer(prix);
+                console.log('salut les gens')
                 setTimeout(() => {
                     window.location = "accueil";
 
@@ -327,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var prix;
         var formData = $('.contactForm').serializeArray();
         formData.push({ name: 'prix', value: prix });
-
+        var is_simulation;
         await $.ajax({
             url: baseUrl + 'form_controller/inscrire_vehicule',
             type: 'POST',
@@ -336,10 +337,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             success: function (response) {
                 console.log('assureur ' + response.assureur);
+                is_simulation = response.is_simulation;
                 // prix = response.prix;
             }
         });
-        return prix;
+        return is_simulation;
     }
 
     async function verifier_vehicule() {

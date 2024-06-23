@@ -21,13 +21,14 @@ class Template_controller extends CI_Controller {
                 echo $e;
             }
         }else {
-            echo 'session vide';
+            redirect("/form_controller/inscription_vehicule");
+            
         }
 
         // echo $this->session->flashdata('utilisateur');
     }
     public function historique_facture ($page = 1) {
-        $limit = 3;
+        $limit = 5;
         $offset = ($page - 1) * $limit;
 
         $total_facture = $this->Pagination->get_nombre_facture();

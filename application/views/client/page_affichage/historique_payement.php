@@ -95,11 +95,13 @@ foreach ($liste_facture as $row) {
             </a>
         </li> -->
         <?php
-        for ($i = 1; $i <= $total_pages; $i++) {
+        if (isset($total_pages)) {
+            for ($i = 1; $i <= $total_pages; $i++) {
         ?>
-            <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>"><a class="page-link" href="<?= base_url('template_controller/historique_facture/' . $i) ?>"><?= $i ?></a></li>
+                <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>"><a class="page-link" href="<?= base_url('template_controller/historique_facture/' . $i) ?>"><?= $i ?></a></li>
 
         <?php
+            }
         } ?>
 
         <!-- <li class="page-item active"><a class="page-link" href="<?php echo base_url("pagination_controller/display_page_facture/1"); ?>">1</a></li>

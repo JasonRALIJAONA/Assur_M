@@ -30,7 +30,7 @@
         <div class="col-md-5 droite">
             <h1> PAYEMENT D'ASSURANCE EN LIGNE </h1>
             <div class="div_btn">
-                <a href="#"> <input type="button" class="btn btn_simuler" value="SIMULER"  > </a> 
+                <a href="<?php echo base_url("form_controller/inscription_vehicule"); ?>"> <input type="button" class="btn btn_simuler" value="SIMULER"  > </a> 
             </div>
             <div class="div_btn" >
                 <a href="<?php echo base_url("welcome/to_login"); ?>"> <input type="button" class="btn btn_connecter" value="Se connecter"> </a> 
