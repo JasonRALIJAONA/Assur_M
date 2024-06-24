@@ -28,12 +28,12 @@ class Template_controller extends CI_Controller {
         // echo $this->session->flashdata('utilisateur');
     }
     public function historique_facture ($page = 1) {
-        $limit = 5;
+        $limit = 3;
         $offset = ($page - 1) * $limit;
 
         $total_facture = $this->Pagination->get_nombre_facture();
 
-        $data['liste_facture'] = $this->Pagination->get_page($limit, $offset);
+        $data['liste_facture'] = $this->Pagination->get_page($limit, $. );
         $data['total_pages'] = ceil($total_facture / $limit);
         $data['current_page'] = $page;
         $data["content"] = "page_affichage/historique_payement";

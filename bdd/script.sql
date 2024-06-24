@@ -37,7 +37,7 @@ CREATE TABLE utilisateur(
    email VARCHAR(50)  NOT NULL,
    mdp VARCHAR(50)  NOT NULL,
    telephone VARCHAR(20)  NOT NULL,
-   supprime BOOLEAN DEFAULT FALSE NOT NULL,
+   deleted BOOLEAN DEFAULT FALSE NOT NULL,
    id_operateur INT,
    solde DECIMAL(12,2) DEFAULT 100000.0,
    admin BOOLEAN DEFAULT FALSE NOT NULL,
