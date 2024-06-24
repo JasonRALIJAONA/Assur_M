@@ -221,8 +221,7 @@ CREATE TABLE liste_vehicule(
    puissance INTEGER NOT NULL,
    place INTEGER NOT NULL,
    marque VARCHAR(50) NOT NULL,
-   carburant VARCHAR(50),
-   email_utilisateur INTEGER NOT NULL
+   carburant VARCHAR(50)
 );
 
 
