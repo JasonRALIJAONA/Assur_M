@@ -11,6 +11,11 @@
 <?php 
     $this->load->view("client/partial/nav_template.php");
 ?>
+<!-- Bouton Retour en haut -->
+<button type="button" class="btn" id="btn_on_scroll" style="display: none;">
+  <img src="<?php echo base_url('assets/img/fleche_haut.png'); ?>" alt="">
+</button>
+
 <section id="content-model">
     <?php $this->load->view("client/".$content); ?>
 </section>

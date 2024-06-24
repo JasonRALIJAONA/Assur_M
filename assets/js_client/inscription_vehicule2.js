@@ -152,9 +152,15 @@ document.addEventListener("DOMContentLoaded", function () {
             input.name = 'mode_usage';
             input.id = 'mode_usage_' + row['id'];
             input.value = row['id'];
+            input.togglePopover
             input.setAttribute('data-bs-toggle', 'popover');
             input.setAttribute('data-bs-custom-class', 'custom-popover');
-            input.setAttribute('data-bs-trigger', 'hover focus');
+            input.setAttribute('data-bs-trigger', 'hover');
+            input.setAttribute('title', `<h3>${row['nom']}</h3>`);
+
+            var popover = new bootstrap.Popover(input, {
+                html: true
+            });
 
             var label = document.createElement('label');
             label.className = 'form-check-label';
@@ -186,6 +192,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     }
+    
+    
 
     function display_options() {
         box_options.style.display = 'block';
@@ -209,15 +217,23 @@ document.addEventListener("DOMContentLoaded", function () {
             input.name = 'option';
             input.id = 'cotisation1';
             input.value = row['id'];
+            input.togglePopover
             input.setAttribute('data-bs-toggle', 'popover');
             input.setAttribute('data-bs-custom-class', 'custom-popover_cotisation');
-            input.setAttribute('data-bs-trigger', 'hover focus');
+            input.setAttribute('data-bs-trigger', 'hover');
+            input.setAttribute('title', `<h3>${row['nom']}</h3>`);
+            input.setAttribute("data-bs-content", `<p class="para3"><i>${row['descri']}</i></p>`);
+
+            var popover = new bootstrap.Popover(input, {
+                html: true
+            });
+
 
             var label = document.createElement('label');
             label.className = 'form-check-label';
             label.setAttribute('for', 'cotisation1');
             label.textContent = row['nom'];
-
+            
             div.appendChild(input);
             div.appendChild(label);
 
@@ -225,12 +241,22 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    
     // *********************************************************************
-
+    
 });
 
 (function ($) {
-
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var options={
+        animation:true,
+		html:true
+		
+	};
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl,options);
+    });
+    
     $(".contactForm").on("submit", async function (event) {
         event.preventDefault();
 
@@ -255,7 +281,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 // Action à réaliser lorsque l'utilisateur clique sur "Oui"
-                await enregistrer(prix);
+                var is_simulation = await enregistrer(prix);
+                console.log('salut les gens')
                 setTimeout(() => {
                     window.location = "accueil";
 
@@ -301,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var prix;
         var formData = $('.contactForm').serializeArray();
         formData.push({ name: 'prix', value: prix });
-
+        var is_simulation;
         await $.ajax({
             url: baseUrl + 'form_controller/inscrire_vehicule',
             type: 'POST',
@@ -310,10 +337,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             success: function (response) {
                 console.log('assureur ' + response.assureur);
+                is_simulation = response.is_simulation;
                 // prix = response.prix;
             }
         });
-        return prix;
+        return is_simulation;
     }
 
     async function verifier_vehicule() {

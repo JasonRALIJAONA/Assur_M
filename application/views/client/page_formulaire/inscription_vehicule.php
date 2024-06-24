@@ -2,7 +2,15 @@
 <html lang="en">
 
 <head>
-	<title>Inscription vehicule</title>
+	<?php if ($this->session->userdata('utilisateur') !== null) {
+	?>
+		<title>Inscription vehicule</title>
+
+	<?php
+	} else { ?>
+		<title>Simulation</title>
+	<?php } ?>
+
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -21,7 +29,14 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">ENREGISTREMENT DU VEHICULE</h2>
+					<?php if ($this->session->userdata('utilisateur') !== null) {
+					?>
+						<h2 class="heading-section">ENREGISTREMENT DU VEHICULE</h2>
+
+					<?php
+					} else { ?>
+						<h2 class="heading-section" style="color: green;">FAIRE UNE SIMULATION</h2>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -200,9 +215,9 @@
 					return;
 				}
 				setTimeout(() => {
-                    window.location = baseUrl + 'form_controller/insert_vehicule_2';
+					window.location = baseUrl + 'form_controller/insert_vehicule_2';
 
-                }, 1000);
+				}, 1000);
 			});
 
 			async function valider_formulaire() {

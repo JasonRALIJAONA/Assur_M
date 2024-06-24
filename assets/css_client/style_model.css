@@ -93,13 +93,127 @@ html, body {
   color: white;
 }
 
-
 .logo_sidebar{
   width: 75px;
   height: 65px;
   margin-left: 57px;
   margin-top: 10px;
 }
+.logo_facture{
+  width: 42px;
+}
+.profil_titre{
+  font-family: kallisto;
+}
+.table_profil{
+  width: 550px;
+}
+.table_profil .attribut {
+  font-family: eurostyle;
+  font-size: 20px;
+}
+.table_profil .valeur {
+  font-family: poppins;
+  font-size: 20px;
+  border-radius: 15px;
+}
+.recherche_vehicule{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 15px;
+  margin-right: 79px;
+  font-family: poppins;
+}
+.recherche_vehicule input[type="text"]{
+  width: 160px;
+  margin-right: 30px;
+}
+
+.card{
+  margin-top: 15px;
+  padding: 10px 15px;
+  width: 45em;
+  border-radius: 10px;
+  box-shadow: 3px 6px 5px #181a18, -3px -3px 5px rgb(203 192 192);
+}
+.card_img{
+  width: 200px;
+  height: 150px;
+}
+.btn_search{
+  font-family: poppins;
+  background-color: #17a706;
+  border-color: white;
+}
+
+.btn_search:hover{
+  color: #17a706 ;
+  background-color: white;
+  border-color: #17a706;
+}
+
+#btn_on_scroll{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  transition: 0.23;
+  display: none;
+  background-color: white;
+  border-radius: 50%;
+  border-color: #17a706;
+  z-index: 10000000;
+}
+#btn_on_scroll:hover{
+  background-color: #17a706 ;
+  border-color:white ;
+}
+#btn_on_scroll img{
+  width: 50px;
+  height: 50px;
+}
+
+.bloc_search_facture{
+  display: flex;
+  flex-wrap: wrap;
+}
+.bloc_search_facture input, .bloc_search_facture select{
+  min-width: 170px;
+  height: 52px;
+}
+.bloc_search_facture div{
+  margin-bottom: 10px;
+  
+}
+@media (max-width:940px){
+  .div_submit{
+    margin-left: 25px;
+  }
+}
+.btn_search img{
+  width: 24px;
+  height: 24px;
+}
+#expirer{
+  box-shadow: inset 0px 0px 30px 0px rgb(255 0 0);
+}
+#presque_expirer{
+  box-shadow: inset 0px 0px 30px 0px rgb(255 255 0);
+}
+
+#nav-bar #nav-content img{
+  position: absolute;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  background-color: white;
+  border-radius: 50%;
+  padding: 6px 6px;
+}
+#nav-button{
+  position: relative;
+}
+
+/*------------------------------------------------*/
 
 #nav-toggle:checked ~ #nav-header {
   width: calc(var(--navbar-width-min) - 16px);

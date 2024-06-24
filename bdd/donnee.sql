@@ -12,13 +12,8 @@ INSERT INTO type_vehicule (nom) VALUES
 ('Voiture'),
 ('Moto'),
 ('Camion'),
-('Bus'),
-('Vélo'),
-('Scooter'),
-('Tracteur'),
-('Fourgonnette'),
-('Véhicule utilitaire'),
-('Cabriolet');
+('Autre');
+
 
 -- Insérer des options pour l'assureur 'Aro'
 INSERT INTO options (nom, descri, valeur, id_assureur) VALUES

@@ -78,9 +78,10 @@ class Vehicule_controller extends CI_Controller {
             $data_facture = array(
                 'date_debut' => $dateNow,
                 'date_fin' => $dateFinFormatted,
-                'police_assurance' => $somme,
                 'id_assureur' => $this->Vehicule->get_by_id($id_vehicule)['id_assureur'],
-                'id_vehicule' => $id_vehicule
+                'id_vehicule' => $id_vehicule,
+                'id_utilisateur' => $this->session->userdata('utilisateur')->id
+
             );
             $this->Vehicule->verifier_expiration($data_facture);
             $this->Utilisateur->verifier_solde($somme);
@@ -107,6 +108,66 @@ class Vehicule_controller extends CI_Controller {
         );
         /*...*/
         $this->load->view("client/page_formulaire/payement_assurance.php",$data);
+    }
+
+    /* PDF */
+    public function to_generate_pdf ($id_facture) {
+
+        // RECUPERER TOUTES LES DONNEES
+
+        //DONNEE UTILISATEUR
+        $utilisateur = $this->session->userdata('utilisateur');
+
+        // DONNEE FACTURE
+        $facture = $this->Vehicule->get_facture_by_id($id_facture);
+        
+
+        $data = array();
+        /* Mamorona fonction mamadika ireo date en lettre et en Malagasy*/
+        $data['date_debut_malagasy'] = "23 Jiona 2023"; 
+        $data['date_debut'] = $facture['date_debut']; 
+        $data['date_fin_malagasy'] = "23 Juin 2023";
+        $data['date_fin'] = $facture['date_fin'];
+        $data['police_assurance'] = $facture['police_assurance'];
+        $data['immatriculation'] = $facture['immatriculation'];
+        $data['marque'] = $facture['marque'];
+        $data['puissance'] = $facture['puissance'];
+        $data['place'] = $facture['place'];
+
+        $data['assureur'] = $facture['nom_assureur']; /* HAVANA na MAMA na ARO fa misy fiantraikany @ le sary */
+        $data['nom_complet'] = $utilisateur->nom . " " . $utilisateur->prenom;
+        $data['adresse'] = $utilisateur->adresse;        
+        $this->load->view('client/page_pdf/generate_pdf.php',$data);
+    }
+    public function to_generate_pdf_html () {
+        $this->load->view('client/page_pdf/factureAro.php');
+    }
+    public function to_facture ($assurance="")  {
+        if ($assurance==1) {
+            $this->load->view('client/page_pdf/factureAro.php');
+        }
+        else if ($assurance==2) {
+            $this->load->view('client/page_pdf/factureHavana.php');
+        }
+        else if ($assurance==3) {
+            $this->load->view('client/page_pdf/factureMAMA.php');
+        }
+    }
+
+    public function search_facture () {
+        $criteria = array(
+            'immatriculation' => $this->input->get('immatriculation'),
+            'assurance' => $this->input->get('assurance'),
+            'date_paye_min' => $this->input->get('date_paye_min'),
+            'date_paye_max' => $this->input->get('date_paye_max'),
+            'date_exp_min' => $this->input->get('date_exp_min'),
+            'date_exp_max' => $this->input->get('date_exp_max')
+        );
+        $data['liste_facture'] = $this->Vehicule->search_facture($criteria);
+        $data["content"] = "page_affichage/historique_payement";
+        $this->load->view("client/template.php",$data);
+
+        
     }
 
     

@@ -2,7 +2,14 @@
 <html lang="en">
 
 <head>
-	<title>Inscription personne</title>
+	<?php if ($this->session->userdata('utilisateur') !== null) {
+	?>
+		<title>Inscription vehicule</title>
+
+	<?php
+	} else { ?>
+		<title>Simulation</title>
+	<?php } ?>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -19,7 +26,14 @@
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 text-center mb-5">
-					<h2 class="heading-section">ENREGISTREMENT DU VEHICULE</h2>
+					<?php if ($this->session->userdata('utilisateur') !== null) {
+					?>
+						<h2 class="heading-section">ENREGISTREMENT DU VEHICULE</h2>
+
+					<?php
+					} else { ?>
+						<h2 class="heading-section" style="color: green;">FAIRE UNE SIMULATION</h2>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="row justify-content-center">
@@ -79,23 +93,23 @@
 														</label>
 													</div> -->
 
-													
+
 
 												</div>
 											</div>
-											
+
 											<hr style="color:white">
 											<!-- MODE D'USAGE -->
 											<div class="col-md-12">
 												<div class="form-group row" style="display: none;" id="box_usage">
-													
-													
+
+
 												</div>
 											</div>
 
 											<hr style="color:white">
 
-											
+
 
 											<!-- ANNEE DE FABRICATION -->
 											<div class="col-md-12" id="annee_fabrication_box" style="display: none;">
@@ -133,7 +147,7 @@
 											<div class="col-md-12" id="bouton_box" style="display: none;">
 												<div class="form-group">
 													<input type="submit" value="SIMULER" class="btn btn-primary">
-													<div class="submitting"></div> 
+													<div class="submitting"></div>
 												</div>
 
 
@@ -154,15 +168,15 @@
 		</div>
 	</section>
 
-	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
 	<!-- <script src="js/popper.js"></script>-->
-	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.js"></script>
 	<script>
 		var baseUrl = "<?php echo base_url(); ?>";
 	</script>
+	<script src="<?php echo base_url(); ?>assets/js/jquery.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/bootstrap.bundle.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-	<script src="<?php echo base_url(); ?>assets/js_client/form_vehicule.js"></script>
+	<!-- <script src="<?php echo base_url(); ?>assets/js_client/form_vehicule.js"></script> -->
 	<script src="<?php echo base_url(); ?>assets/js_client/inscription_vehicule2.js"></script>
 
 
